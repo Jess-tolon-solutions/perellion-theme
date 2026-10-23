@@ -17,25 +17,101 @@
       "customDuotone": false,
       "customGradient": false,
       "palette": [
-        { "slug": "charcoal",       "name": "Charcoal",        "color": "#231F20" },
-        { "slug": "graphite",       "name": "Graphite",        "color": "#333333" },
-        { "slug": "white",          "name": "White",           "color": "#FFFFFF" },
-        { "slug": "canvas",         "name": "Canvas",          "color": "#F5F5F5" },
-        { "slug": "panel",          "name": "Panel",           "color": "#F0F0F0" },
-        { "slug": "subtle",         "name": "Subtle",          "color": "#F2F2F2" },
-        { "slug": "light-grey",     "name": "Light grey",      "color": "#D9D9D9" },
-        { "slug": "disabled",       "name": "Disabled",        "color": "#BDBBBC" },
-        { "slug": "action-primary", "name": "Action primary",  "color": "#0669FE" },
-        { "slug": "action-focus",   "name": "Action focus",    "color": "#00A9FF" },
-        { "slug": "brand-azure",    "name": "Azure",           "color": "#009EFF" },
-        { "slug": "brand-violet",   "name": "Violet",          "color": "#6125CE" },
-        { "slug": "brand-orchid",   "name": "Orchid",          "color": "#7F52EE" },
-        { "slug": "lavender-tint",  "name": "Lavender tint",   "color": "#EAE6FD" },
-        { "slug": "decoration-cyan","name": "Cyan",            "color": "#32EEFF" },
-        { "slug": "ultraviolet",    "name": "Ultraviolet",     "color": "#1206FE" },
-        { "slug": "spectrum-gold",  "name": "Gold",            "color": "#F9DA3C" },
-        { "slug": "spectrum-amber", "name": "Amber",           "color": "#F6CD2B" },
-        { "slug": "spectrum-lemon", "name": "Lemon",           "color": "#FAF262" }
+        {
+          "slug": "charcoal",
+          "name": "Charcoal",
+          "color": "#231F20"
+        },
+        {
+          "slug": "graphite",
+          "name": "Graphite",
+          "color": "#333333"
+        },
+        {
+          "slug": "white",
+          "name": "White",
+          "color": "#FFFFFF"
+        },
+        {
+          "slug": "canvas",
+          "name": "Canvas",
+          "color": "#F5F5F5"
+        },
+        {
+          "slug": "panel",
+          "name": "Panel",
+          "color": "#F0F0F0"
+        },
+        {
+          "slug": "subtle",
+          "name": "Subtle",
+          "color": "#F2F2F2"
+        },
+        {
+          "slug": "light-grey",
+          "name": "Light grey",
+          "color": "#D9D9D9"
+        },
+        {
+          "slug": "disabled",
+          "name": "Disabled",
+          "color": "#BDBBBC"
+        },
+        {
+          "slug": "action-primary",
+          "name": "Action primary",
+          "color": "#0669FE"
+        },
+        {
+          "slug": "action-focus",
+          "name": "Action focus",
+          "color": "#00A9FF"
+        },
+        {
+          "slug": "brand-azure",
+          "name": "Azure",
+          "color": "#009EFF"
+        },
+        {
+          "slug": "brand-violet",
+          "name": "Violet",
+          "color": "#6125CE"
+        },
+        {
+          "slug": "brand-orchid",
+          "name": "Orchid",
+          "color": "#7F52EE"
+        },
+        {
+          "slug": "lavender-tint",
+          "name": "Lavender tint",
+          "color": "#EAE6FD"
+        },
+        {
+          "slug": "decoration-cyan",
+          "name": "Cyan",
+          "color": "#32EEFF"
+        },
+        {
+          "slug": "ultraviolet",
+          "name": "Ultraviolet",
+          "color": "#1206FE"
+        },
+        {
+          "slug": "spectrum-gold",
+          "name": "Gold",
+          "color": "#F9DA3C"
+        },
+        {
+          "slug": "spectrum-amber",
+          "name": "Amber",
+          "color": "#F6CD2B"
+        },
+        {
+          "slug": "spectrum-lemon",
+          "name": "Lemon",
+          "color": "#FAF262"
+        }
       ],
       "gradients": [
         {
@@ -63,10 +139,30 @@
           "fontFace": [
             {
               "fontFamily": "Poppins",
-              "fontWeight": "400 600",
+              "fontWeight": "400",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": [ "file:./assets/fonts/poppins-variable.woff2" ]
+              "src": [
+                "file:./assets/fonts/poppins-400.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Poppins",
+              "fontWeight": "500",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/poppins-500.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Poppins",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/poppins-600.woff2"
+              ]
             }
           ]
         },
@@ -80,7 +176,9 @@
               "fontWeight": "400 600",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": [ "file:./assets/fonts/inter-variable.woff2" ]
+              "src": [
+                "file:./assets/fonts/inter-variable.woff2"
+              ]
             }
           ]
         }
@@ -108,55 +206,144 @@
           "slug": "lead",
           "name": "Lead",
           "size": "1.3125rem",
-          "fluid": { "min": "1.125rem", "max": "1.3125rem" }
+          "fluid": {
+            "min": "1.125rem",
+            "max": "1.3125rem"
+          }
         },
         {
           "slug": "card",
           "name": "Card",
           "size": "1.3125rem",
-          "fluid": { "min": "1.3125rem", "max": "1.75rem" }
+          "fluid": {
+            "min": "1.3125rem",
+            "max": "1.75rem"
+          }
         },
         {
           "slug": "subheading",
           "name": "Subheading",
           "size": "1.75rem",
-          "fluid": { "min": "1.5rem", "max": "1.75rem" }
+          "fluid": {
+            "min": "1.5rem",
+            "max": "1.75rem"
+          }
         },
         {
           "slug": "heading",
           "name": "Heading",
           "size": "2.5rem",
-          "fluid": { "min": "2rem", "max": "2.5rem" }
+          "fluid": {
+            "min": "2rem",
+            "max": "2.5rem"
+          }
         },
         {
           "slug": "display",
           "name": "Display",
           "size": "3.75rem",
-          "fluid": { "min": "3.125rem", "max": "3.75rem" }
+          "fluid": {
+            "min": "3.125rem",
+            "max": "3.75rem"
+          }
         }
       ]
     },
     "spacing": {
       "defaultSpacingSizes": false,
-      "units": [ "px", "rem", "%", "vw", "vh" ],
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vw",
+        "vh"
+      ],
       "spacingSizes": [
-        { "slug": "4",   "name": "4",   "size": "0.25rem" },
-        { "slug": "8",   "name": "8",   "size": "0.5rem" },
-        { "slug": "10",  "name": "10",  "size": "0.625rem" },
-        { "slug": "12",  "name": "12",  "size": "0.75rem" },
-        { "slug": "16",  "name": "16",  "size": "1rem" },
-        { "slug": "20",  "name": "20",  "size": "1.25rem" },
-        { "slug": "24",  "name": "24",  "size": "1.5rem" },
-        { "slug": "32",  "name": "32",  "size": "2rem" },
-        { "slug": "40",  "name": "40",  "size": "2.5rem" },
-        { "slug": "48",  "name": "48",  "size": "3rem" },
-        { "slug": "60",  "name": "60",  "size": "3.75rem" },
-        { "slug": "64",  "name": "64",  "size": "4rem" },
-        { "slug": "80",  "name": "80",  "size": "5rem" },
-        { "slug": "96",  "name": "96",  "size": "6rem" },
-        { "slug": "120", "name": "120", "size": "7.5rem" },
-        { "slug": "160", "name": "160", "size": "10rem" },
-        { "slug": "220", "name": "220", "size": "13.75rem" }
+        {
+          "slug": "4",
+          "name": "4",
+          "size": "0.25rem"
+        },
+        {
+          "slug": "8",
+          "name": "8",
+          "size": "0.5rem"
+        },
+        {
+          "slug": "10",
+          "name": "10",
+          "size": "0.625rem"
+        },
+        {
+          "slug": "12",
+          "name": "12",
+          "size": "0.75rem"
+        },
+        {
+          "slug": "16",
+          "name": "16",
+          "size": "1rem"
+        },
+        {
+          "slug": "20",
+          "name": "20",
+          "size": "1.25rem"
+        },
+        {
+          "slug": "24",
+          "name": "24",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "32",
+          "name": "32",
+          "size": "2rem"
+        },
+        {
+          "slug": "40",
+          "name": "40",
+          "size": "2.5rem"
+        },
+        {
+          "slug": "48",
+          "name": "48",
+          "size": "3rem"
+        },
+        {
+          "slug": "60",
+          "name": "60",
+          "size": "3.75rem"
+        },
+        {
+          "slug": "64",
+          "name": "64",
+          "size": "4rem"
+        },
+        {
+          "slug": "80",
+          "name": "80",
+          "size": "5rem"
+        },
+        {
+          "slug": "96",
+          "name": "96",
+          "size": "6rem"
+        },
+        {
+          "slug": "120",
+          "name": "120",
+          "size": "7.5rem"
+        },
+        {
+          "slug": "160",
+          "name": "160",
+          "size": "10rem"
+        },
+        {
+          "slug": "220",
+          "name": "220",
+          "size": "13.75rem"
+        }
       ]
     },
     "border": {
@@ -233,13 +420,21 @@
     },
     "elements": {
       "link": {
-        "color": { "text": "var(--wp--preset--color--action-primary)" },
-        "typography": { "textDecoration": "underline" },
+        "color": {
+          "text": "var(--wp--preset--color--action-primary)"
+        },
+        "typography": {
+          "textDecoration": "underline"
+        },
         ":hover": {
-          "color": { "text": "var(--wp--preset--color--ultraviolet)" }
+          "color": {
+            "text": "var(--wp--preset--color--ultraviolet)"
+          }
         },
         ":focus": {
-          "color": { "text": "var(--wp--preset--color--action-focus)" }
+          "color": {
+            "text": "var(--wp--preset--color--action-focus)"
+          }
         }
       },
       "heading": {
@@ -298,7 +493,9 @@
           "fontWeight": "500",
           "lineHeight": "1.5"
         },
-        "border": { "radius": "var(--wp--custom--radius--pill)" },
+        "border": {
+          "radius": "var(--wp--custom--radius--pill)"
+        },
         "spacing": {
           "padding": {
             "top": "var(--wp--preset--spacing--12)",
@@ -308,25 +505,35 @@
           }
         },
         ":hover": {
-          "color": { "background": "var(--wp--preset--color--ultraviolet)" }
+          "color": {
+            "background": "var(--wp--preset--color--ultraviolet)"
+          }
         },
         ":focus": {
-          "color": { "background": "var(--wp--preset--color--action-focus)" }
+          "color": {
+            "background": "var(--wp--preset--color--action-focus)"
+          }
         },
         ":active": {
-          "color": { "background": "var(--wp--preset--color--brand-violet)" }
+          "color": {
+            "background": "var(--wp--preset--color--brand-violet)"
+          }
         }
       },
       "caption": {
         "typography": {
           "fontSize": "var(--wp--preset--font-size--caption)"
         },
-        "color": { "text": "var(--wp--preset--color--graphite)" }
+        "color": {
+          "text": "var(--wp--preset--color--graphite)"
+        }
       }
     },
     "blocks": {
       "core/paragraph": {
-        "typography": { "lineHeight": "1.5" }
+        "typography": {
+          "lineHeight": "1.5"
+        }
       },
       "core/quote": {
         "typography": {
@@ -337,7 +544,9 @@
         }
       },
       "core/separator": {
-        "color": { "text": "var(--wp--preset--color--light-grey)" }
+        "color": {
+          "text": "var(--wp--preset--color--light-grey)"
+        }
       }
     }
   }
