@@ -1,0 +1,203 @@
+/*
+Theme Name: Perellion
+Theme URI: https://www.perellion.com
+Author: Tolon Solutions AI LLC
+Author URI: https://tolonsolutions.ai
+Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
+Template: ollie
+Version: 0.1.0
+Requires at least: 6.5
+Tested up to: 6.8
+Requires PHP: 8.1
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: perellion
+*/
+
+/* ---------------------------------------------------------------------------
+   Figma token aliases
+
+   Sovo's Figma file emits CSS custom properties named --perellion-*.
+   WordPress generates its own names from theme.json (--wp--preset--*).
+   These aliases map one to the other, so CSS copied out of Figma dev mode
+   works unchanged and there is a single source of truth for every value.
+
+   Do not hardcode hex values anywhere in this theme. Use a token.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* Text */
+  --perellion-text-primary:            var(--wp--preset--color--charcoal);
+  --perellion-text-inverse:            var(--wp--preset--color--white);
+
+  /* Backgrounds */
+  --perellion-background-dark-grey:    var(--wp--preset--color--charcoal);
+  --perellion-background-white:        var(--wp--preset--color--white);
+  --perellion-background-light-grey:   var(--wp--preset--color--light-grey);
+
+  /* Neutrals */
+  --perellion-neutral-charcoal:        var(--wp--preset--color--charcoal);
+  --perellion-neutral-graphite:        var(--wp--preset--color--graphite);
+  --perellion-neutral-light-grey:      var(--wp--preset--color--light-grey);
+  --perellion-neutral-white:           var(--wp--preset--color--white);
+  --perellion-source-neutral-canvas:   var(--wp--preset--color--canvas);
+  --perellion-source-neutral-panel:    var(--wp--preset--color--panel);
+  --perellion-source-neutral-subtle:   var(--wp--preset--color--subtle);
+  --perellion-source-neutral-disabled: var(--wp--preset--color--disabled);
+  --perellion-source-neutral-ink:      var(--wp--preset--color--graphite);
+  --perellion-source-neutral-black:    #000000;
+
+  /* Action */
+  --perellion-action-primary:          var(--wp--preset--color--action-primary);
+  --perellion-source-action-focus:     var(--wp--preset--color--action-focus);
+
+  /* Brand */
+  --perellion-brand-azure:             var(--wp--preset--color--brand-azure);
+  --perellion-brand-violet:            var(--wp--preset--color--brand-violet);
+  --perellion-brand-orchid:            var(--wp--preset--color--brand-orchid);
+  --perellion-brand-lavender-tint:     var(--wp--preset--color--lavender-tint);
+
+  /* Decoration and spectrum */
+  --perellion-decoration-cyan:         var(--wp--preset--color--decoration-cyan);
+  --perellion-decoration-ultraviolet:  var(--wp--preset--color--ultraviolet);
+  --perellion-decoration-lemon:        var(--wp--preset--color--spectrum-lemon);
+  --perellion-spectrum-gold:           var(--wp--preset--color--spectrum-gold);
+  --perellion-spectrum-amber:          var(--wp--preset--color--spectrum-amber);
+  --perellion-spectrum-lemon:          var(--wp--preset--color--spectrum-lemon);
+
+  /* Alpha variants. Figma emits these as flat hex-with-alpha. */
+  --perellion-background-dark-grey-alpha-5:  rgba(35, 31, 32, 0.05);
+  --perellion-background-dark-grey-alpha-10: rgba(35, 31, 32, 0.10);
+  --perellion-background-dark-grey-alpha-15: rgba(35, 31, 32, 0.15);
+  --perellion-background-dark-grey-alpha-20: rgba(35, 31, 32, 0.20);
+  --perellion-background-dark-grey-alpha-30: rgba(35, 31, 32, 0.30);
+  --perellion-background-white-alpha-30:     rgba(255, 255, 255, 0.30);
+  --perellion-background-white-alpha-72:     rgba(255, 255, 255, 0.72);
+  --perellion-background-white-alpha-80:     rgba(255, 255, 255, 0.80);
+
+  /* Spacing */
+  --perellion-space-0:   0;
+  --perellion-space-4:   var(--wp--preset--spacing--4);
+  --perellion-space-8:   var(--wp--preset--spacing--8);
+  --perellion-space-10:  var(--wp--preset--spacing--10);
+  --perellion-space-12:  var(--wp--preset--spacing--12);
+  --perellion-space-16:  var(--wp--preset--spacing--16);
+  --perellion-space-20:  var(--wp--preset--spacing--20);
+  --perellion-space-24:  var(--wp--preset--spacing--24);
+  --perellion-space-32:  var(--wp--preset--spacing--32);
+  --perellion-space-40:  var(--wp--preset--spacing--40);
+  --perellion-space-48:  var(--wp--preset--spacing--48);
+  --perellion-space-60:  var(--wp--preset--spacing--60);
+  --perellion-space-64:  var(--wp--preset--spacing--64);
+  --perellion-space-80:  var(--wp--preset--spacing--80);
+  --perellion-space-96:  var(--wp--preset--spacing--96);
+  --perellion-space-120: var(--wp--preset--spacing--120);
+  --perellion-space-160: var(--wp--preset--spacing--160);
+  --perellion-space-220: var(--wp--preset--spacing--220);
+
+  /* Radius, layout, effects */
+  --perellion-radius-pill:    var(--wp--custom--radius--pill);
+  --perellion-layout-card-min: var(--wp--custom--layout--card-min);
+  --perellion-blur-backdrop:  var(--wp--custom--blur--backdrop);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Respect the viewer's motion preference. Applies to every transition
+   and animation in the theme without having to remember it each time. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible focus for keyboard users, suppressed for mouse users. */
+:focus-visible {
+  outline: 2px solid var(--wp--preset--color--action-focus);
+  outline-offset: 2px;
+}
+
+/* Skip link target */
+.wp-block-group.is-layout-constrained > :where(:not(.alignleft):not(.alignright)) {
+  margin-inline: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+/* Overline / eyebrow label. Poppins medium, wide tracking, uppercase. */
+.perellion-overline {
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: var(--wp--preset--font-size--body);
+  font-weight: 500;
+  letter-spacing: var(--wp--custom--tracking--overline);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* Gradient text. Used on the accent word in hero headlines.
+   Falls back to a solid colour where background-clip is unsupported. */
+.perellion-gradient-text {
+  color: var(--perellion-brand-azure);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .perellion-gradient-text {
+    background-image: var(--wp--preset--gradient--azure-ultraviolet);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Glass panel. Backdrop blur with a graceful fallback. */
+.perellion-glass {
+  background-color: var(--perellion-background-white-alpha-72);
+  box-shadow: var(--wp--preset--shadow--glass);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .perellion-glass {
+    background-color: var(--perellion-background-white-alpha-30);
+    backdrop-filter: blur(var(--perellion-blur-backdrop));
+  }
+}
+
+/* Auto-fitting card grid. Used by capability, case study and team grids. */
+.perellion-card-grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--24);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(var(--perellion-layout-card-min), 100%), 1fr)
+  );
+}
+
+.screen-reader-text {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal;
+}
