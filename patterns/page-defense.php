@@ -5,12 +5,13 @@
  * Categories: perellion-content
  * Block Types: core/post-content
  * Post Types: page
- * Description: Complete Defense industry page. Insert into an empty page, then swap copy and images.
+ * Description: Complete Defense industry page. Insert into an empty page, then replace copy and imagery.
  */
 
 $perellion_sections = array(
 	'hero-industry.php',
 	'section-overview.php',
+	'section-challenges.php',
 	'section-media-text.php',
 	'section-capability-cards.php',
 	'section-proof-stats.php',

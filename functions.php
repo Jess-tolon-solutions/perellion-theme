@@ -31,7 +31,7 @@ function perellion_enqueue_styles(): void {
 	wp_enqueue_style(
 		'perellion',
 		PERELLION_URI . '/style.css',
-		array( 'ollie-style' ),
+		array(),
 		PERELLION_VERSION
 	);
 }

@@ -197,6 +197,20 @@ body {
     auto-fit,
     minmax(min(var(--perellion-layout-card-min), 100%), 1fr)
   );
+  align-items: stretch;
+}
+
+/* Cards fill their grid cell so a longer heading does not make one
+   card taller than its neighbours. */
+.perellion-card-grid > .perellion-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-block: 0;
+}
+
+.perellion-card-grid > .perellion-card > :last-child {
+  margin-bottom: 0;
 }
 
 .screen-reader-text {
@@ -268,10 +282,47 @@ body {
 	letter-spacing: var(--perellion-tracking-tight);
 }
 
+/* Hero media: a circular disc holding the image or placeholder. */
+.perellion-hero__media {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--wp--preset--spacing--64);
+}
+
+.perellion-hero__disc,
+figure.perellion-hero__disc {
+	width: min(520px, 78vw);
+	margin-inline: auto;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow: var(--wp--preset--shadow--lifted);
+}
+
+.perellion-hero__disc img,
+.perellion-hero__disc svg,
+figure.perellion-hero__disc img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
 .perellion-hero__image img {
 	border-radius: var(--perellion-radius-lg);
 	width: 100%;
 	height: auto;
+}
+
+/* Section media, rounded. */
+.perellion-media img,
+.perellion-media svg,
+figure.perellion-media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: var(--perellion-radius-lg);
+	box-shadow: var(--wp--preset--shadow--card);
 }
 
 /* Section navigation, the jump links under the hero headline. */
@@ -376,4 +427,183 @@ body {
 	.perellion-hero__title {
 		max-width: 100%;
 	}
+}
+
+/* ------------------------------------------------------------------
+   Depth
+   The crosshatch field behind the hero, and the accents that keep the
+   page from reading flat. All of it decorative and hidden from
+   assistive technology.
+   ------------------------------------------------------------------ */
+
+.perellion-hero {
+	position: relative;
+	isolation: isolate;
+}
+
+/* Crosshatch grid field, masked to a soft circle behind the hero. */
+.perellion-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-image:
+		linear-gradient(to right, rgba(35, 31, 32, 0.055) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(35, 31, 32, 0.055) 1px, transparent 1px);
+	background-size: 64px 64px;
+	-webkit-mask-image: radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
+	mask-image: radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
+}
+
+/* A hairline of brand gradient at the top of each card, revealed on hover. */
+.perellion-card {
+	position: relative;
+	overflow: hidden;
+}
+
+.perellion-card::after {
+	content: "";
+	position: absolute;
+	inset-inline: 0;
+	top: 0;
+	height: 3px;
+	background: var(--wp--preset--gradient--azure-ultraviolet);
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform var(--perellion-transition-base) ease;
+}
+
+.perellion-card:hover::after,
+.perellion-card:focus-within::after {
+	transform: scaleX(1);
+}
+
+/* Section eyebrow label. Gives each band a point of entry the way the
+   design does, rather than a heading floating on its own. */
+.perellion-eyebrow {
+	display: block;
+	margin-bottom: var(--wp--preset--spacing--16);
+	color: var(--perellion-brand-violet);
+}
+
+/* The dark proof band carries a faint gradient wash so it does not read
+   as a flat rectangle. */
+.perellion-proof-band {
+	position: relative;
+	isolation: isolate;
+}
+
+.perellion-proof-band::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	opacity: 0.22;
+	background:
+		radial-gradient(60% 120% at 15% 0%, var(--perellion-brand-violet) 0%, transparent 60%),
+		radial-gradient(50% 110% at 85% 100%, var(--perellion-brand-azure) 0%, transparent 60%);
+}
+
+/* Heading accent rule, drawn in the brand gradient. */
+.perellion-rule {
+	width: 64px;
+	height: 4px;
+	border: 0;
+	border-radius: 2px;
+	margin: var(--wp--preset--spacing--24) 0 0;
+	background: var(--wp--preset--gradient--azure-ultraviolet);
+}
+
+/* ------------------------------------------------------------------
+   Brand assets supplied by Sovo
+   ------------------------------------------------------------------ */
+
+.perellion-logo {
+	display: inline-flex;
+	align-items: center;
+	line-height: 0;
+	text-decoration: none;
+}
+
+.perellion-logo__svg {
+	width: 168px;
+	height: auto;
+	display: block;
+}
+
+@media (max-width: 600px) {
+	.perellion-logo__svg {
+		width: 136px;
+	}
+}
+
+/* Certification marks on the dark band. */
+.perellion-badge {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	min-height: 150px;
+}
+
+.perellion-badge img {
+	width: auto;
+	max-width: 100%;
+	max-height: 150px;
+	height: auto;
+	display: block;
+	opacity: 0.92;
+	transition: opacity var(--perellion-transition-base) ease,
+		transform var(--perellion-transition-base) ease;
+}
+
+.perellion-motion .perellion-badge:hover img {
+	opacity: 1;
+	transform: translateY(-3px);
+}
+
+/* The key challenges infographic. */
+.perellion-infographic {
+	max-width: 984px;
+	margin-inline: auto;
+}
+
+.perellion-infographic img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Sticky header, so the section jump links stay reachable. */
+.perellion-header {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	background-color: var(--perellion-background-white-alpha-80);
+	backdrop-filter: blur(var(--perellion-blur-backdrop));
+	-webkit-backdrop-filter: blur(var(--perellion-blur-backdrop));
+	border-bottom: 1px solid var(--perellion-neutral-light-grey);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.perellion-header {
+		background-color: var(--perellion-background-white);
+	}
+}
+
+/* The admin bar offsets the sticky header while logged in. */
+.admin-bar .perellion-header {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	.admin-bar .perellion-header {
+		top: 46px;
+	}
+}
+
+/* Anchored sections clear the sticky header. */
+[id] {
+	scroll-margin-top: 96px;
 }
