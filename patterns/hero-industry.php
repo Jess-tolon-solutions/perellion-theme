@@ -37,7 +37,7 @@
 
 <!-- wp:group {"className":"perellion-hero__media","layout":{"type":"constrained"}} -->
 <div class="wp-block-group perellion-hero__media">
-<!-- wp:image {"align":"center","className":"perellion-hero__disc perellion-parallax","sizeSlug":"perellion-hero"} -->
+<!-- wp:image {"align":"center","className":"perellion-hero__disc perellion-parallax","sizeSlug":"full"} -->
 <figure class="wp-block-image aligncenter perellion-hero__disc perellion-parallax"><img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/img/placeholder-hero.svg" alt="Defense engineering at Perellion"/></figure>
 <!-- /wp:image -->
 </div>

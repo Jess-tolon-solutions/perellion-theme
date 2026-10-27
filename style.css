@@ -282,38 +282,6 @@ body {
 	letter-spacing: var(--perellion-tracking-tight);
 }
 
-/* Hero media: a circular disc holding the image or placeholder. */
-.perellion-hero__media {
-	display: flex;
-	justify-content: center;
-	margin-top: var(--wp--preset--spacing--64);
-}
-
-.perellion-hero__disc,
-figure.perellion-hero__disc {
-	width: min(520px, 78vw);
-	margin-inline: auto;
-	aspect-ratio: 1;
-	border-radius: 50%;
-	overflow: hidden;
-	box-shadow: var(--wp--preset--shadow--lifted);
-}
-
-.perellion-hero__disc img,
-.perellion-hero__disc svg,
-figure.perellion-hero__disc img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	display: block;
-}
-
-.perellion-hero__image img {
-	border-radius: var(--perellion-radius-lg);
-	width: 100%;
-	height: auto;
-}
-
 /* Section media, rounded. */
 .perellion-media img,
 .perellion-media svg,
@@ -441,21 +409,6 @@ figure.perellion-media img {
 	isolation: isolate;
 }
 
-/* Crosshatch grid field, masked to a soft circle behind the hero. */
-.perellion-hero::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	z-index: -1;
-	pointer-events: none;
-	background-image:
-		linear-gradient(to right, rgba(35, 31, 32, 0.055) 1px, transparent 1px),
-		linear-gradient(to bottom, rgba(35, 31, 32, 0.055) 1px, transparent 1px);
-	background-size: 64px 64px;
-	-webkit-mask-image: radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
-	mask-image: radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
-}
-
 /* A hairline of brand gradient at the top of each card, revealed on hover. */
 .perellion-card {
 	position: relative;
@@ -563,15 +516,18 @@ figure.perellion-media img {
 	transform: translateY(-3px);
 }
 
-/* The key challenges infographic. */
+/* The key challenges infographic. Supplied by Sovo at 984x712 and built
+   for a dark surface: the decorative spectrum blends to mud on white. */
 .perellion-infographic {
 	max-width: 984px;
-	margin-inline: auto;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .perellion-infographic img {
 	display: block;
 	width: 100%;
+	max-width: 100%;
 	height: auto;
 }
 
@@ -606,4 +562,195 @@ figure.perellion-media img {
 /* Anchored sections clear the sticky header. */
 [id] {
 	scroll-margin-top: 96px;
+}
+
+/* ------------------------------------------------------------------
+   Image focal point
+   Add one of these as an Additional CSS class on an image block when
+   the default centre crop cuts the subject badly.
+   ------------------------------------------------------------------ */
+
+.is-focus-top img      { object-position: center 15% !important; }
+.is-focus-upper img    { object-position: center 30% !important; }
+.is-focus-lower img    { object-position: center 70% !important; }
+.is-focus-bottom img   { object-position: center 85% !important; }
+.is-focus-left img     { object-position: 20% center !important; }
+.is-focus-right img    { object-position: 80% center !important; }
+
+/* Default the panel media slightly above centre, which suits most
+   equipment and aircraft photography. */
+figure.perellion-panel__media img {
+	object-position: center 35%;
+}
+
+/* ------------------------------------------------------------------
+   Visual panel
+   The design composes each content section against a 720x700 panel:
+   Sovo's atmospheric artwork with a 467px feature image on top. The
+   artwork is decorative, so it is a background rather than an <img>.
+   ------------------------------------------------------------------ */
+
+.perellion-panel {
+	position: relative;
+	display: grid;
+	place-items: center;
+	aspect-ratio: 720 / 700;
+	width: 100%;
+}
+
+.perellion-panel::before {
+	content: "";
+	position: absolute;
+	inset: -6%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	pointer-events: none;
+}
+
+.perellion-panel--a::before { background-image: url("assets/img/panel-a.png"); }
+.perellion-panel--b::before { background-image: url("assets/img/panel-b.png"); }
+.perellion-panel--c::before { background-image: url("assets/img/panel-c.png"); }
+
+.perellion-panel__media,
+figure.perellion-panel__media {
+	position: relative;
+	margin: 0;
+	z-index: 1;
+	width: 64.86%;          /* 467 of 720, as drawn */
+	aspect-ratio: 467 / 638;
+	object-fit: cover;
+	border-radius: var(--perellion-radius-lg);
+	box-shadow: var(--wp--preset--shadow--lifted);
+	display: block;
+}
+
+figure.perellion-panel__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: var(--perellion-radius-lg);
+	display: block;
+}
+
+/* ------------------------------------------------------------------
+   Compliance commitments and marks
+   ------------------------------------------------------------------ */
+
+.perellion-ticklist {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.perellion-ticklist li {
+	position: relative;
+	padding-left: var(--wp--preset--spacing--32);
+	margin-bottom: var(--wp--preset--spacing--12);
+}
+
+.perellion-ticklist li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.55em;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--wp--preset--gradient--cyan-violet);
+}
+
+.perellion-marks {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: var(--wp--preset--spacing--32);
+	align-items: end;
+}
+
+.perellion-marks figure {
+	margin: 0;
+	text-align: center;
+}
+
+.perellion-marks img {
+	width: auto;
+	max-width: 100%;
+	max-height: 132px;
+	height: auto;
+	display: block;
+	margin: 0 auto var(--wp--preset--spacing--16);
+	opacity: 0.92;
+	transition: opacity var(--perellion-transition-base) ease,
+		transform var(--perellion-transition-base) ease;
+}
+
+.perellion-motion .perellion-marks figure:hover img {
+	opacity: 1;
+	transform: translateY(-3px);
+}
+
+.perellion-marks figcaption {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--perellion-neutral-light-grey);
+}
+
+/* ------------------------------------------------------------------
+   Contact details
+   ------------------------------------------------------------------ */
+
+.perellion-contact {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: var(--wp--preset--spacing--32);
+	margin: var(--wp--preset--spacing--48) 0 0;
+}
+
+.perellion-contact div { margin: 0; }
+
+.perellion-contact dt {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	letter-spacing: var(--perellion-tracking-overline);
+	text-transform: uppercase;
+	color: var(--perellion-neutral-graphite);
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.perellion-contact dd {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--lead);
+	line-height: 1.4;
+}
+
+.perellion-contact a {
+	color: var(--perellion-action-primary);
+	text-decoration: none;
+}
+
+.perellion-contact a:hover { text-decoration: underline; }
+
+/* ------------------------------------------------------------------
+   Hero, without the panel artwork behind it
+   ------------------------------------------------------------------ */
+
+.perellion-hero__title {
+	max-width: 20ch;
+}
+
+@media (max-width: 860px) {
+	.perellion-panel { aspect-ratio: 620 / 640; }
+	.perellion-panel__media { width: 72%; }
+	.perellion-marks { grid-template-columns: repeat(3, 1fr); gap: var(--wp--preset--spacing--16); }
+	.perellion-marks img { max-height: 92px; }
+}
+
+/* The panel media keeps the design's 16px corner whichever core block
+   style is applied. Core's "Rounded" style is a 9999px radius, which
+   turns a portrait image into an oval. */
+figure.perellion-panel__media,
+figure.perellion-panel__media img,
+figure.perellion-panel__media.is-style-rounded img {
+	border-radius: var(--perellion-radius-lg);
 }

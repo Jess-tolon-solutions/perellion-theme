@@ -26,7 +26,7 @@
 <!-- /wp:column -->
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center">
-<!-- wp:image {"className":"perellion-media perellion-parallax","sizeSlug":"perellion-card"} -->
+<!-- wp:image {"className":"perellion-media perellion-parallax","sizeSlug":"large"} -->
 <figure class="wp-block-image perellion-media perellion-parallax"><img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/img/placeholder-section.svg" alt="Perellion engineering in progress"/></figure>
 <!-- /wp:image -->
 </div>
