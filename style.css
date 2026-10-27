@@ -96,7 +96,16 @@ Text Domain: perellion
   --perellion-space-220: var(--wp--preset--spacing--220);
 
   /* Radius, layout, effects */
+  --perellion-radius-sm:      var(--wp--custom--radius--sm);
+  --perellion-radius-md:      var(--wp--custom--radius--md);
+  --perellion-radius-lg:      var(--wp--custom--radius--lg);
   --perellion-radius-pill:    var(--wp--custom--radius--pill);
+  --perellion-transition-fast: var(--wp--custom--transition--fast);
+  --perellion-transition-base: var(--wp--custom--transition--base);
+  --perellion-transition-slow: var(--wp--custom--transition--slow);
+  --perellion-tracking-tight:  var(--wp--custom--tracking--tight);
+  --perellion-tracking-base:   var(--wp--custom--tracking--base);
+  --perellion-tracking-overline: var(--wp--custom--tracking--overline);
   --perellion-layout-card-min: var(--wp--custom--layout--card-min);
   --perellion-blur-backdrop:  var(--wp--custom--blur--backdrop);
 }
@@ -200,4 +209,171 @@ body {
   position: absolute;
   width: 1px;
   word-wrap: normal;
+}
+
+/* ------------------------------------------------------------------
+   Motion layer
+   Everything here is opt-in via a class and fully suppressed by the
+   prefers-reduced-motion rule above. Without JavaScript the
+   .perellion-motion class is never added, so content renders visible.
+   ------------------------------------------------------------------ */
+
+.perellion-motion .perellion-reveal {
+	opacity: 0;
+	transform: translate3d(0, 24px, 0);
+	transition:
+		opacity var(--perellion-transition-slow) ease-out var(--perellion-reveal-delay, 0ms),
+		transform var(--perellion-transition-slow) ease-out var(--perellion-reveal-delay, 0ms);
+	will-change: opacity, transform;
+}
+
+.perellion-motion .perellion-reveal.is-revealed {
+	opacity: 1;
+	transform: none;
+}
+
+/* Parallax drift is applied inline by motion.js; keep the transition
+   short so it tracks the scroll rather than lagging behind it. */
+.perellion-motion .perellion-parallax {
+	transition: transform var(--perellion-transition-fast) linear;
+	will-change: transform;
+}
+
+/* Headline, revealed line by line. */
+.perellion-word {
+	display: inline-block;
+}
+
+.perellion-motion .perellion-split .perellion-word {
+	opacity: 0;
+	transform: translate3d(0, 0.5em, 0);
+	transition:
+		opacity 520ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--perellion-line-delay, 0ms),
+		transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--perellion-line-delay, 0ms);
+}
+
+.perellion-motion .perellion-split.is-revealed .perellion-word {
+	opacity: 1;
+	transform: none;
+}
+
+/* ------------------------------------------------------------------
+   Hero
+   ------------------------------------------------------------------ */
+
+.perellion-hero__title {
+	max-width: 18ch;
+	margin-inline: auto;
+	text-align: center;
+	letter-spacing: var(--perellion-tracking-tight);
+}
+
+.perellion-hero__image img {
+	border-radius: var(--perellion-radius-lg);
+	width: 100%;
+	height: auto;
+}
+
+/* Section navigation, the jump links under the hero headline. */
+.perellion-sectionnav {
+	opacity: 0.8;
+}
+
+.perellion-sectionnav p {
+	margin: 0;
+}
+
+.perellion-sectionnav a {
+	color: var(--perellion-neutral-graphite);
+	text-decoration: none;
+	padding-bottom: 4px;
+	border-bottom: 2px solid transparent;
+	transition: color var(--perellion-transition-base) ease,
+		border-color var(--perellion-transition-base) ease;
+}
+
+.perellion-sectionnav a:hover,
+.perellion-sectionnav a:focus-visible {
+	color: var(--perellion-neutral-charcoal);
+	border-bottom-color: var(--perellion-action-primary);
+}
+
+/* Scroll cue. */
+.perellion-scrollcue {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--wp--preset--spacing--48);
+	color: var(--perellion-action-primary);
+	transition: opacity var(--perellion-transition-base) ease;
+}
+
+.perellion-motion .perellion-scrollcue svg {
+	animation: perellion-nudge 1.8s ease-in-out infinite;
+}
+
+@keyframes perellion-nudge {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(6px);
+	}
+}
+
+/* ------------------------------------------------------------------
+   Cards and FAQ
+   ------------------------------------------------------------------ */
+
+.perellion-card {
+	box-shadow: var(--wp--preset--shadow--card);
+	transition: transform var(--perellion-transition-base) ease,
+		box-shadow var(--perellion-transition-base) ease;
+}
+
+.perellion-motion .perellion-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--wp--preset--shadow--lifted);
+}
+
+.perellion-faq summary {
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--card);
+	font-weight: 500;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--24);
+}
+
+.perellion-faq summary::-webkit-details-marker {
+	display: none;
+}
+
+.perellion-faq summary::after {
+	content: "+";
+	font-weight: 400;
+	color: var(--perellion-action-primary);
+	flex: none;
+}
+
+.perellion-faq details[open] summary::after {
+	content: "\2013";
+}
+
+/* ------------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------------ */
+
+@media (max-width: 781px) {
+	.perellion-sectionnav {
+		flex-wrap: wrap !important;
+		gap: var(--wp--preset--spacing--24) !important;
+	}
+
+	.perellion-hero__title {
+		max-width: 100%;
+	}
 }

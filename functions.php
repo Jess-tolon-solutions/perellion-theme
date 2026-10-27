@@ -97,3 +97,17 @@ function perellion_editor_restrictions(): void {
 	remove_theme_support( 'core-block-patterns' );
 }
 add_action( 'after_setup_theme', 'perellion_editor_restrictions' );
+
+/**
+ * Front-end motion script. Included-tier scroll behaviour only.
+ */
+function perellion_enqueue_motion() {
+	wp_enqueue_script(
+		'perellion-motion',
+		get_stylesheet_directory_uri() . '/assets/js/motion.js',
+		array(),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'perellion_enqueue_motion' );
