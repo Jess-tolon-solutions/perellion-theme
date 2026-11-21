@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.31.0
+Version: 1.31.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -3496,7 +3496,7 @@ main section.alignfull#faq {
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: url("assets/img/art/about-hero.webp") center top / 1440px 360px no-repeat;
+	background: url("assets/img/art/about-hero.webp?v=2") center top / 1440px 360px no-repeat;
 	pointer-events: none;
 }
 
@@ -3883,7 +3883,7 @@ main section.alignfull#faq {
 
 /* ---- Decoration crops for About, same mapping as the industry pages -- */
 .perellion-page--about #who-we-are .perellion-panel { --perellion-art: url("assets/img/art/about-who-we-are.webp"); }
-.perellion-page--about #what-we-do .perellion-panel { --perellion-art: url("assets/img/art/about-what-we-do.webp"); }
+.perellion-page--about #what-we-do .perellion-panel { --perellion-art: url("assets/img/art/about-what-we-do.webp?v=2"); }
 .perellion-page--about #our-culture .perellion-panel--wide { --perellion-art: url("assets/img/art/about-culture-wide.webp"); }
 .perellion-page--about .perellion-culture-split .perellion-panel { --perellion-art: url("assets/img/art/about-culture.webp"); }
 .perellion-page--about #join .perellion-panel { --perellion-art: url("assets/img/art/about-join.webp"); }
@@ -4453,6 +4453,20 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
 		color: var(--wp--preset--color--action-primary);
 		text-decoration: none;
+	}
+
+	/* The frame's panel runs edge to edge; the items stay under their
+	   parent. */
+	.perellion-header .wp-block-navigation .has-child .wp-block-navigation__submenu-container::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		background: var(--wp--preset--color--white);
+		z-index: -1;
 	}
 
 	/* The submenu caret the frame hides on closed items. */
