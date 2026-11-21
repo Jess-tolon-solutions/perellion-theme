@@ -66,4 +66,4 @@
 </section>
 <!-- /wp:group -->
 
-<!-- wp:pattern {"slug":"perellion/cta-contact"} /-->
+<?php echo perellion_cta_markup( array( 'eyebrow' => false, 'email' => 'info@perellion.com', 'address_line' => true, 'card' => 'beside', 'portrait' => array( 926, 868 ), 'quote' => 'We can\'t lose access to your team\'s skill sets.', 'source' => 'Aerospace Supply Chain Manager' ) ); ?>

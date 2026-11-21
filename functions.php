@@ -89,6 +89,7 @@ add_action( 'init', 'perellion_pattern_categories' );
  */
 require_once PERELLION_DIR . '/inc/post-types.php';
 require_once PERELLION_DIR . '/inc/redirects.php';
+require_once PERELLION_DIR . '/inc/cta.php';
 
 /**
  * Dev-only deploy endpoint (REMOVE BEFORE LAUNCH).

@@ -84,4 +84,4 @@ $caps = array(
 </section>
 <!-- /wp:group -->
 
-<!-- wp:pattern {"slug":"perellion/cta-contact"} /-->
+<?php echo perellion_cta_markup( array( 'eyebrow' => false, 'email' => 'info@perellion.com', 'address_line' => true, 'card' => 'beside', 'portrait' => array( 904, 868 ), 'quote' => 'The tooling worked as intended without any issues, and the installation was smooth and straightforward.', 'source' => 'Equipment engineer at a space technology company' ) ); ?>
