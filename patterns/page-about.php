@@ -222,7 +222,7 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:group {"className":"perellion-certcard","layout":{"type":"default"}} -->
 <div class="wp-block-group perellion-certcard">
 <!-- wp:html -->
-<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-as9100d.png" width="96" height="85" alt="AS9100D certified">
+<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-as9100d-gray.png" width="96" height="85" alt="AS9100D certified">
 <!-- /wp:html -->
 <!-- wp:heading {"level":3,"textAlign":"center","fontSize":"card"} -->
 <h3 class="wp-block-heading has-text-align-center has-card-font-size">Quality</h3>
@@ -243,7 +243,7 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:group {"className":"perellion-certcard","layout":{"type":"default"}} -->
 <div class="wp-block-group perellion-certcard">
 <!-- wp:html -->
-<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-cmmc.png" width="96" height="75" alt="CMMC Level 2 compliant">
+<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-cmmc-gray.png" width="96" height="75" alt="CMMC Level 2 compliant">
 <!-- /wp:html -->
 <!-- wp:heading {"level":3,"textAlign":"center","fontSize":"card"} -->
 <h3 class="wp-block-heading has-text-align-center has-card-font-size">Cyber Security</h3>
@@ -257,7 +257,7 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:group {"className":"perellion-certcard","layout":{"type":"default"}} -->
 <div class="wp-block-group perellion-certcard">
 <!-- wp:html -->
-<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-itar.png" width="96" height="96" alt="ITAR registered">
+<img class="perellion-certcard__badge" src="<?php echo esc_url( $t ); ?>/assets/img/badge-itar-gray.png" width="96" height="96" alt="ITAR registered">
 <!-- /wp:html -->
 <!-- wp:heading {"level":3,"textAlign":"center","fontSize":"card"} -->
 <h3 class="wp-block-heading has-text-align-center has-card-font-size">Defense Services</h3>
