@@ -74,13 +74,29 @@
  * page is already functional for someone trying to find the building.
  */
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-mapband","style":{"spacing":{"padding":{"top":"var:preset|spacing|0","bottom":"var:preset|spacing|0"}}},"layout":{"type":"default"}} -->
-<section class="wp-block-group alignfull perellion-reveal perellion-mapband">
+<?php
+/**
+ * Map: the frame's own map image (dark Puget Sound map with the yellow
+ * "Perellion HQ" pin), taken from the Contact frame's image fill and
+ * sideloaded into the media library on 21 Nov as id 880. Drawn at the
+ * frame's 800 x 450 with the brand glow behind it; the address above
+ * still links out to Google Maps.
+ */
+$map = wp_get_attachment_image_url( 880, 'full' );
+?>
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-mapband","style":{"spacing":{"padding":{"top":"24px","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"800px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-mapband" style="padding-top:24px;padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
 <!-- wp:html -->
+<?php if ( $map ) : ?>
+<div class="perellion-panel perellion-panel--map perellion-panel--c">
+  <figure class="perellion-panel__media"><img src="<?php echo esc_url( $map ); ?>" alt="Map showing Perellion HQ in Everett, Washington" width="800" height="450"></figure>
+</div>
+<?php else : ?>
 <div class="perellion-mapband__slot is-awaiting-asset">
   <span class="perellion-mapband__label">Perellion HQ</span>
-  <span class="perellion-mapband__note">Map image to come &mdash; static export or live embed, pending Sovo</span>
+  <span class="perellion-mapband__note">Map image to come</span>
 </div>
+<?php endif; ?>
 <!-- /wp:html -->
 </section>
 <!-- /wp:group -->
