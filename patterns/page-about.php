@@ -27,8 +27,8 @@ $u = '/wp-content/uploads/2026/11/';
 $t = get_stylesheet_directory_uri();
 ?>
 
-<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hero perellion-hero--page perellion-hero--about","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
-<section class="wp-block-group alignfull perellion-reveal perellion-hero perellion-hero--page perellion-hero--about" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hero perellion-hero--page perellion-hero--about","style":{"spacing":{"padding":{"top":"36px","bottom":"36px","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-hero perellion-hero--page perellion-hero--about" style="padding-top:36px;padding-right:var(--wp--preset--spacing--24);padding-bottom:36px;padding-left:var(--wp--preset--spacing--24)">
 <!-- wp:heading {"level":1,"className":"perellion-hero__title perellion-wordstack","fontSize":"display"} -->
 <h1 class="wp-block-heading perellion-hero__title perellion-wordstack has-display-font-size">Designers<span class="perellion-dot">.</span><br>Inventors<span class="perellion-dot">.</span><br>Collaborators<span class="perellion-dot">.</span><br>Partners<span class="perellion-dot">.</span></h1>
 <!-- /wp:heading -->
