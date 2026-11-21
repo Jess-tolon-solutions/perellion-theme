@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.29.5
+Version: 1.30.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4071,4 +4071,113 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 
 .perellion-article__media .wp-block-post-featured-image img {
 	border-radius: var(--perellion-radius-sm);
+}
+
+/* ======================================================================
+   Industries hub, built from the Industries / Desktop frame, 21 Nov
+   ====================================================================== */
+
+/* Gray band under the header with the six cards straddling its bottom
+   edge by 55px (frame: band to y 959, second card row to 1014). */
+.perellion-hubhero {
+	position: relative;
+	background: var(--wp--preset--color--white);
+}
+
+.perellion-hubhero::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 55px;
+	background: var(--wp--preset--color--canvas);
+	pointer-events: none;
+}
+
+.perellion-hubhero > * {
+	position: relative;
+}
+
+.perellion-hubhero__title {
+	margin: 0 0 56px;
+}
+
+.perellion-industrygrid {
+	display: grid;
+	grid-template-columns: repeat(3, 345px);
+	justify-content: center;
+	gap: 40px 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.perellion-industrygrid > li {
+	margin: 0;
+}
+
+.perellion-card--industry {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+	padding: 0 0 24px;
+}
+
+.perellion-card--industry .perellion-card__media {
+	display: block;
+	line-height: 0;
+}
+
+.perellion-card--industry .perellion-card__media img {
+	width: 100%;
+	aspect-ratio: 345 / 205;
+	object-fit: cover;
+	border-radius: var(--perellion-radius-sm) var(--perellion-radius-sm) 0 0;
+}
+
+.perellion-card--industry .perellion-card__title {
+	margin: 24px 20px 24px;
+	font-size: var(--wp--preset--font-size--card);
+	font-weight: 500;
+	line-height: 1.25;
+}
+
+.perellion-card--industry .perellion-card__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.perellion-card--industry .perellion-card__link {
+	margin: 0 20px;
+	font-weight: 500;
+	color: var(--wp--preset--color--action-primary);
+	text-decoration: none;
+}
+
+/* Partner splits keep frame order (media first where the photo is on the
+   left), as on About. */
+@media (min-width: 861px) {
+	.perellion-partner.perellion-split--mirror .perellion-col--media,
+	.perellion-partner.perellion-split--mirror .perellion-split__media {
+		order: 1;
+	}
+	/* Coriolis photo is 467 x 571 with the card over its right edge, the
+	   card's top 210px above the photo's center. */
+	#coriolis .perellion-panel--rect .perellion-panel__media {
+		aspect-ratio: 467 / 571;
+	}
+	.perellion-quote--rect {
+		top: calc(50% - 210px);
+	}
+}
+
+.perellion-partner .perellion-split__text p {
+	line-height: 1.96875;
+	letter-spacing: 0.4px;
+}
+
+.perellion-partner .wp-block-buttons {
+	margin-top: var(--wp--preset--spacing--32);
+}
+
+@media (max-width: 1100px) {
+	.perellion-industrygrid { grid-template-columns: repeat(auto-fit, minmax(280px, 345px)); }
 }
