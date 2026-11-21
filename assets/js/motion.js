@@ -772,7 +772,11 @@
 			return;
 		}
 		var h = headerHeight();
-		anchorBar.style.top = h + 'px';
+		/* The header is sticky, so its on-screen bottom is where the bar
+		 * docks; that also absorbs the admin bar for logged-in reviewers. */
+		var hdr = document.querySelector( '.wp-site-blocks > header, header.wp-block-template-part' );
+		var dockTop = hdr ? Math.max( 0, Math.round( hdr.getBoundingClientRect().bottom ) ) : h;
+		anchorBar.style.top = dockTop + 'px';
 
 		/* Dock the moment the hero's own copy has cleared the header, so
 		 * the two are never both in the same place on screen. */
