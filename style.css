@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.33.0
+Version: 1.33.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -1824,8 +1824,10 @@ header.wp-block-template-part {
 /* The overlap is a desktop instruction; below the split breakpoint the
    photo goes full width and a card hanging off its right edge would push
    the page sideways, so it sits under the photo instead. */
-@media (min-width: 861px) {
-	/* WordPress renders the card as a SIBLING of the image figure, not
+@media (min-width: 601px) {
+	/* 834 frame keeps this card over the portrait; phones stack it (see
+	   the phone block at the end of the file).
+	   WordPress renders the card as a SIBLING of the image figure, not
 	   inside it, so its containing block is the 720-wide panel and the
 	   percentages above resolved against that: a 429px card overlapping
 	   by 20 instead of a 206px card overlapping by 99.
@@ -1847,16 +1849,8 @@ header.wp-block-template-part {
 	}
 }
 
-/* Below the split breakpoint the card is hidden rather than stacked.
-   The photo inside the panel is absolutely positioned, so a card left in
-   flow lands on top of it instead of under it, and the overlap Haley
-   asked for is a desktop instruction in any case. Revisit if a mobile
-   frame for this section arrives. */
-@media (max-width: 860px) {
-	.perellion-quote {
-		display: none;
-	}
-}
+/* Phones and tablets: the 390/834 frames (21 Nov) stack the card under
+   the photo; those rules live in the phone block at the end of the file. */
 
 .perellion-quote__mark {
 	display: block;
