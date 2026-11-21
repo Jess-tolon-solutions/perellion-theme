@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.32.4
+Version: 1.33.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -3558,7 +3558,7 @@ main section.alignfull#faq {
 	color: var(--wp--preset--color--action-primary);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 600px) {
 	.perellion-hero--about,
 	.perellion-hero--home {
 		grid-template-columns: 1fr;
@@ -4659,14 +4659,13 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	.perellion-split .perellion-split__media { order: -1; }
 
 	/* testimonial: in flow under the photo, centered, no card */
-	.perellion-quote,
-	.perellion-quote--left,
-	.perellion-quote--near,
-	.perellion-quote--beside,
-	.perellion-quote--over,
-	.perellion-quote--rect,
-	.perellion-quote--showcase,
-	#contact .perellion-quote {
+	.perellion-quote:not(#contact *),
+	.perellion-quote--left:not(#contact *),
+	.perellion-quote--near:not(#contact *),
+	.perellion-quote--beside:not(#contact *),
+	.perellion-quote--over:not(#contact *),
+	.perellion-quote--rect:not(#contact *),
+	.perellion-quote--showcase:not(#contact *) {
 		display: flex;
 		position: static;
 		transform: none;
@@ -4685,24 +4684,30 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	figure.perellion-quote figcaption.perellion-quote__source { text-align: center; }
 
 	/* the panel grows to hold the photo plus the quote beneath it */
-	.perellion-panel,
-	.perellion-panel--round,
-	.perellion-panel--rect,
-	.perellion-panel--portrait {
+	.perellion-panel:not(#contact *),
+	.perellion-panel--round:not(#contact *),
+	.perellion-panel--rect:not(#contact *),
+	.perellion-panel--portrait:not(#contact *) {
 		aspect-ratio: auto;
 		height: auto;
 		padding-block: 24px;
 	}
-	.perellion-panel .perellion-panel__media,
-	.perellion-panel figure.perellion-panel__media {
+	.perellion-panel:not(#contact *) .perellion-panel__media,
+	.perellion-panel:not(#contact *) figure.perellion-panel__media {
 		position: relative;
 		width: 86%;
 		margin: 0 auto;
 	}
 	.perellion-panel--round .perellion-panel__media { aspect-ratio: 1; }
 	.perellion-panel--rect .perellion-panel__media { aspect-ratio: 1; }
-	.perellion-panel--portrait .perellion-panel__media,
-	.perellion-panel--portrait figure.perellion-panel__media { aspect-ratio: 345 / 471; translate: 0; width: 86%; }
+	.perellion-panel--portrait:not(#contact *) .perellion-panel__media,
+	.perellion-panel--portrait:not(#contact *) figure.perellion-panel__media { aspect-ratio: 345 / 471; translate: 0; width: 86%; }
+	/* 834 frames: the header is logo + menu button, no Contact pill, and
+	   the menu is the overlay (WP's own switch is 600px) */
+	.perellion-header .wp-block-buttons { display: none; }
+	.perellion-header .wp-block-navigation__responsive-container-open:not(.always-shown) { display: flex; }
+	.perellion-header .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) { display: none; }
+	.perellion-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close { display: flex; }
 	.perellion-panel--wide .perellion-panel__media,
 	.perellion-panel--wide figure.perellion-panel__media { width: 100%; aspect-ratio: 838 / 480; }
 	.perellion-panel--map { height: auto; }
@@ -4731,7 +4736,16 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	.perellion-page--home .perellion-showcase .perellion-panel--wide::before { display: none; }
 	.perellion-showcase .perellion-panel--wide .perellion-panel__media,
 	.perellion-showcase .perellion-panel--wide figure.perellion-panel__media { width: 100vw; margin-left: calc(50% - 50vw) !important; margin-right: 0 !important; border-radius: 0; }
-	#contact .perellion-panel { padding-inline: 0; }
+	#contact .perellion-quote {
+		display: flex; position: static; transform: none; width: min(320px, 100%); min-height: 0;
+		margin: 24px auto 0; padding: 0; border: 0; background: transparent;
+		-webkit-backdrop-filter: none; backdrop-filter: none; text-align: center; align-items: center;
+	}
+	#contact .perellion-quote .perellion-quote__mark { margin: 0 auto; }
+	#contact figure.perellion-quote figcaption.perellion-quote__source { text-align: center; }
+	#contact .perellion-panel { aspect-ratio: auto; height: auto; padding-block: 24px; padding-inline: 0; }
+	#contact .perellion-panel .perellion-panel__media,
+	#contact .perellion-panel figure.perellion-panel__media { position: relative; translate: 0; margin: 0 auto; }
 	#contact .perellion-panel--portrait .perellion-panel__media,
 	#contact .perellion-panel--portrait figure.perellion-panel__media,
 	#contact .perellion-panel--rect .perellion-panel__media,
