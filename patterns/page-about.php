@@ -227,8 +227,15 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:heading {"level":3,"textAlign":"center","fontSize":"card"} -->
 <h3 class="wp-block-heading has-text-align-center has-card-font-size">Quality</h3>
 <!-- /wp:heading -->
+<?php
+/**
+ * LINK HELD. The frame links "AS9100D" but the target was not supplied and
+ * the certificate PDF on the live site could not be confirmed from here.
+ * Plain text until Perellion supplies the current certificate link.
+ */
+?>
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">Our <a href="https://www.perellion.com/wp-content/uploads/2023/04/Perellion-AS9100D-Certificate.pdf" rel="noopener">AS9100D</a> and ISO 9001:2015 certifications demonstrate our unwavering commitment to quality. Clients come to us for our world-class engineering expertise, and because they know they can rely on us. The consistency and dependability of a certified quality management system is essential to our continued success as an industry-leading provider of custom automation and tooling solutions.</p>
+<p class="has-text-align-center">Our AS9100D and ISO 9001:2015 certifications demonstrate our unwavering commitment to quality. Clients come to us for our world-class engineering expertise, and because they know they can rely on us. The consistency and dependability of a certified quality management system is essential to our continued success as an industry-leading provider of custom automation and tooling solutions.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -274,8 +281,8 @@ $t = get_stylesheet_directory_uri();
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","anchor":"join","className":"perellion-reveal perellion-split perellion-split--mirror perellion-join","backgroundColor":"canvas","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
-<section id="join" class="wp-block-group alignfull perellion-reveal perellion-split perellion-split--mirror perellion-join has-canvas-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:group {"tagName":"section","align":"full","anchor":"join","className":"perellion-reveal perellion-split perellion-split--mirror perellion-join","backgroundColor":"white","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
+<section id="join" class="wp-block-group alignfull perellion-reveal perellion-split perellion-split--mirror perellion-join has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
 
 <!-- wp:group {"className":"perellion-split__text","layout":{"type":"constrained","contentSize":"460px","justifyContent":"left"}} -->
 <div class="wp-block-group perellion-split__text">

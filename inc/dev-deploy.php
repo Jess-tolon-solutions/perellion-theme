@@ -401,7 +401,7 @@ function perellion_dev_migrate( WP_REST_Request $req ) {
 	if ( ! $category || ! post_type_exists( $post_type ) ) {
 		return new WP_Error( 'bad_request', 'category and a registered post_type are required', array( 'status' => 400 ) );
 	}
-	$src = 'https://www.perellion.com/wp-json/wp/v2/posts?categories=' . $category . '&per_page=' . $limit . '&orderby=date&order=asc&_fields=id,slug,title,excerpt,content,featured_media,date_gmt,modified_gmt,link';
+	$src = 'https://www.perellion.com/wp-json/wp/v2/posts?categories=' . $category . '&per_page=' . $limit . '&orderby=date&order=desc&_fields=id,slug,title,excerpt,content,featured_media,date_gmt,modified_gmt,link';
 	$res = wp_remote_get( $src, array( 'timeout' => 30 ) );
 	if ( is_wp_error( $res ) ) {
 		return new WP_Error( 'fetch_failed', $res->get_error_message(), array( 'status' => 502 ) );
@@ -416,7 +416,7 @@ function perellion_dev_migrate( WP_REST_Request $req ) {
 	$out = array();
 	$order = 0;
 	foreach ( $posts as $p ) {
-		$order++;
+		$order++; // production lists newest first (its category archive order), so menu_order 1 = newest
 		$prod_id = (int) $p['id'];
 		$slug    = sanitize_title( $p['slug'] );
 		$title   = wp_strip_all_tags( $p['title']['rendered'] );

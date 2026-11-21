@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.29.1
+Version: 1.29.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -3717,24 +3717,46 @@ main section.alignfull#faq {
 }
 
 /* ---- Certification cards -------------------------------------------- */
+/* Frame: three 345px cards 20px apart on a white band, with a canvas stripe
+   running behind them from 122px below the cards' top for 394px, so the
+   cards straddle it top and bottom. */
+.perellion-certs {
+	background: var(--wp--preset--color--white);
+}
+
 .perellion-certs .perellion-certs__grid {
-	margin-top: var(--wp--preset--spacing--48);
-	gap: 24px;
+	position: relative;
+	max-width: 1075px;
+	margin-top: 72px;
+	gap: 20px;
+}
+
+.perellion-certs .perellion-certs__grid::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 122px;
+	width: 100vw;
+	height: 394px;
+	transform: translateX(-50%);
+	background: var(--wp--preset--color--canvas);
+	pointer-events: none;
 }
 
 .perellion-certcard {
+	position: relative;
 	background: var(--wp--preset--color--white);
 	border-radius: var(--perellion-radius-sm);
 	box-shadow: var(--wp--preset--shadow--card);
-	padding: 32px 28px;
+	padding: 24px 20px 28px;
 	text-align: center;
 }
 
 .perellion-certcard__badge {
 	display: block;
-	width: 96px;
+	width: 170px;
 	height: auto;
-	margin: 0 auto 20px;
+	margin: 0 auto 24px;
 }
 
 .perellion-certcard h3 {
