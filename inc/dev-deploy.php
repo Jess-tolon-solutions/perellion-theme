@@ -250,7 +250,22 @@ function perellion_dev_deploy( WP_REST_Request $req ) {
 				continue;
 			}
 			$title = isset( $item['title'] ) ? sanitize_text_field( $item['title'] ) : '';
-			$id    = media_sideload_image( $url, 0, $title, 'id' );
+			if ( ! empty( $item['name'] ) ) {
+				// Figma raw-image URLs carry no extension, which
+				// media_sideload_image() insists on; download and hand the
+				// file over under the given name instead.
+				$tmp = download_url( $url, 60 );
+				if ( is_wp_error( $tmp ) ) {
+					$errors[] = array( 'path' => $url, 'error' => $tmp->get_error_message() );
+					continue;
+				}
+				$id = media_handle_sideload( array( 'name' => sanitize_file_name( $item['name'] ), 'tmp_name' => $tmp ), 0, $title );
+				if ( is_wp_error( $id ) ) {
+					@unlink( $tmp );
+				}
+			} else {
+				$id = media_sideload_image( $url, 0, $title, 'id' );
+			}
 			if ( is_wp_error( $id ) ) {
 				$errors[] = array( 'path' => $url, 'error' => $id->get_error_message() );
 				continue;
