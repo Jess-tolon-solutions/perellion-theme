@@ -271,6 +271,7 @@ function perellion_dev_deploy( WP_REST_Request $req ) {
 	if ( ! empty( $body['pull']['ref'] ) && ! $dry ) {
 		$ref = preg_replace( '/[^A-Za-z0-9._\/-]/', '', (string) $body['pull']['ref'] );
 		$zip_url = 'https://codeload.github.com/Jess-tolon-solutions/perellion-theme/zip/' . $ref;
+		require_once ABSPATH . 'wp-admin/includes/file.php';
 		$tmpzip  = wp_tempnam( 'perellion-pull.zip' );
 		$res     = wp_remote_get( $zip_url, array( 'timeout' => 60, 'stream' => true, 'filename' => $tmpzip ) );
 		if ( is_wp_error( $res ) || 200 !== (int) wp_remote_retrieve_response_code( $res ) ) {
