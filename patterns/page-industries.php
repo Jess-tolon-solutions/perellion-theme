@@ -31,8 +31,8 @@ $cards = array(
 );
 ?>
 
-<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hubhero","style":{"spacing":{"padding":{"top":"56px","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"1075px"}} -->
-<section class="wp-block-group alignfull perellion-reveal perellion-hubhero" style="padding-top:56px;padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hubhero","style":{"spacing":{"padding":{"top":"56px","bottom":"0","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"1075px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-hubhero" style="padding-top:56px;padding-right:var(--wp--preset--spacing--24);padding-bottom:0;padding-left:var(--wp--preset--spacing--24)">
 <!-- wp:heading {"level":1,"textAlign":"center","className":"perellion-hubhero__title","fontSize":"display"} -->
 <h1 class="wp-block-heading has-text-align-center perellion-hubhero__title has-display-font-size">Industries served</h1>
 <!-- /wp:heading -->

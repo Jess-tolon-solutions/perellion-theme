@@ -56,8 +56,8 @@ $caps = array(
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","anchor":"capabilities","className":"perellion-reveal perellion-sectionhead perellion-capabilities","backgroundColor":"canvas","style":{"spacing":{"padding":{"top":"72px","bottom":"48px","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
-<section id="capabilities" class="wp-block-group alignfull perellion-reveal perellion-sectionhead perellion-capabilities has-canvas-background-color has-background" style="padding-top:72px;padding-right:var(--wp--preset--spacing--24);padding-bottom:48px;padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:group {"tagName":"section","align":"full","anchor":"capabilities","className":"perellion-reveal perellion-sectionhead perellion-capabilities","backgroundColor":"canvas","style":{"spacing":{"padding":{"top":"80px","bottom":"36px","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
+<section id="capabilities" class="wp-block-group alignfull perellion-reveal perellion-sectionhead perellion-capabilities has-canvas-background-color has-background" style="padding-top:80px;padding-right:var(--wp--preset--spacing--24);padding-bottom:36px;padding-left:var(--wp--preset--spacing--24)">
 <!-- wp:heading {"level":2,"textAlign":"center","fontSize":"heading"} -->
 <h2 class="wp-block-heading has-text-align-center has-heading-font-size">Core Capabilities</h2>
 <!-- /wp:heading -->
