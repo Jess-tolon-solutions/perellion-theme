@@ -1,0 +1,108 @@
+{
+ "industry": "Space",
+ "figmaNodeId": "8:15346",
+ "figmaFrameName": "Space Industry Page",
+ "source": {
+  "fileKey": "Qon5tyltcRAiYHLLQxqWOg",
+  "viewport": "desktop 1463w",
+  "readOn": "2026-11-04"
+ },
+ "hero": {
+  "eyebrow": null,
+  "headline": "Trusted Engineering for Secure Space Programs",
+  "sectionLinks": [
+   "Challenges",
+   "Help",
+   "Security",
+   "Reduced Risk",
+   "Future Proof",
+   "FAQ"
+  ]
+ },
+ "sections": {
+  "overview": {
+   "eyebrow": "SPACE",
+   "heading": "Industry Overview",
+   "body": [
+    "Space system manufacturing is changing quickly. Renewed investment in lunar missions, planetary exploration, and orbital infrastructure is converging with a rapidly growing commercial space sector, creating new expectations for how satellites, spacecraft, launch systems, and mission-critical components are produced. Private companies are developing new technologies and iterating faster than traditional space programs.",
+    "That shift creates a new manufacturing challenge: space systems still require exceptional reliability, precision, and traceability, but manufacturers increasingly need production processes capable of supporting faster development cycles and higher production volumes. Automation can help bridge that gap by improving process repeatability, strengthening inspection and traceability, and creating production systems that can scale without sacrificing the reliability of mission-critical hardware demands. Perellion works with space system manufacturers to develop automation and integrated production solutions for satellites, launch vehicle systems, payload assemblies, and other mission-critical components."
+   ],
+   "quote": null
+  },
+  "challenges": {
+   "eyebrow": "SPACE",
+   "heading": "Industry Challenges",
+   "intro": "Commercial aerospace manufacturers face an unusual challenge: Production needs to evolve while aircraft programs and manufacturing systems stay in service for decades. Oftentimes, new aircraft designs introduce advanced materials, components, and production requirements that may not fit established manufacturing methods. Innovating old processes and introducing new automation or technology is what’s required to meet the challenge. Growing global aircraft demand also creates pressure to increase output while still maintaining tight quality standards across complex assemblies.",
+   "circleLabels": [
+    "Preserving traceability & documentation",
+    "Systems for higher production volumes than traditional space programs",
+    "Integrating advanced materials & electronics",
+    "Managing complex supply chains for high-value, low-volume assemblies",
+    "Reliability across all mission-critical components",
+    "Supporting evolving mission profiles, payload configurations, & rapid iteration cycles"
+   ]
+  },
+  "help": {
+   "eyebrow": "SPACE",
+   "heading": "How Perellion Helps",
+   "body": [
+    "As space manufacturing moves toward faster development cycles and increasingly scalable production, manufacturers need systems that can improve efficiency without compromising mission-critical reliability. Perellion helps space system manufacturers develop robust, scalable production systems by combining engineering fundamentals with automation and systems integration expertise. We support space applications including satellites, launch vehicle systems, payload assemblies, and mission-critical components. Our engineering teams work with customers to understand production requirements, identify manufacturing challenges, and develop solutions around the needs of each program."
+   ]
+  },
+  "security": {
+   "heading": "Secure Engineering for Aerospace Programs",
+   "body": [
+    "Space programs often involve sensitive technical information, controlled data, and federal export requirements. Security therefore needs to be considered alongside technical capability when selecting an engineering and automation partner. Perellion supports these requirements through:",
+    "• 100% U.S.-based engineering",
+    "• A robust domestic manufacturing network",
+    "• AS9100 certification since 2023",
+    "• NIST 800-171 and CMMC Level 2 compliance",
+    "• ITAR registration",
+    "• A secure engineering environment",
+    "As a CMMC Level 2-compliant and ITAR-registered organization, Perellion provides secure engineering environments and supports federal export compliance for space programs."
+   ]
+  },
+  "risk": {
+   "heading": "Focused on Reducing Program Risk",
+   "body": [
+    "Space manufacturing leaves little room for uncertainty. Technical challenges before they affect production. These methods allow manufacturing concepts and automation strategies to be evaluated as programs progress toward production readiness. By addressing risk throughout development and implementation, manufacturers can make more informed engineering decisions, reduce production uncertainty, and prepare complex space systems for reliable manufacturing."
+   ]
+  },
+  "future": {
+   "heading": "Built for a Changing Space Industry",
+   "body": [
+    "The modern space industry is moving faster than the traditional manufacturing model that defined much of the first space race. More frequent launches, expanding satellite constellations, commercial investment, and rapidly evolving mission requirements are creating demand for production systems that can support greater scale while remaining flexible. Perellion develops flexible automation systems that allow manufacturers to improve repeatability and process control without assuming every space program will eventually become a traditional high-volume production environment. That flexibility is particularly important as manufacturers navigate the industry's combination of high-value, low-volume programs and emerging applications that require increasingly repeatable production."
+   ]
+  },
+  "faq": [
+   {
+    "q": "How does automation improve quality in space system manufacturing?",
+    "a": "Automation improves repeatability, inspection capability, and process control throughout space system manufacturing. More consistent processes can help manufacturers reduce variation while providing greater confidence in the quality of satellites, spacecraft, launch systems, payload assemblies, and other mission-critical components."
+   },
+   {
+    "q": "How does automation support traceability in space manufacturing?",
+    "a": "Automated data systems can capture manufacturing and inspection information throughout production, creating greater visibility into how mission-critical hardware was produced. This traceability supports mission assurance, documentation requirements, and regulatory compliance."
+   },
+   {
+    "q": "Can automation support high-mix, low-volume space production?",
+    "a": "Yes. Flexible automation platforms can be designed to support diverse spacecraft designs, payload configurations, and changing production requirements. This allows manufacturers to gain the benefits of automation without requiring the production volumes associated with traditional mass manufacturing."
+   }
+  ],
+  "contact": {
+   "heading": "Get in touch",
+   "body": "Have a problem that needs solving? Ojust want more information? Let’s discuss it.",
+   "email": "space@perellion.com"
+  }
+ },
+ "extraSections": [],
+ "notes": [
+  "hero.eyebrow: null - no eyebrow text layer above the H1.",
+  "overview.quote: null (placeholder testimonial sits in the 'Get in touch' band only).",
+  "challenges.intro is AEROSPACE placeholder copy - it is the Aerospace page's intro paragraph verbatim, talking about aircraft programs, not space. Needs real Space copy before build.",
+  "security.heading reads 'Secure Engineering for Aerospace Programs' - Aerospace leftover on the Space frame.",
+  "risk.body contains a broken/truncated sentence: 'Space manufacturing leaves little room for uncertainty. Technical challenges before they affect production.' - a verb is missing. Preserved verbatim.",
+  "future.heading is 'Built for a Changing Space Industry', not the 'Built for Evolving [Industry] Requirements' pattern.",
+  "help has a single paragraph where Defense/Aerospace have two.",
+  "contact.body contains the 'Ojust' typo. Contact email is space@perellion.com."
+ ]
+}

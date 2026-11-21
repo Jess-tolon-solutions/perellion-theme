@@ -90,6 +90,13 @@ add_action( 'init', 'perellion_pattern_categories' );
 require_once PERELLION_DIR . '/inc/post-types.php';
 
 /**
+ * Dev-only deploy endpoint (REMOVE BEFORE LAUNCH).
+ * The file returns early on any host other than perelliondev.wpengine.com,
+ * so this line is inert on production. See inc/dev-deploy.php.
+ */
+require_once PERELLION_DIR . '/inc/dev-deploy.php';
+
+/**
  * Restrict the editor to the theme's own palette and sizes.
  * Stops the site drifting off-brand through ordinary content edits.
  */
@@ -99,7 +106,32 @@ function perellion_editor_restrictions(): void {
 add_action( 'after_setup_theme', 'perellion_editor_restrictions' );
 
 /**
- * Front-end motion script. Included-tier scroll behaviour only.
+ * Add a slug-based class to <body> so page-specific rules can be written
+ * once, in the stylesheet, instead of being applied by hand per page.
+ *
+ * The six industry pages all reuse the same section ids (#overview, #help,
+ * #risk and so on), so before this there was no way to say "the decoration
+ * in Defense's risk section sits at the top, but Aerospace's sits right."
+ * That is why those corrections kept arriving one page at a time: each one
+ * could only be fixed where it was seen, never stated as a rule.
+ *
+ * Deliberately keyed on the slug, not on page-id. Ids differ between dev
+ * and production -- Medical Technology is already live under a different
+ * one -- so a page-id rule would silently stop matching on launch.
+ */
+function perellion_body_class( array $classes ): array {
+	if ( is_page() ) {
+		$post = get_queried_object();
+		if ( $post instanceof WP_Post && $post->post_name ) {
+			$classes[] = 'perellion-page--' . sanitize_html_class( $post->post_name );
+		}
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'perellion_body_class' );
+
+/**
+ * Front-end motion script. Included-tier scroll behavior only.
  */
 function perellion_enqueue_motion() {
 	wp_enqueue_script(
@@ -111,3 +143,28 @@ function perellion_enqueue_motion() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'perellion_enqueue_motion' );
+
+/**
+ * Query loop adjustments for the content types.
+ *
+ *  - queryId 7  (team profile, "You might also like to meet"): leave the
+ *    current person out and shuffle, so the strip changes per profile.
+ *  - queryId 31 (Insights): one grid across all three content types, which
+ *    the Query block cannot express on its own.
+ */
+add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
+	$id = isset( $block->context['queryId'] ) ? (int) $block->context['queryId'] : 0;
+	if ( 7 === $id ) {
+		$current = get_queried_object_id();
+		if ( $current ) {
+			$query['post__not_in'] = array( $current );
+		}
+		$query['orderby'] = 'rand';
+	}
+	if ( 31 === $id ) {
+		$query['post_type'] = array( 'team_member', 'case_study', 'job_posting' );
+		$query['orderby']   = 'date';
+		$query['order']     = 'DESC';
+	}
+	return $query;
+}, 10, 2 );

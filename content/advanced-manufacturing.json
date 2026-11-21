@@ -1,0 +1,105 @@
+{
+ "industry": "Advanced Manufacturing / Automation",
+ "figmaNodeId": "12:75392",
+ "figmaFrameName": "Advanced Manufacturing Industry Page",
+ "source": {
+  "fileKey": "Qon5tyltcRAiYHLLQxqWOg",
+  "viewport": "desktop 1463w",
+  "readOn": "2026-11-04"
+ },
+ "hero": {
+  "eyebrow": null,
+  "headline": "Trusted Engineering for Advanced Manufacturing Programs",
+  "sectionLinks": [
+   "Challenges",
+   "Help",
+   "Security",
+   "Reduced Risk",
+   "Future Proof",
+   "FAQ"
+  ]
+ },
+ "sections": {
+  "overview": {
+   "eyebrow": "Advanced Manufacturing",
+   "heading": "Industry Overview",
+   "body": [
+    "Advanced manufacturing is expanding what companies can design. Products with new and sophisticated materials, and emerging manufacturing technologies create opportunities to build things that were previously difficult to produce. At the same time, manufacturers face pressure to shorten development cycles, increase production capacity, improve precision, and adapt as products and demand evolve.",
+    "Automation can help manufacturers make that transition by improving repeatability, increasing throughput, controlling complex processes, and creating more flexible production environments. Perellion works with advanced manufacturers to develop the custom machinery, robotics, automation, tooling, and integrated systems needed to turn complex processes into dependable advanced manufacturing operations."
+   ],
+   "quote": null
+  },
+  "challenges": {
+   "eyebrow": "Advanced Manufacturing",
+   "heading": "Industry Challenges",
+   "intro": "For advanced manufacturers, the challenge isn’t to simply make a product, as it’s determining how to make it repeatedly, efficiently, and at the required level of precision. A process that succeeds during development may require entirely new equipment, automation, tooling, or production strategies before it can become a dependable manufacturing operation. Solving these challenges requires manufacturers to consider the complete production system. Product requirements, materials, equipment, automation, factory layout, process control, and production objectives all influence one another. Addressing those variables can help manufacturers develop production systems that perform now while also providing a foundation for future manufacturing requirements.",
+   "circleLabels": [
+    "Integrating robotics, tooling, machinery, and material handling",
+    "Managing complex, highly specialized production requirements",
+    "Developing new & emerging manufacturing processes",
+    "Increasing throughput while maintaining precision & quality",
+    "Adapting production systems as products & demand evolve",
+    "Moving from prototype to scalable production"
+   ]
+  },
+  "help": {
+   "eyebrow": "Advanced Manufacturing",
+   "heading": "How Perellion Helps",
+   "body": [
+    "Perellion's capabilities include manufacturing process development, factory planning, custom machinery, robotics and automation, assembly tooling, material handling systems, and advanced composite manufacturing. The process begins with understanding what needs to be manufactured, identifying the limitations of existing processes, and determining where new equipment, automation, or process development can improve manufacturing performance. Perellion can then take the solution from concept and engineering through fabrication, integration, testing, and production.",
+    "This concept-to-creation approach is particularly valuable for manufacturers developing new products, working with advanced materials, automating complex processes, or scaling production beyond prototype volumes."
+   ]
+  },
+  "security": null,
+  "risk": {
+   "heading": "Example applications",
+   "body": [
+    "Perellion can support advanced manufacturing programs across a wide range of complex and emerging production environments, including:",
+    "High-precision robotic systems for automated assembly and material handling\nCustom automation for complex or difficult-to-manufacture products\nAutomated layup, trimming, and processing systems for advanced composites\nPrecision dispensing systems for adhesives, coatings, and specialty materials\nCustom machinery for specialized manufacturing and assembly processes\nAutomated drilling, fastening, positioning, and joining systems\nProcess development and automation for emerging materials and technologies\nFactory planning and integrated automation for scalable production",
+    "Every application is engineered around the product, materials, manufacturing process, and production requirements, helping Perellion’s customers improve precision, repeatability, throughput, automated complex processes, and prepare manufacturing for future growth."
+   ],
+   "list": [
+    "High-precision robotic systems for automated assembly and material handling",
+    "Custom automation for complex or difficult-to-manufacture products",
+    "Automated layup, trimming, and processing systems for advanced composites",
+    "Precision dispensing systems for adhesives, coatings, and specialty materials",
+    "Custom machinery for specialized manufacturing and assembly processes",
+    "Automated drilling, fastening, positioning, and joining systems",
+    "Process development and automation for emerging materials and technologies",
+    "Factory planning and integrated automation for scalable production"
+   ]
+  },
+  "future": null,
+  "faq": [
+   {
+    "q": "Can Perellion automate a manufacturing process that has never been automated before?",
+    "a": "Yes! Perellion specializes in custom automation and advanced manufacturing systems for processes that may not have an off-the-shelf solution. Our engineers evaluate the product, materials, process requirements, production environment, and performance goals to determine how robotics, custom machinery, tooling, controls, and other technologies can be integrated into a reliable manufacturing process."
+   },
+   {
+    "q": "How can we automate a complex manufacturing process without sacrificing precision or quality?",
+    "a": "Successful automation begins with understanding the manufacturing process rather than simply selecting equipment. Perellion develops automation around the specific requirements of the application, integrating robotics, precision tooling, machine vision, controls, material handling, and custom machinery where needed. This engineering-first approach helps manufacturers improve throughput and repeatability while maintaining the precision and process control their products require."
+   },
+   {
+    "q": "Can Perellion help us scale a prototype or low-volume process for production?",
+    "a": "Yes. Perellion works with manufacturers to develop scalable manufacturing systems that can bridge the gap between product development and production. This can include process development, automation feasibility, factory planning, custom machinery, robotics, tooling, and systems integration. By considering future production requirements early, Perellion can help manufacturers increase capacity while maintaining quality, repeatability, and manufacturing flexibility."
+   }
+  ],
+  "contact": {
+   "heading": "Get in touch",
+   "body": "Have a problem that needs solving? Ojust want more information? Let’s discuss it.",
+   "email": "manufacturing@perellion.com"
+  }
+ },
+ "extraSections": [],
+ "notes": [
+  "hero.eyebrow: null.",
+  "overview.quote: null (placeholder testimonial in the 'Get in touch' band only).",
+  "security: MISSING. No 'Cybersecurity & Export Compliance' / 'Secure Engineering' section, though the jump-nav still shows 'Security'.",
+  "future: MISSING. No 'Built for Evolving ... Requirements' section, though the jump-nav still shows 'Future Proof'.",
+  "risk: as on MedTech, the Defense 'Focused on Reducing Program Risk' slot (component node 1:2755) is used for a section headed 'Example applications'. Recorded under 'risk' because it occupies that slot; the heading is NOT the Defense one.",
+  "risk carries a bulleted list; bullets also given separately as 'list'.",
+  "circleLabels taken from the on-frame text layers. The infographic export annotation for this page writes labels 3, 4 and 5 with 'and' where the live text layers use '&' ('Developing new & emerging...', '...precision & quality', '...products & demand evolve'). The on-frame wording is used here.",
+  "contact.body contains the 'Ojust' typo. Contact email is manufacturing@perellion.com.",
+  "Page frame is 6230px tall vs Defense 7706px, consistent with the two missing sections."
+ ]
+}

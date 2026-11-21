@@ -1,0 +1,56 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"perellion-archive","layout":{"type":"default"}} -->
+<main class="wp-block-group perellion-archive">
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hero perellion-hero--page perellion-hero--archive","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|32","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"900px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-hero perellion-hero--page perellion-hero--archive" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--32);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:heading {"level":1,"textAlign":"center","className":"perellion-hero__title","fontSize":"display"} -->
+<h1 class="wp-block-heading has-text-align-center perellion-hero__title has-display-font-size">Join the team</h1>
+<!-- /wp:heading -->
+<!-- wp:group {"className":"perellion-tagrow","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<div class="wp-block-group perellion-tagrow">
+<!-- wp:paragraph --><p><a class="perellion-tag" href="/meet-the-team/">Meet the team</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a class="perellion-tag is-current" href="/join-the-team/">Join the team</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a class="perellion-tag" href="/case-studies/">Case studies</a></p><!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-archive__grid","style":{"spacing":{"padding":{"top":"var:preset|spacing|32","bottom":"var:preset|spacing|80","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"1100px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-archive__grid" style="padding-top:var(--wp--preset--spacing--32);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--80);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:query {"queryId":11,"query":{"perPage":12,"pages":0,"offset":0,"postType":"job_posting","order":"desc","orderBy":"date","inherit":true},"layout":{"type":"default"}} -->
+<div class="wp-block-query">
+<!-- wp:post-template {"className":"perellion-insightgrid","layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:group {"className":"perellion-card perellion-card--team","layout":{"type":"default"}} -->
+<div class="wp-block-group perellion-card perellion-card--team">
+<!-- wp:post-featured-image {"isLink":true,"className":"perellion-card__media"} /-->
+<!-- wp:paragraph {"className":"perellion-card__pill"} -->
+<p class="perellion-card__pill">Join the team</p>
+<!-- /wp:paragraph -->
+<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"card"} /-->
+<!-- wp:post-excerpt {"showMoreOnNewLine":false,"excerptLength":12,"className":"perellion-card__role","excerptLength":20} /-->
+<!-- wp:read-more {"content":"Read more","className":"perellion-card__link"} /-->
+</div>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+<!-- wp:query-pagination {"paginationArrow":"none","layout":{"type":"flex","justifyContent":"center"}} -->
+<!-- wp:query-pagination-previous {"label":"Previous"} /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next {"label":"More"} /-->
+<!-- /wp:query-pagination -->
+<!-- wp:query-no-results -->
+<!-- wp:paragraph {"align":"center"} --><p class="has-text-align-center">Nothing here yet.</p><!-- /wp:paragraph -->
+<!-- /wp:query-no-results -->
+</div>
+<!-- /wp:query -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:pattern {"slug":"perellion/cta-contact"} /-->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

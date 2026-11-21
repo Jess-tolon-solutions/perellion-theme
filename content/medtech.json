@@ -1,0 +1,114 @@
+{
+ "industry": "Medical Technology (MedTech)",
+ "figmaNodeId": "11:55850",
+ "figmaFrameName": "Medical Technology Industry Page",
+ "source": {
+  "fileKey": "Qon5tyltcRAiYHLLQxqWOg",
+  "viewport": "desktop 1463w",
+  "readOn": "2026-11-04"
+ },
+ "hero": {
+  "eyebrow": null,
+  "headline": "Trusted Engineering for Advanced Medical Technology Programs",
+  "sectionLinks": [
+   "Challenges",
+   "Help",
+   "Security",
+   "Reduced Risk",
+   "Future Proof",
+   "FAQ"
+  ]
+ },
+ "sections": {
+  "overview": {
+   "eyebrow": "Medical Technology",
+   "heading": "Industry Overview",
+   "body": [
+    "The medical technology (MedTech) industry is evolving rapidly, driven by an aging population, growing demand for diagnostic and therapeutic devices, advances in digital health, and expanding access to healthcare worldwide. As products become more sophisticated, manufacturers must accelerate production while maintaining quality, compliance, and patient safety.",
+    "Manufacturing automation helps meet these demands by improving production consistency, reducing process variability, and creating scalable operations that can adapt as products and market needs evolve. Perellion designs and builds custom manufacturing automation, inspection systems, and test equipment for medical device manufacturers. Final device manufacturing and regulatory release remain the responsibility of the device manufacturer."
+   ],
+   "quote": null
+  },
+  "challenges": {
+   "eyebrow": "Medical Technology",
+   "heading": "Industry Challenges",
+   "intro": "Every production decision has the potential to affect product quality, validation activities, regulatory compliance, and ultimately, patient safety. Manufacturers must balance increasing product complexity with compressed launch schedules, supply chain uncertainty, labor shortages, and rising production costs. At the same time, many devices now combine miniature components, electronics, software, and precision assemblies that require tighter process control than ever before. Success depends on more than automating production, as manufacturers need repeatable processes, reliable inspection, and comprehensive traceability that support quality throughout the product lifecycle while making validation more predictable.",
+   "circleLabels": [
+    "Process validation",
+    "Labor shortages & rising costs",
+    "Supply chain disruptions",
+    "Managing complex supply chains for high-value, low-volume assemblies",
+    "Evolving regulations & documentation",
+    "Complete traceability"
+   ]
+  },
+  "help": {
+   "eyebrow": "Medical Technology",
+   "heading": "How Perellion Helps",
+   "body": [
+    "Every medical device presents its own manufacturing challenges, but the objective remains the same: build products safely, consistently, and with confidence. Perellion helps manufacturers achieve those goals through solutions including:",
+    "Precision assembly automation\nMachine vision inspection and quality verification\nFunctional, electrical, and leak testing systems\nPrecision dispensing and material handling\nManufacturing traceability and production data collection\nProcess development and validation support",
+    "Rather than delivering standalone equipment, we design integrated manufacturing systems that improve process control, strengthen product quality, and support long-term operational performance in regulated environments."
+   ],
+   "list": [
+    "Precision assembly automation",
+    "Machine vision inspection and quality verification",
+    "Functional, electrical, and leak testing systems",
+    "Precision dispensing and material handling",
+    "Manufacturing traceability and production data collection",
+    "Process development and validation support"
+   ]
+  },
+  "security": null,
+  "risk": {
+   "heading": "Example applications",
+   "body": [
+    "Perellion can support automation programs across a wide range of medical device manufacturing environments, including:",
+    "Automated assembly systems for disposable diagnostic cartridges\nVision inspection systems for IV tubing and fluid management component\nLeak testing equipment for drug delivery devices\nRobotic packaging systems for surgical kits\nTraceability and serialization systems for regulated medical products\nFunctional test equipment for wearable medical electronics\nPrecision dispensing systems for adhesives and specialty materials\nManufacturing fixtures and tooling for catheter production",
+    "Every application is engineered around the product, manufacturing process, and regulatory requirements, helping customers improve repeatability, simplify validation, and prepare production for future growth."
+   ],
+   "list": [
+    "Automated assembly systems for disposable diagnostic cartridges",
+    "Vision inspection systems for IV tubing and fluid management component",
+    "Leak testing equipment for drug delivery devices",
+    "Robotic packaging systems for surgical kits",
+    "Traceability and serialization systems for regulated medical products",
+    "Functional test equipment for wearable medical electronics",
+    "Precision dispensing systems for adhesives and specialty materials",
+    "Manufacturing fixtures and tooling for catheter production"
+   ]
+  },
+  "future": null,
+  "faq": [
+   {
+    "q": "What types of medical device manufacturing automation does Perellion provide?",
+    "a": "Perellion develops custom automation for precision assembly, material handling, dispensing, inspection, testing, packaging, and traceability. Each system is engineered around the medical device, manufacturing process, and production requirements."
+   },
+   {
+    "q": "Can Perellion design custom manufacturing automation for medical devices",
+    "a": "Perellion designs custom manufacturing automation for complex processes that may not fit standard equipment. Systems can combine robotics, precision tooling, inspection, testing, controls, and material handling based on the needs of the application."
+   },
+   {
+    "q": "How does Perellion support medical device manufacturing validation and regulatory compliance?",
+    "a": "Perellion designs automation to support process repeatability, reliable inspection and testing, traceability, and validation activities. Final device validation, regulatory compliance, and product release remain the responsibility of the manufacturer."
+   }
+  ],
+  "contact": {
+   "heading": "Get in touch",
+   "body": "Have a problem that needs solving? Ojust want more information? Let’s discuss it.",
+   "email": "medical@perellion.com"
+  }
+ },
+ "extraSections": [],
+ "notes": [
+  "hero.eyebrow: null.",
+  "overview.quote: null (placeholder testimonial in the 'Get in touch' band only).",
+  "security: MISSING. There is no 'Cybersecurity & Export Compliance' / 'Secure Engineering' section on this frame at all, even though the jump-nav still shows a 'Security' link.",
+  "future: MISSING. No 'Built for Evolving ... Requirements' section, though the jump-nav still shows 'Future Proof'.",
+  "risk: the Defense 'Focused on Reducing Program Risk' slot (same component, node 1:2755) is used here for a section headed 'Example applications'. Recorded under 'risk' because it occupies that slot and anchor position; the heading is NOT the Defense one. Jump-nav still says 'Reduced Risk'.",
+  "help and risk each carry a bulleted list; the bullets are also given separately as 'list'. Bullet 2 of the risk list reads 'fluid management component' (singular) in the frame - preserved verbatim.",
+  "faq[1] is malformed in the frame: the question is missing its '?' and the question and answer are merged into one text node separated by a lone '.' ('... for medical devices' + '.' + answer). Split here on that boundary; the question text is verbatim, with the stray '.' dropped from the question and not added to it.",
+  "contact.body contains the 'Ojust' typo. Contact email is medical@perellion.com.",
+  "Page frame is 5687px tall vs Defense 7706px, consistent with the three missing sections."
+ ]
+}

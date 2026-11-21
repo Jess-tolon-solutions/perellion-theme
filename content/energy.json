@@ -1,0 +1,193 @@
+{
+ "industry": "Energy / EV Battery",
+ "figmaNodeId": "8:37563",
+ "figmaFrameName": "Energy Industry Page",
+ "source": {
+  "fileKey": "Qon5tyltcRAiYHLLQxqWOg",
+  "viewport": "desktop 1463w",
+  "readOn": "2026-11-04"
+ },
+ "hero": {
+  "eyebrow": null,
+  "headline": "Trusted Engineering for Secure Advanced Energy Programs",
+  "sectionLinks": [
+   "Challenges",
+   "Help",
+   "Security",
+   "Reduced Risk",
+   "Future Proof",
+   "FAQ"
+  ]
+ },
+ "sections": {
+  "overview": {
+   "eyebrow": "Advanced Energy",
+   "heading": "Industry Overview",
+   "body": [
+    "Energy manufacturing is evolving across multiple fronts at once. Global electrification, renewable energy integration, cleaner power generation, and new mobility platforms are changing how energy is produced, stored, and consumed. At the same time, advances in battery manufacturing, grid-scale energy storage, electric drivetrain systems, power electronics, and emerging fusion technologies are creating new production challenges.",
+    "Across these applications, manufacturers share a common challenge: moving new technologies toward scalable production while maintaining precision, reliability, safety, and quality. Automation, advanced testing, and data-driven quality systems can help manufacturers make that transition by creating more repeatable processes, strengthening traceability, and providing manufacturing platforms that can adapt as technologies continue to evolve. Perellion works with energy manufacturers to develop automation, test, inspection, and digital manufacturing solutions for advanced energy and electrification programs."
+   ],
+   "quote": null
+  },
+  "challenges": {
+   "eyebrow": "Advanced Energy",
+   "heading": "Industry Challenges",
+   "intro": "There is no single manufacturing model for the modern energy industry. Some manufacturers are scaling battery and EV production to high volumes. Others are commercializing emerging technologies that may still be moving from R&D into pilot production. Products, materials, chemistries, and architectures can also change quickly as technologies mature. Manufacturers must build production strategies capable of responding to that variation without compromising the quality and safety required for high-energy systems. The consequences of manufacturing variation can also be significant. In grid storage, electric mobility, fusion, and other high-energy applications, even small defects can affect system performance, cost, reliability, or safety. Successful manufacturing strategies therefore need to balance production growth with rigorous process control while remaining adaptable enough to support continued technology evolution.",
+   "circleLabels": [
+    "Meeting safety-critical requirements for high-energy products",
+    "Managing supply chain volatility & workforce shortages",
+    "Scaling EV & energy storage manufacturing to higher production volumes",
+    "Managing complex supply chains for high-value, low-volume assemblies",
+    "Adapting production lines as battery materials & chemistries evolve",
+    "Regulatory & compliance requirements across power & mobility sectors"
+   ]
+  },
+  "help": {
+   "eyebrow": "Advanced Energy",
+   "heading": "How Perellion Helps",
+   "body": [
+    "Advanced energy technologies move from development to production at very different speeds. Some manufacturers need to scale established products rapidly, while others are still defining the processes required to commercialize emerging technologies. Perellion works with energy manufacturers to develop automation, test, inspection, and digital manufacturing solutions around those different production requirements. Our engineering teams consider the product, process, testing requirements, production goals, and future technology roadmap before developing a manufacturing strategy. This approach supports the transition from concept and pilot production toward reliable, scalable manufacturing."
+   ]
+  },
+  "security": null,
+  "risk": {
+   "heading": "Focused on Reducing Program Risk",
+   "body": [
+    "Moving advanced energy technologies into production introduces risk at every stage of commercialization. Products may continue changing while manufacturing systems are being designed. Critical processes may still require validation. Testing requirements can span electrical, thermal, structural, and functional performance. Production targets may also increase before manufacturing processes have fully matured.",
+    "Perellion works collaboratively with customers to identify these risks early, validate critical processes, and develop scalable manufacturing strategies around both current and future production requirements. Structured engineering reviews, process development, simulation, and phased implementation help teams evaluate manufacturing decisions before they become costly production constraints. The goal is a more predictable transition from development through pilot production and into scalable manufacturing."
+   ]
+  },
+  "future": {
+   "heading": "Built for Evolving Energy Technologies",
+   "body": [
+    "Energy technologies rarely remain static. Battery materials and chemistries continue to evolve. Electric mobility platforms introduce new architectures and performance requirements. Grid-scale systems must support changing energy infrastructure. Emerging technologies such as fusion may require entirely new manufacturing processes as they progress toward commercialization. Manufacturing systems need enough flexibility to evolve alongside those technologies.",
+    "Perellion develops configurable automation platforms that can accommodate product changes, new configurations, and increasing production volumes. Modular tooling, adaptable software, and scalable system architectures can help manufacturers respond to changing requirements without replacing entire production systems. That flexibility allows customers to invest in manufacturing capabilities for today's products while preparing for technologies that may look very different tomorrow."
+   ]
+  },
+  "faq": [
+   {
+    "q": "When should automation be considered during energy storage product development?",
+    "a": "Automation should be considered as early as possible during product and process development. Early collaboration between product design and manufacturing engineering teams improves manufacturability, reduces redesigns, accelerates production readiness, and lowers long-term manufacturing costs while preparing production for future growth."
+   },
+   {
+    "q": "How does manufacturing automation improve battery quality and reliability?",
+    "a": "Manufacturing automation improves battery quality by reducing process variability, increasing repeatability, enhancing inspection capabilities, and capturing production data throughout the manufacturing process. These capabilities help manufacturers improve consistency, reduce defects, strengthen process control, and deliver more reliable products."
+   },
+   {
+    "q": "Why is traceability important in energy storage manufacturing?",
+    "a": "Traceability enables manufacturers to monitor materials, manufacturing activities, inspection results, and testing data throughout the production lifecycle. This visibility supports quality investigations, warranty analysis, regulatory compliance, root cause analysis, and continuous process improvement while providing greater confidence in product performance."
+   },
+   {
+    "q": "How can manufacturers prepare for future battery technologies?",
+    "a": "Battery technologies continue to evolve, making manufacturing flexibility increasingly important. Modular tooling, configurable software, and scalable automation platforms allow manufacturers to support new cell formats, battery chemistries, and production requirements without significant equipment replacement or extended production downtime."
+   },
+   {
+    "q": "How can automation support both pilot production and high-volume manufacturing?",
+    "a": "Modern automation systems can be designed to support prototype, pilot, and high-volume production using scalable architectures. This flexibility allows manufacturers to validate manufacturing processes, increase production capacity, and adapt to changing customer demand while maintaining consistent quality."
+   },
+   {
+    "q": "What should manufacturers look for in an energy storage automation partner?",
+    "a": "Manufacturers should look for a partner with expertise in battery manufacturing processes, automation engineering, inspection technologies, testing systems, traceability, and scalable production solutions. Equally important is experience developing flexible manufacturing systems that can adapt as products, production requirements, and technologies continue to evolve."
+   }
+  ],
+  "contact": {
+   "heading": "Get in touch",
+   "body": "Have a problem that needs solving? Ojust want more information? Let’s discuss it.",
+   "email": "energy@perellion.com"
+  }
+ },
+ "extraSections": [
+  {
+   "slot": "after future, before risk",
+   "heading": "Manufacturing Solutions",
+   "intro": "Advanced energy manufacturing requires coordination across mechanical, electrical, thermal, test, and digital systems. Perellion develops integrated solutions that help manufacturers improve process control, validate product performance, and prepare production for future scale. Together, these capabilities allow manufacturers to approach automation as part of a broader production strategy rather than a collection of individual pieces of equipment. Capabilities include:",
+   "cards": [
+    {
+     "title": "Manufacturing Automation",
+     "items": [
+      "Battery cell, module, & pack assembly Robotic material handling",
+      "Precision assembly & fastening",
+      "Bonding & dispensing systems",
+      "Thermal interface material application Automation for power electronics Automation for electrified systems"
+     ]
+    },
+    {
+     "title": "Test & Validation",
+     "items": [
+      "Electrical verification and safety testingFunctional testing",
+      "Battery and energy system testing",
+      "End-of-line testing Thermal and performance validation",
+      "Multidisciplinary test system integration"
+     ]
+    },
+    {
+     "title": "Engineering & Process Development",
+     "items": [
+      "Design for Manufacturability (DFM) Process development and validation Manufacturing",
+      "system integration Pilot",
+      "production planning Scalable production strategies Factory",
+      "and workflow optimization"
+     ]
+    },
+    {
+     "title": "Digital Manufacturing & Traceability",
+     "items": [
+      "Manufacturing Execution System (MES) Production data collection",
+      "Manufacturing traceability",
+      "Process monitoring & data-driven quality control"
+     ]
+    },
+    {
+     "title": "Inspection & Quality",
+     "items": [
+      "Machine vision inspection",
+      "Dimensional verification",
+      "Automated quality verification",
+      "In-process inspection"
+     ]
+    }
+   ]
+  },
+  {
+   "slot": "after Manufacturing Solutions, before risk",
+   "heading": "Applications Across Advanced Energy",
+   "intro": "Perellion supports manufacturing challenges across a range of advanced energy and electrification technologies.",
+   "items": [
+    {
+     "title": "Energy Storage & Battery Systems",
+     "body": "Automation can support battery cell, module, and pack manufacturing along with material handling, dispensing, inspection, electrical testing, and production traceability."
+    },
+    {
+     "title": "Autonomous Mobility",
+     "body": "Autonomous platforms introduce additional electronics, communications, and reliability requirements. Manufacturing and testing strategies must verify that integrated systems can perform consistently in demanding operating environments."
+    },
+    {
+     "title": "Fusion",
+     "body": "Emerging fusion technologies present specialized manufacturing challenges involving extreme thermal and electromagnetic environments. As these programs move from research and development toward commercialization, automation and validation strategies can help create more repeatable processes and prepare manufacturing for future scale."
+    },
+    {
+     "title": "Electrified Mobility",
+     "body": "Electric drivetrain systems, high-voltage power electronics, and related mobility technologies require manufacturing processes that account for electrical safety, thermal performance, durability, and reliable system integration."
+    },
+    {
+     "title": "Grid & Power Systems",
+     "body": "Grid-scale energy technologies require reliable manufacturing and testing strategies capable of supporting high-energy products while maintaining quality as production requirements grow."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  "hero.eyebrow: null.",
+  "overview.quote: null (placeholder testimonial in the 'Get in touch' band only).",
+  "security: MISSING. No 'Cybersecurity & Export Compliance' / 'Secure Engineering' section, though the jump-nav still shows 'Security'.",
+  "SECTION ORDER DIFFERS from Defense: overview, challenges, help, FUTURE ('Built for Evolving Energy Technologies'), then two extra sections, then RISK, then FAQ, contact. On Defense the order is risk then future.",
+  "TWO EXTRA SECTIONS not in the Defense eight: 'Manufacturing Solutions' (five capability cards) and 'Applications Across Advanced Energy' (five application blocks). Captured under extraSections.",
+  "faq has SIX questions, not three.",
+  "faq[1] answer is corrupted in the frame: a Prismatic Thinking paragraph is spliced into the middle of a word - 'Manufacturing automation improves batte' + the Prismatic Thinking text + 'ry quality by reducing...'. Preserved verbatim; needs fixing in Figma before build.",
+  "Two capability-card lines in 'Manufacturing Solutions' are missing line breaks in the frame: 'Battery cell, module, & pack assembly Robotic material handling' and 'Electrical verification and safety testingFunctional testing'. Verified against the raw frame markup - these are single text lines in Figma, not an extraction artifact. Preserved verbatim.",
+  "Several other capability-card lines run two items together on one line ('Thermal interface material application Automation for power electronics Automation for electrified systems', 'End-of-line testing Thermal and performance validation', the Engineering & Process Development and Digital Manufacturing lines). Same cause.",
+  "contact.body contains the 'Ojust' typo. Contact email is energy@perellion.com.",
+  "Page frame is 10207px tall - the longest of the six, consistent with the extra sections and six FAQs.",
+  "faq[1].a: the spliced Prismatic Thinking paragraph was removed and the split word rejoined ('batte'+'ry quality'). Deletion only, nothing rewritten. Still needs fixing at source in Figma."
+ ]
+}

@@ -1,0 +1,76 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"perellion-profile","layout":{"type":"default"}} -->
+<main class="wp-block-group perellion-profile">
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-hero perellion-hero--page perellion-hero--profile","style":{"spacing":{"padding":{"top":"var:preset|spacing|48","bottom":"var:preset|spacing|32","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"900px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-hero perellion-hero--page perellion-hero--profile" style="padding-top:var(--wp--preset--spacing--48);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--32);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:paragraph {"align":"center","className":"perellion-overline perellion-eyebrow"} -->
+<p class="has-text-align-center perellion-overline perellion-eyebrow">Meet the team</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"perellion-profile__title","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<div class="wp-block-group perellion-profile__title">
+<!-- wp:post-title {"level":1,"className":"perellion-profile__name","fontSize":"heading"} /-->
+<!-- wp:post-excerpt {"showMoreOnNewLine":false,"className":"perellion-profile__role"} /-->
+</div>
+<!-- /wp:group -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-profile__portrait","style":{"spacing":{"padding":{"top":"0","bottom":"var:preset|spacing|32","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"720px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-profile__portrait" style="padding-top:0;padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--32);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:group {"className":"perellion-panel perellion-panel--round perellion-panel--a perellion-parallax","layout":{"type":"constrained"}} -->
+<div class="wp-block-group perellion-panel perellion-panel--round perellion-panel--a perellion-parallax">
+<!-- wp:post-featured-image {"className":"perellion-panel__media"} /-->
+</div>
+<!-- /wp:group -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-profile__bio","style":{"spacing":{"padding":{"top":"var:preset|spacing|24","bottom":"var:preset|spacing|80","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"constrained","contentSize":"580px"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-profile__bio" style="padding-top:var(--wp--preset--spacing--24);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--80);padding-left:var(--wp--preset--spacing--24)">
+<!-- wp:post-content {"layout":{"type":"constrained","contentSize":"580px"}} /-->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","align":"full","className":"perellion-reveal perellion-teamband perellion-teamband--related","backgroundColor":"canvas","style":{"spacing":{"padding":{"top":"var:preset|spacing|48","bottom":"var:preset|spacing|60","left":"0","right":"0"}}},"layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull perellion-reveal perellion-teamband perellion-teamband--related has-canvas-background-color has-background" style="padding-top:var(--wp--preset--spacing--48);padding-right:0;padding-bottom:var(--wp--preset--spacing--60);padding-left:0">
+<!-- wp:paragraph {"align":"center","className":"perellion-overline perellion-eyebrow"} -->
+<p class="has-text-align-center perellion-overline perellion-eyebrow">You might also like to meet</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="perellion-carousel" data-carousel>
+  <div class="perellion-carousel__nav">
+    <button type="button" class="perellion-carousel__btn" data-carousel-prev aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="perellion-carousel__btn" data-carousel-next aria-label="Next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+<!-- /wp:html -->
+<!-- wp:query {"queryId":7,"query":{"perPage":"8","pages":0,"offset":0,"postType":"team_member","order":"asc","orderBy":"menu_order","inherit":false,"exclude":[]},"className":"perellion-carousel__viewport","layout":{"type":"default"}} -->
+<div class="wp-block-query perellion-carousel__viewport">
+<!-- wp:post-template {"className":"perellion-carousel__track","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"perellion-card perellion-card--team","layout":{"type":"default"}} -->
+<div class="wp-block-group perellion-card perellion-card--team">
+<!-- wp:post-featured-image {"isLink":true,"className":"perellion-card__media"} /-->
+<!-- wp:paragraph {"className":"perellion-card__pill"} -->
+<p class="perellion-card__pill">Meet the team</p>
+<!-- /wp:paragraph -->
+<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"card"} /-->
+<!-- wp:post-excerpt {"showMoreOnNewLine":false,"excerptLength":12,"className":"perellion-card__role"} /-->
+<!-- wp:read-more {"content":"Read more","className":"perellion-card__link"} /-->
+</div>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+</div>
+<!-- /wp:query -->
+<!-- wp:html -->
+</div>
+<!-- /wp:html -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:pattern {"slug":"perellion/cta-contact"} /-->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

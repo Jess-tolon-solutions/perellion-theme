@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 0.1.0
+Version: 1.29.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -153,12 +153,13 @@ body {
 
 /* Overline / eyebrow label. Poppins medium, wide tracking, uppercase. */
 .perellion-overline {
-  font-family: var(--wp--preset--font-family--poppins);
-  font-size: var(--wp--preset--font-size--body);
-  font-weight: 500;
-  letter-spacing: var(--wp--custom--tracking--overline);
-  line-height: 1.5;
-  text-transform: uppercase;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 500;
+	font-size: var(--wp--preset--font-size--body);   /* 16px, per the frame */
+	line-height: 2.25;                                /* 36px */
+	letter-spacing: 2px;                              /* per the frame */
+	text-transform: uppercase;
+	margin: 0;
 }
 
 /* Gradient text. Used on the accent word in hero headlines.
@@ -258,7 +259,7 @@ body {
 	display: inline-block;
 }
 
-.perellion-motion .perellion-split .perellion-word {
+.perellion-motion .perellion-lines .perellion-word {
 	opacity: 0;
 	transform: translate3d(0, 0.5em, 0);
 	transition:
@@ -266,7 +267,7 @@ body {
 		transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--perellion-line-delay, 0ms);
 }
 
-.perellion-motion .perellion-split.is-revealed .perellion-word {
+.perellion-motion .perellion-lines.is-revealed .perellion-word {
 	opacity: 1;
 	transform: none;
 }
@@ -436,8 +437,8 @@ figure.perellion-media img {
    design does, rather than a heading floating on its own. */
 .perellion-eyebrow {
 	display: block;
-	margin-bottom: var(--wp--preset--spacing--16);
-	color: var(--perellion-brand-violet);
+	margin-bottom: 0;
+	color: var(--perellion-text-primary);
 }
 
 /* The dark proof band carries a faint gradient wash so it does not read
@@ -521,7 +522,7 @@ figure.perellion-media img {
 .perellion-infographic {
 	max-width: 984px;
 	width: 100%;
-	margin: 0 auto;
+	margin: var(--wp--preset--spacing--80) auto 0;
 }
 
 .perellion-infographic img {
@@ -598,19 +599,68 @@ figure.perellion-panel__media img {
 	width: 100%;
 }
 
-.perellion-panel::before {
+/* The artwork is held in a custom property rather than being set directly
+   on ::before, so that a second instance can be drawn from the same source
+   and either one can be repositioned without knowing which variant a
+   panel is using. Round 2 asked for the decoration to move per section
+   per page, and in four places for two of them at once ("one right side
+   and one on the bottom"), which the single centered layer could not
+   express at all. */
+.perellion-panel {
+	--perellion-art-pos: center;
+	--perellion-art-pos-2: center;
+	--perellion-art-2: none;
+}
+
+.perellion-panel::before,
+.perellion-panel::after {
 	content: "";
 	position: absolute;
 	inset: -6%;
 	background-repeat: no-repeat;
-	background-position: center;
 	background-size: contain;
 	pointer-events: none;
 }
 
-.perellion-panel--a::before { background-image: url("assets/img/panel-a.png"); }
-.perellion-panel--b::before { background-image: url("assets/img/panel-b.png"); }
-.perellion-panel--c::before { background-image: url("assets/img/panel-c.png"); }
+.perellion-panel::before {
+	background-image: var(--perellion-art, none);
+	background-position: var(--perellion-art-pos);
+}
+
+/* The second instance. Off unless a section opts in by setting
+   --perellion-art-2, so every existing panel renders exactly as before. */
+.perellion-panel::after {
+	background-image: var(--perellion-art-2);
+	background-position: var(--perellion-art-pos-2);
+}
+
+.perellion-panel--a { --perellion-art: url("assets/img/panel-a.png"); }
+.perellion-panel--b { --perellion-art: url("assets/img/panel-b.png"); }
+.perellion-panel--c { --perellion-art: url("assets/img/panel-c.png"); }
+
+/* Positioning vocabulary. Round 2 phrased every decoration note as one of
+   these, so the notes translate one-to-one and a future note needs no new
+   CSS -- only the class or the property set on the section. */
+.perellion-art-left   { --perellion-art-pos: left center; }
+.perellion-art-right  { --perellion-art-pos: right center; }
+.perellion-art-top    { --perellion-art-pos: center top; }
+.perellion-art-bottom { --perellion-art-pos: center bottom; }
+.perellion-art-top-right    { --perellion-art-pos: right top; }
+.perellion-art-top-left     { --perellion-art-pos: left top; }
+
+/* Two instances at once. Draws the same artwork a second time from
+   --perellion-art, so it stays in step with the panel variant. */
+.perellion-art-right-and-bottom {
+	--perellion-art-pos: right center;
+	--perellion-art-2: var(--perellion-art);
+	--perellion-art-pos-2: center bottom;
+}
+
+.perellion-art-doubled-right {
+	--perellion-art-pos: right 35%;
+	--perellion-art-2: var(--perellion-art);
+	--perellion-art-pos-2: right 65%;
+}
 
 .perellion-panel__media,
 figure.perellion-panel__media {
@@ -618,19 +668,40 @@ figure.perellion-panel__media {
 	margin: 0;
 	z-index: 1;
 	width: 64.86%;          /* 467 of 720, as drawn */
-	aspect-ratio: 467 / 638;
-	object-fit: cover;
-	border-radius: var(--perellion-radius-lg);
-	box-shadow: var(--wp--preset--shadow--lifted);
 	display: block;
+	overflow: hidden;
 }
 
-figure.perellion-panel__media img {
+/* Circular media. The frame draws these at aspect 467/467 with a pill
+   radius. */
+.perellion-panel--round .perellion-panel__media {
+	aspect-ratio: 1;
+	border-radius: var(--perellion-radius-pill);
+	box-shadow: var(--wp--preset--shadow--lifted);
+}
+
+/* Rectangular media. The frame draws these at 345/471 with a 4px
+   radius, not the 16px used elsewhere. */
+.perellion-panel--rect .perellion-panel__media {
+	aspect-ratio: 345 / 471;
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+}
+
+/* The image must fill its frame completely, or the circle reads as a
+   flat-topped lozenge with the artwork showing through. WordPress's own
+   image rules set height:auto, so this is positioned rather than sized
+   to guarantee it wins. */
+.perellion-panel figure.perellion-panel__media img,
+.perellion-panel figure.perellion-panel__media > img {
+	position: absolute;
+	inset: 0;
 	width: 100%;
 	height: 100%;
+	max-width: none;
 	object-fit: cover;
-	border-radius: var(--perellion-radius-lg);
 	display: block;
+	border-radius: inherit;
 }
 
 /* ------------------------------------------------------------------
@@ -662,9 +733,17 @@ figure.perellion-panel__media img {
 
 .perellion-marks {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-	gap: var(--wp--preset--spacing--32);
-	align-items: end;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--24);
+	align-items: center;
+	justify-items: center;
+	height: 100%;
+	align-content: center;
+}
+
+/* Keep the marks column level with the copy beside it. */
+#security .wp-block-columns {
+	align-items: center;
 }
 
 .perellion-marks figure {
@@ -746,11 +825,3128 @@ figure.perellion-panel__media img {
 	.perellion-marks img { max-height: 92px; }
 }
 
-/* The panel media keeps the design's 16px corner whichever core block
-   style is applied. Core's "Rounded" style is a 9999px radius, which
-   turns a portrait image into an oval. */
-figure.perellion-panel__media,
-figure.perellion-panel__media img,
-figure.perellion-panel__media.is-style-rounded img {
-	border-radius: var(--perellion-radius-lg);
+/* The shape comes from the --round / --rect modifier above, so a core
+   block style must not override it. */
+.perellion-panel figure.perellion-panel__media.is-style-rounded,
+.perellion-panel figure.perellion-panel__media.is-style-rounded img {
+	border-radius: inherit;
+}
+
+/* The FAQ summary marker. Scoped tightly so Ollie's own details
+   styling does not reintroduce the native disclosure triangle. */
+.perellion-faq details > summary {
+	list-style: none;
+}
+
+.perellion-faq details > summary::-webkit-details-marker,
+.perellion-faq details > summary::marker {
+	display: none;
+	content: "";
+}
+
+/* The two dark bands carry more content than the light sections and
+   need the extra vertical room to read as deliberate. */
+#challenges,
+#security {
+	padding-block: var(--wp--preset--spacing--120);
+}
+
+/* A touch more space under the lead paragraph in the dark bands. */
+#challenges > p:last-of-type {
+	margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------------
+   Split section
+   The frame lays each content section out as two 720px halves inside a
+   1440px frame, vertically centred. The copy block is exactly 460px
+   wide, inset 210px from the left edge of its half (or 250px when it
+   sits on the right). Those insets are expressed as percentages of the
+   half so they hold as the viewport changes.
+   ------------------------------------------------------------------ */
+
+.perellion-split {
+	display: grid;
+	/* Two 720px halves, centred. Capping the columns rather than the
+	   section avoids WordPress's alignfull rule, which forces
+	   max-width:none and would otherwise stretch the halves. */
+	grid-template-columns: repeat(2, minmax(0, 720px));
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+}
+
+.perellion-split__text {
+	max-width: 460px;
+	margin-inline: 29.17% 6.94%;    /* 210px and 50px of 720px */
+}
+
+.perellion-split--mirror .perellion-split__text {
+	margin-inline: 34.72% 1.39%;    /* 250px and 10px of 720px */
+}
+
+.perellion-split__text > * + * {
+	margin-top: var(--wp--preset--spacing--16);
+}
+
+.perellion-split__text h2 {
+	margin-block: 0;
+}
+
+/* Body copy inside a split, at the frame's measure. */
+.perellion-split__text p {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 400;
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 2.3125;            /* 37px on 16px */
+	letter-spacing: 1px;
+}
+
+@media (max-width: 1100px) {
+	.perellion-split__text {
+		margin-inline: 12% 8%;
+	}
+	.perellion-split--mirror .perellion-split__text {
+		margin-inline: 12% 8%;
+	}
+}
+
+@media (max-width: 860px) {
+	.perellion-split {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--48);
+	}
+	.perellion-split__text,
+	.perellion-split--mirror .perellion-split__text {
+		margin-inline: 0;
+		max-width: none;
+	}
+	/* Media first on narrow screens, copy beneath. */
+	.perellion-split--mirror .perellion-split__media { order: -1; }
+}
+
+/* The jump navigation is action blue and uppercase in the frame. */
+.perellion-sectionnav a {
+	color: var(--perellion-action-primary);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.perellion-sectionnav a:hover,
+.perellion-sectionnav a:focus-visible {
+	color: var(--perellion-decoration-ultraviolet);
+	border-bottom-color: var(--perellion-action-primary);
+}
+
+/* The editor writes inline width, height and aspect-ratio onto an image
+   when it is replaced from the Media Library. Inline styles outrank the
+   stylesheet, so the panel media has to override them explicitly or the
+   photo will not fill its circle. */
+.perellion-panel figure.perellion-panel__media img {
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	aspect-ratio: auto !important;
+	object-fit: cover;
+}
+
+/* ------------------------------------------------------------------
+   Verified against the rendered page, not assumed
+   Each rule below was tested live before shipping.
+   ------------------------------------------------------------------ */
+
+/* WordPress applies global padding to a constrained group, which pulled
+   the media in from the frame's 467px to 436px. */
+.perellion-panel {
+	padding-inline: 0;
+}
+
+/* The split's paragraph rule has the same specificity as the eyebrow and
+   came later, so the eyebrow was inheriting body weight and tracking. */
+.perellion-split__text p.perellion-overline,
+p.perellion-overline {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 500;
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 2.25;              /* 36px, per the frame */
+	letter-spacing: 2px;            /* per the frame */
+	text-transform: uppercase;
+}
+
+/* The frame tracks the display headline at +1px like everything else. */
+.perellion-hero__title {
+	letter-spacing: 1px;
+}
+
+/* Centred intro copy on the dark bands reads better at a shorter measure
+   than the full 1280. */
+#challenges > p,
+#security > p {
+	max-width: 56rem;
+	margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------
+   Band joins
+   WordPress gives every top-level block a 24px top margin. Between two
+   full-width coloured sections that margin shows the white page
+   background as a stripe. The bands must meet flush.
+   ------------------------------------------------------------------ */
+
+main section.alignfull {
+	margin-block: 0;
+}
+
+/* Haley's supplied media comes pre-cropped. The How Perellion Helps
+   image is 467x471 where the other rectangle is 345x471, so that one
+   slot takes its own ratio. Scoped by section so no pattern changes and
+   no page rebuild are needed. */
+#help .perellion-panel__media {
+	aspect-ratio: 467 / 471;
+}
+
+/* The reveal animation shifts an element down 24px until it fires. On a
+   full-width coloured band that leaves a stripe of page background
+   above it, which reads as a white bar and persists until the section
+   reveals. Bands fade only; the content inside them can still travel. */
+.perellion-motion section.alignfull.perellion-reveal {
+	transform: none;
+}
+
+/* ------------------------------------------------------------------
+   Pinned scroll storytelling
+
+   Handoff note 41:15480 (10.19.26): the Visual side stays pinned while
+   the copy on the other side scrolls up until the content is finished,
+   with foreground and background drifting at different speeds behind
+   it, very subtly.
+
+   motion.js adds .is-pinned to a split only when the copy actually
+   outruns the panel and the viewport is wide enough for two columns,
+   so a short section is left centred exactly as the frame draws it.
+   ------------------------------------------------------------------ */
+
+.perellion-split.is-pinned {
+	align-items: start;
+}
+
+/* motion.js wraps each half in a column at runtime, because the sticky
+   elements need a taller box to travel inside and that box cannot be added
+   to the pattern without rebuilding every page already built from it. */
+.perellion-col {
+	min-width: 0;
+}
+
+.perellion-split--mirror .perellion-col--media {
+	order: -1;
+}
+
+.perellion-motion .perellion-split.is-pinned .perellion-col--media > .perellion-panel {
+	position: sticky;
+	top: var(--perellion-pin-top, 12vh);
+	align-self: start;
+}
+
+/* The copy window. Held at the same time as the visual, sized just taller
+   than the photograph so the two halves balance, and faded at both edges so
+   the text dissolves rather than being chopped off by the window. */
+.perellion-motion .perellion-split.is-pinned .perellion-col--text > .perellion-split__text {
+	position: sticky;
+	top: var(--perellion-win-top, 12vh);
+	overflow: hidden;
+	max-width: none;
+	-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 48px, #000 calc(100% - 72px), transparent 100%);
+	        mask-image: linear-gradient(to bottom, transparent 0, #000 48px, #000 calc(100% - 72px), transparent 100%);
+}
+
+/* Inset by MORE than the depth of each fade band, so the first line starts
+   clear of the top fade at rest and the last line finishes well clear of
+   the bottom one. Padding equal to the fade depth is not enough: it lands
+   the line exactly on the boundary where the gradient begins, and the line
+   reads as chopped off. Fades are 48 and 72; these are 80 and 150. */
+.perellion-motion .perellion-split.is-pinned .perellion-copy__inner {
+	max-width: 460px;
+	padding-block: 80px 150px;
+	will-change: transform;
+}
+
+.perellion-copy__inner > * + * {
+	margin-top: var(--wp--preset--spacing--16);
+}
+
+/* The panel is also the parallax element, and a transform on a sticky
+   element fights its own pin. motion.js therefore publishes depth as
+   two custom properties and the layers inside the panel carry the
+   movement: the artwork against the scroll, the photo with it at under
+   half the rate. Transforms on descendants of a sticky element are
+   safe; a transform on an ancestor is what breaks position:sticky. */
+.perellion-motion .perellion-panel {
+	transform: none !important;
+}
+
+.perellion-motion .perellion-panel::before {
+	transform: translate3d(0, var(--perellion-depth-bg, 0px), 0);
+	will-change: transform;
+}
+
+.perellion-motion .perellion-panel > .perellion-panel__media,
+.perellion-motion .perellion-panel > figure.perellion-panel__media {
+	transform: translate3d(0, var(--perellion-depth-fg, 0px), 0);
+	will-change: transform;
+}
+
+/* Below the two-column breakpoint nothing pins: a pinned panel against
+   copy taller than the screen has nowhere to travel and simply reads as
+   stuck. Confirmed with Haley Oct 28 for the section nav, same
+   reasoning applies to the panels. */
+@media (max-width: 860px) {
+	/* The column wrappers step out of the grid entirely below the
+	   breakpoint, so the layout collapses exactly as it did before they
+	   were introduced. */
+	.perellion-col {
+		display: contents;
+	}
+	.perellion-split.is-pinned .perellion-panel,
+	.perellion-split.is-pinned .perellion-split__text {
+		position: static;
+		height: auto;
+		overflow: visible;
+		-webkit-mask-image: none;
+		        mask-image: none;
+	}
+	.perellion-copy__inner {
+		padding-block: 0;
+		transform: none !important;
+	}
+	.perellion-motion .perellion-panel::before,
+	.perellion-motion .perellion-panel > .perellion-panel__media,
+	.perellion-motion .perellion-panel > figure.perellion-panel__media {
+		transform: none;
+	}
+}
+
+/* Motion off at the system level: no pin, no drift, nothing to settle. */
+.perellion-no-motion .perellion-split.is-pinned > .perellion-panel {
+	position: static;
+}
+
+/* ------------------------------------------------------------------
+   Horizontal overflow
+
+   The decorative panel artwork is drawn with inset:-6%, so it bleeds
+   past the panel on every side by design. At the page edge that bleed
+   widens the document: 43px at 1440, 23px at 390, which on a phone is
+   a visible sideways scroll.
+
+   Clipped at the page wrapper so the artwork still bleeds within the
+   section. This must be `clip` and not `hidden`: `hidden` would make
+   the wrapper a scroll container and silently break the pinned panels
+   above, which fail by simply not sticking.
+   ------------------------------------------------------------------ */
+
+.wp-site-blocks,
+main {
+	overflow-x: clip;
+}
+
+/* ------------------------------------------------------------------
+   Section rhythm
+
+   Haley, Oct 28: "Consider condensing padding between sections — too
+   much white space, balance looks better on Figma."
+
+   She is right, and the frame says why. A Body Component in the
+   handoff frame is a fixed height with p-0: the breathing room is
+   built into the component, not added around it. The patterns were
+   adding 120px top and bottom on top of content that already carried
+   its own space, so every section ran ~150px taller than drawn.
+
+   Driven by one custom property so the rhythm can be retuned in a
+   single place. Declared !important because the patterns write
+   padding as an inline style on the section, which is baked into any
+   page already built from them; without this, pages would have to be
+   rebuilt to pick the change up.
+   ------------------------------------------------------------------ */
+
+:root {
+	--perellion-section-pad: var(--wp--preset--spacing--60);
+	--perellion-section-pad-tight: var(--wp--preset--spacing--48);
+}
+
+main section.alignfull {
+	padding-top: var(--perellion-section-pad) !important;
+	padding-bottom: var(--perellion-section-pad) !important;
+}
+
+/* The bands that carry a background colour keep slightly less, so the
+   colour does not read as a thick stripe. */
+main section.alignfull#challenges,
+main section.alignfull#security,
+main section.alignfull#faq {
+	padding-top: var(--perellion-section-pad-tight) !important;
+	padding-bottom: var(--perellion-section-pad-tight) !important;
+}
+
+/* ==================================================================
+   Round 1 feedback, Haley 29 Oct (Monday subitems 01-12)
+
+   Applied from the stylesheet and scoped by section id wherever the
+   change would otherwise need the pattern markup altered. Patterns are
+   copied into a page at insert time, so a pattern edit alone would not
+   reach the Defense page that already exists.
+   ================================================================== */
+
+/* [02] Header: sticky, with the backdrop blur and 72% white the frame
+   specifies on its Sticky Menu Bar. */
+.perellion-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background-color: rgba(255, 255, 255, 0.72);
+	-webkit-backdrop-filter: blur(7px);
+	        backdrop-filter: blur(7px);
+}
+
+/* [02] Hero: the eyebrow above the headline is hidden, the headline is
+   held to two lines, and the section sits on grey fading to white. */
+.perellion-hero .perellion-eyebrow {
+	display: none;
+}
+
+.perellion-hero__title {
+	max-width: 18ch;
+	margin-inline: auto;
+	text-wrap: balance;
+}
+
+.perellion-hero {
+	background-image: linear-gradient(180deg, var(--wp--preset--color--canvas) 0%, var(--wp--preset--color--white) 100%);
+}
+
+/* [03] Industry Overview: photograph left, copy right. [05] How
+   Perellion Helps: copy left, photograph right. Both were the other way
+   round. The copy insets swap with the sides, since the frame draws a
+   different gutter on each. */
+@media (min-width: 861px) {
+	#overview .perellion-col--media,
+	#overview .perellion-split__media {
+		order: -1;
+	}
+	#overview .perellion-split__text {
+		margin-inline: 34.72% 1.39%;
+	}
+	/* Help has its media first in the markup, so the copy is moved ahead
+	   of it rather than the order simply being reset. */
+	#help .perellion-col--media,
+	#help .perellion-split__media {
+		order: 1;
+	}
+	#help .perellion-split__text {
+		margin-inline: 29.17% 6.94%;
+	}
+}
+
+/* [04] Industry Challenges on light grey with dark copy, and [06]
+   Cybersecurity back to white. [08] Built for Evolving loses its grey.
+   The colours are baked into the page as block classes, so each one is
+   overridden rather than edited in the pattern. */
+#challenges.has-charcoal-background-color {
+	/* #F0F0F0, the exact surface the Circle Infographic is drawn on in
+	   the frame. The graphic blends with hard-light, so the surface
+	   behind it has to match or the circles go muddy. */
+	background-color: var(--wp--preset--color--panel) !important;
+}
+
+#security.has-charcoal-background-color,
+#future.has-canvas-background-color {
+	background-color: var(--wp--preset--color--white) !important;
+}
+
+#challenges,
+#security {
+	color: var(--wp--preset--color--charcoal) !important;
+}
+
+#challenges .has-white-color,
+#security .has-white-color {
+	color: var(--wp--preset--color--charcoal) !important;
+}
+
+#challenges .has-light-grey-color,
+#security .has-light-grey-color {
+	color: var(--wp--preset--color--graphite) !important;
+}
+
+/* Decoration cyan was legible on charcoal and is not on white: 1.3:1
+   against the new surface. Mapped to the action blue, which is the
+   nearest brand colour that passes. */
+#security .has-decoration-cyan-color {
+	color: var(--perellion-action-primary) !important;
+}
+
+/* [10] FAQ: the frame shows a centred heading over two columns of open
+   question and answer text, not a left heading beside a collapsed
+   accordion. motion.js opens the details elements; this lays them out. */
+#faq .wp-block-columns {
+	display: block;
+}
+
+#faq .wp-block-column:first-child {
+	text-align: center;
+	flex-basis: auto !important;
+	margin-bottom: var(--wp--preset--spacing--48);
+}
+
+#faq .wp-block-column:last-child {
+	columns: 2;
+	column-gap: var(--wp--preset--spacing--80);
+}
+
+#faq details {
+	break-inside: avoid;
+	margin: 0 0 var(--wp--preset--spacing--32);
+}
+
+#faq summary {
+	list-style: none;
+	cursor: default;
+	font-weight: 500;
+	margin-bottom: var(--wp--preset--spacing--12);
+}
+
+#faq summary::-webkit-details-marker,
+#faq summary::marker {
+	display: none;
+	content: "";
+}
+
+@media (max-width: 860px) {
+	#faq .wp-block-column:last-child {
+		columns: 1;
+	}
+}
+
+/* [12] Footer: compact, white, one row. */
+.perellion-footer__row {
+	gap: var(--wp--preset--spacing--24);
+}
+
+.perellion-footer__legal,
+.perellion-footer__links {
+	margin: 0;
+}
+
+.perellion-footer__links a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.perellion-footer__links a:hover,
+.perellion-footer__links a:focus-visible {
+	text-decoration: underline;
+}
+
+/* With the answers permanently open there is nothing to toggle, so the
+   plus/minus affordance is removed and the summary stops behaving like
+   a control. */
+#faq summary::after,
+#faq details[open] summary::after {
+	content: none;
+}
+
+#faq summary {
+	display: block;
+	cursor: default;
+}
+
+/* The infographic is re-exported from the frame so its hard-light blend
+   lands on the correct #F0F0F0 surface. The render available through the
+   design tool caps at 1024px, so it is held to its natural width rather
+   than upscaled; a 2x export from Figma can replace the file with no
+   other change. */
+#challenges .wp-block-image img {
+	width: min(100%, 965px);
+	height: auto;
+	image-rendering: auto;
+}
+
+/* ------------------------------------------------------------------
+   Mobile, feedback items 01 and 09
+
+   Type scale from Haley's note: hero 34, section headings 40, body 16,
+   24px side gutters. Headings centre, the measure widens, and the copy
+   collapses behind a More... control rather than running as one long
+   block.
+   ------------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+	/* Typed against the element as well as the class, so it outranks the
+	   has-display-font-size utility WordPress emits on the heading. */
+	h1.perellion-hero__title {
+		font-size: 34px;
+		line-height: 1.12;
+		max-width: none;
+	}
+
+	main section.alignfull {
+		padding-left: var(--wp--preset--spacing--24) !important;
+		padding-right: var(--wp--preset--spacing--24) !important;
+	}
+
+	main section.alignfull h2,
+	main section.alignfull .perellion-overline,
+	main section.alignfull .perellion-eyebrow {
+		text-align: center;
+	}
+
+	/* A wider measure than the desktop 460px column, which is far too
+	   narrow once it is the only thing on screen. */
+	.perellion-split__text,
+	.perellion-split--mirror .perellion-split__text,
+	.perellion-copy__inner {
+		max-width: none !important;
+		margin-inline: 0 !important;
+	}
+
+	/* The section nav sits at the top of the page and does not stick, so
+	   the reader chooses a section up front. Confirmed with Haley 28 Oct. */
+	.perellion-sectionnav {
+		position: static !important;
+		opacity: 1 !important;
+		justify-content: center;
+	}
+}
+
+.perellion-clamp {
+	display: flex;
+	flex-direction: column;
+}
+
+.perellion-clamp.is-clamped .perellion-copy__inner {
+	display: -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.perellion-more {
+	align-self: center;
+	margin-top: var(--wp--preset--spacing--16);
+	padding: 0;
+	border: 0;
+	background: none;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--body);
+	font-weight: 500;
+	letter-spacing: 1px;
+	color: var(--perellion-action-primary);
+	cursor: pointer;
+}
+
+.perellion-more:hover,
+.perellion-more:focus-visible {
+	text-decoration: underline;
+}
+
+.perellion-more[hidden] {
+	display: none;
+}
+
+/* Mobile stacking, feedback items 03, 05, 07 and 08: the photograph
+   comes before the heading in every split, and sits at close to the
+   content width rather than the 72% used before. Help and Built for
+   Evolving already lead with their media; Overview and Reduced Risk
+   had the copy first. */
+@media (max-width: 860px) {
+	#overview .perellion-split__media,
+	#overview .perellion-col--media,
+	#risk .perellion-split__media,
+	#risk .perellion-col--media {
+		order: -1;
+	}
+
+	#overview .perellion-split__text,
+	#risk .perellion-split__text {
+		order: 0;
+	}
+}
+
+@media (max-width: 600px) {
+	.perellion-panel {
+		aspect-ratio: 1 / 1;
+	}
+
+	.perellion-panel__media,
+	figure.perellion-panel__media {
+		width: 92%;
+	}
+}
+
+/* ------------------------------------------------------------------
+   [06] Cybersecurity & Export Compliance, second pass
+
+   Haley: "use the image with the stacked three compliance badges on the
+   left, with copy on the right; R1 has a horizontal badge row."
+
+   The first pass only changed the surface to white. The marks were
+   still a three-across row in the right-hand column, which on a white
+   background read as a lot of empty space. They now stack down a
+   narrower left column with the copy beside them.
+   ------------------------------------------------------------------ */
+
+@media (min-width: 861px) {
+	#security .wp-block-columns {
+		display: flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--80);
+	}
+
+	/* Copy is first in the markup, so it is moved after the marks
+	   rather than the markup being rewritten. */
+	#security .wp-block-column:nth-child(1) {
+		order: 2;
+		flex: 1 1 auto;
+	}
+
+	#security .wp-block-column:nth-child(2) {
+		order: 1;
+		flex: 0 0 300px;
+	}
+}
+
+#security .perellion-marks {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--32);
+	align-items: flex-start;
+	justify-items: start;
+	height: auto;
+	grid-template-columns: none;
+}
+
+#security .perellion-marks figure {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--20);
+	text-align: left;
+	margin: 0;
+}
+
+#security .perellion-marks img {
+	flex: none;
+	width: 84px;
+	max-height: none;
+	margin: 0;
+}
+
+#security .perellion-marks figcaption {
+	text-align: left;
+	margin: 0;
+}
+
+@media (max-width: 860px) {
+	#security .perellion-marks {
+		align-items: center;
+	}
+	#security .perellion-marks figure {
+		justify-content: center;
+	}
+}
+
+/* The compliance marks are supplied as pure white line art, drawn for
+   the charcoal band they used to sit on. On the white surface they
+   disappear entirely. brightness(0) renders the same artwork dark while
+   leaving the alpha shape untouched, so no new assets are needed; if
+   Sovo supplies dark versions later, drop the filter. */
+#security .perellion-marks img {
+	filter: brightness(0);
+	opacity: 0.85;
+}
+
+#security .perellion-marks figcaption {
+	color: var(--wp--preset--color--graphite);
+}
+
+/* The proof band's violet and azure wash was drawn to stop a charcoal
+   rectangle reading as flat. Both bands are light now, where the same
+   wash tints the whole section lavender and makes the infographic's own
+   surface read as a pale box sitting on top of it. Removed from the two
+   sections that changed; the class keeps its behaviour anywhere else. */
+#challenges.perellion-proof-band::before,
+#security.perellion-proof-band::before {
+	content: none;
+}
+
+/* The infographic is in figure.perellion-infographic, not a
+   .wp-block-image, so the earlier sizing rule never matched it and the
+   image kept the width attribute baked into the markup. */
+#challenges .perellion-infographic img,
+#challenges figure img {
+	width: min(100%, 965px) !important;
+	height: auto !important;
+	display: block;
+	margin-inline: auto;
+}
+
+/* CSS columns balance by height, which with three questions drops one
+   on the left and two on the right with a hole beneath. A two-column
+   grid keeps them in reading order and keeps the rows aligned. */
+#faq .wp-block-column:last-child {
+	columns: auto;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--80);
+	align-items: start;
+}
+
+#faq details {
+	margin: 0;
+}
+
+@media (max-width: 860px) {
+	#faq .wp-block-column:last-child {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* The contact portrait is drawn at 345 wide in the frame, not the 467
+   the circular panels use, so it was rendering a third wider than it
+   should and read as the biggest image on the page. 345 of 720. */
+#contact .perellion-panel__media,
+#contact figure.perellion-panel__media {
+	width: 47.92%;
+}
+
+/* Until a 2x export of the infographic arrives, the file is held to its
+   own pixel width rather than being stretched to the 965 it is drawn
+   at. Smaller than the frame, but sharp; raising the cap is a one-line
+   change once the larger export lands. */
+#challenges .perellion-infographic img,
+#challenges figure img {
+	width: min(100%, 727px) !important;
+}
+
+/* Each question sits above a hairline rule, as the frame draws them, so
+   the two-column grid reads as a deliberate structure rather than text
+   floating in space. */
+#faq details {
+	border-top: 1px solid var(--wp--preset--color--light-grey);
+	padding-top: var(--wp--preset--spacing--24);
+}
+
+/* The FAQ questions were inheriting the body line height of 2.3125,
+   which on 28px type puts 65px between the lines of a two-line
+   question and makes the pair read as separate sentences. */
+#faq summary {
+	line-height: 1.3;
+	margin-bottom: var(--wp--preset--spacing--16);
+}
+
+#faq details > :not(summary) {
+	margin-top: 0;
+}
+
+/* ------------------------------------------------------------------
+   FAQ, corrected against the frame (node 7:14329)
+
+   The frame does not use headings or rules. Questions are 16px
+   Poppins SemiBold, the same size as the answers, on a 37px line.
+   Two 500px columns with a 95px gutter, and the entries fill the
+   first column before the second: Q1 and Q2 on the left, Q3 on the
+   right. The earlier pass had 28px questions, hairline rules and
+   row-first flow, none of which are in the design.
+   ------------------------------------------------------------------ */
+
+#faq .wp-block-column:last-child {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(2, minmax(0, 500px));
+	grid-template-rows: repeat(2, min-content);
+	column-gap: 95px;
+	row-gap: 37px;
+	justify-content: center;
+	columns: auto;
+}
+
+#faq details {
+	border-top: 0;
+	padding-top: 0;
+	margin: 0;
+}
+
+#faq summary {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--body);
+	font-weight: 600;
+	line-height: 37px;
+	letter-spacing: 1px;
+	color: var(--wp--preset--color--charcoal);
+	margin-bottom: 0;
+}
+
+#faq details p {
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 37px;
+	letter-spacing: 1px;
+	margin-top: 0;
+}
+
+/* The 2x asset is in place, so the graphic goes back to the width the
+   frame draws it at. */
+#challenges .perellion-infographic img,
+#challenges figure img {
+	width: min(100%, 965px) !important;
+}
+
+@media (max-width: 860px) {
+	#faq .wp-block-column:last-child {
+		grid-auto-flow: row;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: none;
+	}
+}
+
+/* ---- Industry Challenges infographic, per breakpoint -----------------
+   Haley's 2 Nov exports replace the single file this section used to
+   carry. Three tiers, and the mobile one is portrait where the other
+   two are landscape, so each needs its own ceiling: capping all three
+   at the desktop 965 would blow the tall version far off the screen.
+   The picture element is assembled in motion.js, since the img is baked
+   into each page's content; these rules cap whichever source it picks.
+
+   Everything here repeats the earlier selector list so it carries the
+   same specificity and, coming later in the file, wins over the three
+   single-asset caps above. */
+#challenges .perellion-infographic {
+	max-width: none;
+}
+
+#challenges .perellion-infographic picture {
+	display: block;
+}
+
+#challenges .perellion-infographic img,
+#challenges figure img {
+	width: auto !important;
+	max-width: 100% !important;
+	height: auto !important;
+	margin-inline: auto;
+}
+
+/* xs, portrait at 340 wide. Held to its own pixel width rather than
+   stretched: at a 375 viewport it sits inside the gutters, which is
+   sharper than upscaling it by 10%. */
+@media (max-width: 600px) {
+	#challenges .perellion-infographic img,
+	#challenges figure img {
+		width: min(100%, 340px) !important;
+	}
+}
+
+/* m, the tablet tier Haley added unprompted to keep the labels legible
+   between the two extremes. */
+@media (min-width: 601px) and (max-width: 1024px) {
+	#challenges .perellion-infographic img,
+	#challenges figure img {
+		width: min(100%, 760px) !important;
+	}
+}
+
+/* xl. The asset is 1440 wide but the frame draws the graphic at 965, so
+   it is held there and the extra pixels go to sharpness. */
+@media (min-width: 1025px) {
+	#challenges .perellion-infographic img,
+	#challenges figure img {
+		width: min(100%, 965px) !important;
+	}
+}
+
+/* ---- [02] Sticky header, actually sticky -----------------------------
+   The header rule below has said position: sticky since the first build,
+   and it has never worked. WordPress wraps a template part in its own
+   element, and that wrapper is only as tall as the header itself, so the
+   sticky child had an 86px track to travel before its parent's box ran
+   out and it scrolled away with the page. Measured on dev: scrolled to
+   1500, the header sat at -1468.
+
+   The fix is to stick the wrapper, which is a child of the page flow and
+   so has the whole document to travel. The inner element keeps the blur
+   and the translucent fill; its own sticky is now inert but harmless. */
+.wp-site-blocks > header,
+header.wp-block-template-part {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+}
+
+/* ---- [02] Hero headline on two lines ---------------------------------
+   Haley: "Desktop headline should occupy two lines, not three." The
+   measure was 18ch, which breaks the 47-character Defense headline three
+   ways. 26ch gives two balanced lines there and leaves enough room for
+   the longer industry headlines without forcing a third. text-wrap:
+   balance, already set above, does the splitting. */
+@media (min-width: 1025px) {
+	h1.perellion-hero__title {
+		max-width: 26ch;
+	}
+}
+
+/* ---- [11] Get in touch ----------------------------------------------
+   Built from frame node 7:14472 "Body Component", not from the note.
+   Numbers below are the frame's, relative to the 345x471 portrait:
+     card      205.71 x 314, radius 2, white at 90%, 14px backdrop blur
+     position  85.67 down from the photo top, crossing its right edge so
+               99.48 sits over the image and 106.23 hangs past it
+     inside    24 padding, 20 between items
+     body      Poppins Medium 16 / 23.26, tracking 1
+     rule      32 wide, 2px, text colour at 20%
+     source    Poppins Regular 13 / 19.94, tracking 1
+   Expressed against the photo's own box so it holds if the panel moves. */
+#contact .perellion-panel__media {
+	position: relative;
+}
+
+.perellion-quote {
+	display: none;
+	margin: 0;
+	box-sizing: border-box;
+	flex-direction: column;
+	gap: 20px;
+	padding: 24px;
+	border: 1px solid #fff;
+	border-radius: 2px;
+	background-color: rgba(255, 255, 255, 0.9);
+	-webkit-backdrop-filter: blur(14px);
+	        backdrop-filter: blur(14px);
+}
+
+/* The overlap is a desktop instruction; below the split breakpoint the
+   photo goes full width and a card hanging off its right edge would push
+   the page sideways, so it sits under the photo instead. */
+@media (min-width: 861px) {
+	/* WordPress renders the card as a SIBLING of the image figure, not
+	   inside it, so its containing block is the 720-wide panel and the
+	   percentages above resolved against that: a 429px card overlapping
+	   by 20 instead of a 206px card overlapping by 99.
+
+	   Measured on dev, the photo is centred in the panel at 345x471, so
+	   the card is anchored off the panel's centre instead:
+	     left  50% + 345/2 - 99.48 overlap  = 50% + 73.02px
+	     top   50% - 471/2 + 85.67 from top = 50% - 149.83px
+	   Width and height are the frame's own, in px, since they do not
+	   scale with the panel. */
+	.perellion-quote {
+		display: flex;
+		position: absolute;
+		z-index: 2;
+		width: 205.71px;
+		min-height: 314px;
+		left: calc(50% + 73.02px);
+		top: calc(50% - 149.83px);
+	}
+}
+
+/* Below the split breakpoint the card is hidden rather than stacked.
+   The photo inside the panel is absolutely positioned, so a card left in
+   flow lands on top of it instead of under it, and the overlap Haley
+   asked for is a desktop instruction in any case. Revisit if a mobile
+   frame for this section arrives. */
+@media (max-width: 860px) {
+	.perellion-quote {
+		display: none;
+	}
+}
+
+.perellion-quote__mark {
+	display: block;
+	width: 32px;
+	height: 32px;
+}
+
+.perellion-quote__body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.perellion-quote__body p {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 23.26px;
+	letter-spacing: 1px;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-quote__rule {
+	width: 32px;
+	height: 0;
+	margin: 0;
+	border: 0;
+	border-top: 2px solid rgba(35, 31, 32, 0.2);
+}
+
+.perellion-quote__source {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 19.94px;
+	letter-spacing: 1px;
+	color: var(--wp--preset--color--charcoal);
+}
+
+/* The contact details are one wrapping block in the frame, 460 wide at
+   16/36, label bold and inline, value in action blue. The definition
+   list this replaces is what produced the narrow columns Haley flagged. */
+.perellion-contact {
+	/* The definition-list version of this block used a two-column grid.
+	   The new single-block markup reuses the class, so that grid was
+	   still splitting the intro and the details into two 214px columns
+	   and wrapping the phone number mid-number. Explicitly block. */
+	display: block;
+	max-width: 460px;
+}
+
+#contact .perellion-contact__intro,
+#contact .perellion-contact__lines {
+	margin: 0 0 var(--wp--preset--spacing--16);
+	max-width: none;
+	font-size: 16px;
+	line-height: 36px;
+	letter-spacing: 0.85px;
+}
+
+.perellion-contact__lines b {
+	font-weight: 700;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-contact__lines a {
+	color: var(--wp--preset--color--action-primary);
+	text-decoration: none;
+}
+
+.perellion-contact__lines a:hover,
+.perellion-contact__lines a:focus-visible {
+	text-decoration: underline;
+}
+
+/* Dark Send message button, #231F20 in the frame. Scoped so it overrides
+   the action-primary fill baked into pages inserted before this change,
+   which is why the live Defense page still showed blue. */
+#contact .wp-block-button__link {
+	background-color: var(--wp--preset--color--charcoal) !important;
+	color: var(--wp--preset--color--white) !important;
+	border-radius: 34px;
+}
+
+/* ---- [04] Challenges band matched to Haley's 2 Nov exports ----------
+   The infographics are flattened JPEGs with their own background baked
+   in, so the band only disappears when it is the same colour as the
+   file. Haley's 2 Nov exports did not agree with each other:
+
+     xs @1x   #F5F5F5   all six industries
+     m  @1x   #F0F0F0   five of six (Space is #F5F5F5)
+     xl @2x   #F5F5F5   five of six — Defense was #E3E7EA
+
+   Defense's desktop export was the outlier, and an earlier version of
+   this rule sampled that one file and set the whole site to #E3E7EA,
+   which then boxed the artwork on the other five pages.
+
+   RESOLVED 11 Nov. All 36 were re-tinted onto #F5F5F5 from the
+   originals during the media-library move, and all four corners of all
+   36 now sample #F5F5F5 exactly. So the Defense desktop box is gone and
+   the re-export logged for Haley is no longer needed; withdraw it
+   rather than leaving her chasing a file we already fixed. #F5F5F5 is
+   the theme's canvas token, so this rule now matches the whole set
+   instead of a majority of it. */
+#challenges,
+#challenges.has-panel-background-color,
+#challenges.has-charcoal-background-color {
+	background-color: var(--wp--preset--color--canvas) !important;
+}
+
+/* ---- [02] Docked anchor bar, with the in-view section highlighted ----
+   Haley: "Please add in the animation from the Figma file see demo here."
+   The demo is not a prototype. It is four static frames on the Demos page
+   (247:12966, desktop/tablet/mobile) plus two frames named "Scroll
+   behavior" (21:23347, 21:29434) showing the Defense page mid-scroll with
+   the condensed header and this bar below it, CHALLENGES lit in blue.
+
+   Built as a fixed clone appended to the body rather than by making the
+   hero's own nav sticky. A sticky element is confined to its parent's box,
+   and the hero's nav sits inside a group that ends with the hero, so it
+   could never travel the page. A clone also removes the layout jump that
+   promoting the original to fixed would cause.
+
+   No duration or easing is given for this anywhere in the file. The only
+   motion value in it is the 300ms EASE_OUT on the mega-menu dropdown
+   reaction, so that is what is borrowed here, deliberately and on record,
+   rather than a number invented to look right. */
+.perellion-anchorbar {
+	position: fixed;
+	z-index: 40;
+	top: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--40);
+	flex-wrap: nowrap;
+	margin: 0;
+	padding: 14px var(--wp--preset--spacing--24);
+	background-color: rgba(255, 255, 255, 0.9);
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	border-bottom: 1px solid rgba(35, 31, 32, 0.08);
+	transform: translateY(-100%);
+	transition: transform 300ms cubic-bezier(0, 0, 0.58, 1);
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.perellion-anchorbar::-webkit-scrollbar {
+	display: none;
+}
+
+.perellion-anchorbar.is-docked {
+	transform: translateY(0);
+}
+
+.perellion-anchorbar a {
+	flex: 0 0 auto;
+	padding-bottom: 4px;
+	border-bottom: 2px solid transparent;
+	color: var(--perellion-neutral-graphite);
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	transition: color var(--perellion-transition-base) ease,
+		border-color var(--perellion-transition-base) ease;
+}
+
+.perellion-anchorbar a:hover,
+.perellion-anchorbar a:focus-visible,
+.perellion-anchorbar a.is-current {
+	color: var(--perellion-neutral-charcoal);
+	border-bottom-color: var(--perellion-action-primary);
+}
+
+.perellion-anchorbar a.is-current {
+	color: var(--perellion-action-primary);
+}
+
+/* The hero's own copy of the nav gets the same highlight, so the two
+   never disagree while both are on screen. */
+.perellion-sectionnav a.is-current {
+	color: var(--perellion-action-primary);
+	border-bottom-color: var(--perellion-action-primary);
+}
+
+@media (max-width: 860px) {
+	.perellion-anchorbar {
+		justify-content: flex-start;
+		gap: var(--wp--preset--spacing--24);
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.perellion-anchorbar {
+		transition: none;
+	}
+}
+
+/* ---- [06] Security panel sized to the frame -------------------------
+   The compliance artwork is 345 x 471 in Figma, the same box as the
+   contact portrait, and #contact already has a rule narrowing its media
+   to 47.92% (345 of the 720 panel). #security never got one, so it fell
+   back to the generic 64.86% and rendered 467 x 638. With object-fit:
+   cover that crops the top and bottom off the badge stack.
+
+   Defense never showed this because it uses the three separate badge
+   PNGs in .perellion-marks rather than a panel image. It only surfaced
+   once Haley's combined 2 November export went into the five new pages,
+   which is why it is being fixed now rather than in the Defense round. */
+#security .perellion-panel__media,
+#security figure.perellion-panel__media {
+	width: 47.92%;
+}
+
+/* The compliance marks are line art, not a photograph. The rect panel's
+   card shadow and 4px radius are drawn for a photo that fills its box
+   edge to edge; on artwork with a transparent background they outline an
+   empty rectangle over the Brand Expression gradient, which reads as a
+   box around the badges. Jess spotted it on Aerospace.
+
+   Haley's 2 November export is a JPEG, so it had no alpha and covered
+   the gradient outright. It has been rebuilt as a PNG by clearing only
+   the white connected to the outside edge, which leaves the white inside
+   the marks — the AS9100D lettering, the CMMC padlock, the ITAR centre —
+   intact. A straight white-to-alpha pass would have punched those out. */
+#security figure.perellion-panel__media {
+	box-shadow: none;
+	border-radius: 0;
+}
+
+/* No Brand Expression behind the compliance marks. Every other panel sits
+   on one of the blurred colour blobs, but all three frames that carry this
+   section — Defense 7:13387, Aerospace 7:14604, Space 8:15354 — put the
+   badge stack on plain white with only the faint crosshatch behind it.
+   Jess caught the blob on Space. The decoration is suppressed rather than
+   the accent class removed, so the panel keeps its sizing and the markup
+   stays identical to the other sections. */
+#security .perellion-panel::before {
+	background-image: none;
+}
+
+/* ---- [02] Header blur ----------------------------------------------
+   Haley: "Match the original navigation and hero spacing (taller,
+   sticky, background blur with the Brand Expression)."
+
+   The sticky header and the taller spacing were built; the blur was
+   not. .perellion-header carries a 72% white background with nothing
+   behind it, so page content stayed legible through the bar as it
+   scrolled underneath — the hero's own section-link row showed as grey
+   ghost text behind the logo. 14px matches the blur on the quote card,
+   which is the only other blurred surface in the frame. */
+.perellion-header {
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+}
+
+/* ---- Energy's two card sections -------------------------------------
+   Only the Energy frame has these: "Manufacturing Solutions" (a grid of
+   five bordered capability cards on the light surface) and "Applications
+   Across Advanced Energy" (five title-and-paragraph blocks in two
+   columns on white). Every other page uses the two-column photo split,
+   so these needed their own layout rather than being forced into it. */
+.perellion-feature__intro {
+	max-width: 70ch;
+	margin-inline: auto;
+	margin-bottom: var(--wp--preset--spacing--48);
+}
+
+.perellion-cards,
+.perellion-apps {
+	max-width: var(--wp--style--global--wide-size, 1200px);
+	margin-inline: auto;
+}
+
+.perellion-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--24);
+	padding: 0;
+	list-style: none;
+}
+
+.perellion-cards > li {
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--24);
+	border: 1px solid rgba(35, 31, 32, 0.08);
+	border-radius: var(--perellion-radius-sm);
+	background-color: var(--wp--preset--color--white);
+	/* The frame centres both the card title and its lines. */
+	text-align: center;
+}
+
+.perellion-cards h3 {
+	margin: 0 0 var(--wp--preset--spacing--40);
+}
+
+.perellion-cards h3,
+.perellion-apps h3 {
+	margin-top: 0;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.3;
+	color: var(--perellion-neutral-charcoal);
+}
+
+.perellion-cards ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.perellion-cards ul li {
+	margin-bottom: 10px;
+	font-size: 15px;
+	line-height: 1.55;
+	color: var(--perellion-neutral-graphite);
+}
+
+/* The frame reads DOWN each column, not across the rows: Energy Storage
+   and Autonomous Mobility on the left, Electrified Mobility and Grid &
+   Power Systems on the right. A plain row-major grid interleaves them. */
+.perellion-apps {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, auto);
+	grid-auto-flow: column;
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--48);
+}
+
+.perellion-apps p {
+	margin: 0;
+	font-size: 16px;
+	line-height: 1.7;
+	color: var(--perellion-neutral-graphite);
+}
+
+@media (max-width: 1024px) {
+	.perellion-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 860px) {
+	.perellion-cards,
+	.perellion-apps { grid-template-columns: 1fr; }
+	.perellion-apps { grid-auto-flow: row; grid-template-rows: none; }
+}
+
+/* ---- [06] Defense compliance marks, stacked ------------------------
+   Defense was built before Haley supplied the combined artwork, so it
+   carried three separate badge PNGs laid out in a row about 84px tall,
+   hard against the left edge of the content column. The frame
+   (7:13387) draws one 345x471 stack, the same box Aerospace and Space
+   use. The section keeps its own markup — copy, list and all — and only
+   the artwork block changed, so nothing approved in the Defense round
+   moves except the thing Jess flagged as not matching. */
+.perellion-marks--stacked {
+	display: block;
+	width: 345px;
+	max-width: 100%;
+	margin-inline: auto;
+}
+
+.perellion-marks--stacked img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.perellion-proof-band .wp-block-columns {
+	align-items: center;
+	gap: var(--wp--preset--spacing--48);
+}
+
+@supports selector(:has(*)) {
+	.perellion-proof-band .wp-block-column:has(.perellion-marks--stacked) {
+		flex: 0 0 345px;
+	}
+}
+
+/* ---- Long-form legal pages (Terms, Privacy) --------------------------
+   Terms and Privacy came over from the old site as a single raw-HTML
+   block each, so their <p> and <h3> elements are not core/paragraph and
+   core/heading. They inherit the ROOT typography from theme.json
+   instead: Poppins at 1px letter-spacing, which is a display setting,
+   and they sit at wideSize (1280px) rather than contentSize because
+   nothing constrains them. Measured on dev before this rule: 1474 words
+   of legal prose set 1280px wide, about 200 characters a line.
+
+   This scope fixes readability without touching the site's font
+   decisions: the family stays as the rest of the site, tracking goes
+   back to normal, leading opens up, and the measure is capped at 72ch
+   (about 680px), which is inside contentSize so it holds on every
+   breakpoint without its own media query.
+
+   Applied by wrapping each page's block in a group carrying
+   .perellion-longform, rather than by page id: ids are stable between
+   this dev clone and production today, but a selector keyed to them
+   would break the first time a page is rebuilt. */
+.perellion-longform {
+	max-width: 72ch;
+	margin-inline: auto;
+	padding-inline: var(--wp--preset--spacing--24);
+}
+
+.perellion-longform p,
+.perellion-longform li {
+	letter-spacing: normal;
+	line-height: 1.7;
+	margin-block: 0 1.1em;
+}
+
+.perellion-longform h2,
+.perellion-longform h3,
+.perellion-longform h4 {
+	letter-spacing: normal;
+	margin-block: 2em 0.6em;
+}
+
+.perellion-longform h2:first-child,
+.perellion-longform h3:first-child {
+	margin-block-start: 0;
+}
+
+.perellion-longform h3 {
+	font-size: var(--wp--preset--font-size--lead);
+}
+
+.perellion-longform ul,
+.perellion-longform ol {
+	padding-inline-start: 1.4em;
+	margin-block: 0 1.1em;
+}
+
+.perellion-longform a {
+	overflow-wrap: anywhere;
+}
+
+/* Termly builds the Privacy page as nested divs with inline styles and
+   its own table layout. Those inline styles win over anything here, so
+   the only safe corrections are the ones they do not set: the measure
+   above, and keeping their tables from overflowing on a narrow screen. */
+.perellion-longform table {
+	width: 100%;
+	border-collapse: collapse;
+	display: block;
+	overflow-x: auto;
+}
+
+/* ---- Phone layout, 390w component sheet ------------------------------
+   Built 11 Nov against Haley's "All mobile components" frame (92:41632)
+   and her Defense mobile export. Measured on dev at 390 first; the six
+   pages had no horizontal overflow, so this corrects behaviour and
+   typography rather than structure.
+
+   Scoped to 600px and below. 834 (Haley's tablet width) sits under the
+   860px rules and is a separate pass: those frames are a distinct
+   layout, not a narrow desktop, and nobody has checked them yet. */
+
+@media (max-width: 600px) {
+
+	/* 1. No sticky section nav on a phone.
+	   Haley, 28 Oct: "On mobile let's remove the sticky behavior and
+	   make it so the potential customer can decide at the top. The use
+	   of the 'More...' in mobile will balance the experience."
+	   The docked bar was still position:fixed here, so the hero's own
+	   nav and the docked bar were both on screen. The hero copy already
+	   carries all six links, so the docked bar simply goes away. */
+	.perellion-anchorbar {
+		display: none !important;
+	}
+
+	/* The hero nav becomes the chip row from the export: one line, swiped
+	   sideways, with the gutter bled off so it reads as continuing past
+	   the edge rather than being clipped. */
+	.perellion-sectionnav {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		gap: var(--wp--preset--spacing--20);
+		margin-inline: calc(-1 * var(--wp--preset--spacing--24));
+		padding-inline: var(--wp--preset--spacing--24);
+		justify-content: flex-start;
+	}
+
+	.perellion-sectionnav::-webkit-scrollbar {
+		display: none;
+	}
+
+	.perellion-sectionnav a {
+		flex: 0 0 auto;
+		white-space: nowrap;
+	}
+
+	/* 2. The hero title.
+	   The 34px rule below has been in the theme since the first mobile
+	   pass and never applied: WordPress emits .has-display-font-size as
+	   a preset utility carrying !important, which outranks a plain
+	   class selector however specific. Measured 41.46px against the
+	   34px intended. Matching !important is the fix. */
+	h1.perellion-hero__title,
+	h1.perellion-hero__title.has-display-font-size {
+		font-size: 34px !important;
+		line-height: 1.12 !important;
+	}
+
+	/* 3. Body copy.
+	   theme.json sets the ROOT typography to the display treatment:
+	   line-height 2.3125 and 1px tracking. Headings want that; 1,400
+	   words of body copy on a 390px screen do not. Measured 14.15px
+	   text on 32.7px leading, a ratio of 2.31, at 1px tracking.
+	   This is scoped to phone only, so desktop is untouched. */
+	/* Targeted at the copy containers the theme itself styles, not just
+	   `main p`. .perellion-split__text p is specificity 0,1,1 and a bare
+	   `body main p` is 0,0,3, so a class beats three elements and the
+	   generic rule silently lost. Measured 14.15px on 32.7px leading
+	   before this. */
+	body main p,
+	body main li,
+	body .perellion-split__text p,
+	body .perellion-copy__inner p,
+	body .perellion-copy__inner li {
+		font-size: 16px;
+		line-height: 1.6;
+		letter-spacing: normal;
+	}
+
+	/* FAQ answers sit inside core/details, which the generic copy rules
+	   do not reach. Measured 14.15px on 37px leading, a ratio of 2.6,
+	   which is the root display leading applied to the smallest text on
+	   the page. */
+	body .perellion-faq details p,
+	body .perellion-faq details li {
+		font-size: 16px;
+		line-height: 1.6;
+		letter-spacing: normal;
+	}
+
+	main h2 {
+		letter-spacing: normal;
+		line-height: 1.18;
+	}
+}
+
+/* ---- Industry hub page (Figma 12:91553) -----------------------------
+   Two components the six industry pages never needed: the card grid of
+   industries, and the partner bands for FANUC, Coriolis and Siemens.
+
+   The cards reuse each industry page's own Overview photograph, so a
+   visitor sees the same image on the card and again at the top of the
+   page they land on. That is what the frame shows, and it means the hub
+   needs no new photography. */
+
+.perellion-industrycards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--wp--preset--spacing--24);
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.perellion-industrycard {
+	display: flex;
+	flex-direction: column;
+	background: var(--wp--preset--color--white);
+	text-decoration: none;
+	color: inherit;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+	transition: transform 200ms cubic-bezier(0, 0, 0.58, 1),
+	            box-shadow 200ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+.perellion-industrycard:hover,
+.perellion-industrycard:focus-visible {
+	transform: translateY(-3px);
+	box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
+}
+
+.perellion-industrycard__media {
+	display: block;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+}
+
+.perellion-industrycard__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.perellion-industrycard__body {
+	display: block;
+	padding: var(--wp--preset--spacing--24);
+}
+
+.perellion-industrycard__title {
+	display: block;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--subheading);
+	line-height: 1.2;
+	letter-spacing: normal;
+	margin-bottom: 0.5em;
+}
+
+.perellion-industrycard__more {
+	display: block;
+	color: var(--perellion-action-primary, #0669FE);
+	font-size: var(--wp--preset--font-size--body);
+}
+
+/* ---- Partner bands --------------------------------------------------
+   Image one side, copy the other, alternating down the page. Two of the
+   three carry a pull quote that sits over the image on the frame. */
+
+.perellion-partner__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: var(--wp--preset--spacing--48);
+	align-items: center;
+	max-width: 1280px;
+	margin-inline: auto;
+}
+
+.perellion-partner.is-mirrored .perellion-partner__text {
+	order: -1;
+}
+
+.perellion-partner__media {
+	margin: 0;
+	overflow: hidden;
+}
+
+.perellion-partner__media.is-round {
+	border-radius: 999px;
+	aspect-ratio: 1 / 1;
+}
+
+.perellion-partner__media.is-rect {
+	aspect-ratio: 4 / 3;
+}
+
+.perellion-partner__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* A slot with no asset yet. Deliberately unmissable: a grey circle that
+   looks designed would ship by accident. */
+.perellion-partner__media.is-awaiting-asset {
+	display: grid;
+	place-items: center;
+	background: repeating-linear-gradient(45deg,
+		#ECECEC 0 12px, #E981E9 12px 24px);
+	color: var(--wp--preset--color--charcoal);
+	text-align: center;
+	font-size: var(--wp--preset--font-size--small);
+	padding: var(--wp--preset--spacing--24);
+}
+
+.perellion-partner__quote {
+	margin: 0;
+	grid-column: 1;
+	grid-row: 1;
+	align-self: start;
+	justify-self: start;
+	max-width: 220px;
+	background: var(--wp--preset--color--white);
+	padding: var(--wp--preset--spacing--24);
+	position: relative;
+	z-index: 2;
+}
+
+.perellion-partner__quote blockquote {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--card);
+	line-height: 1.3;
+}
+
+.perellion-partner__quote figcaption {
+	margin-top: var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--graphite);
+}
+
+.perellion-partner__name {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--heading);
+	line-height: 1.1;
+	margin: 0 0 var(--wp--preset--spacing--24);
+}
+
+.perellion-partner__more {
+	display: inline-block;
+	margin-top: var(--wp--preset--spacing--24);
+	padding: 0.7em 1.6em;
+	border-radius: 999px;
+	background: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+	text-decoration: none;
+}
+
+/* ---- Tablet, 601 to 1024 --------------------------------------------
+   Haley's tablet frames cover the six CORE pages only; there is no
+   tablet design for the industry pages or the hub, so this is derived
+   rather than matched, and it should be reviewed as such.
+
+   Measured at 834 before writing: no horizontal overflow, split panels
+   already stack to one column, and the sticky section nav still docks,
+   which is right for a tablet. What was wrong is that anything in a
+   three-up grid collapsed straight to one-up, so three cards became
+   three full-width blocks and the page ran very long. Two-up is the
+   normal tablet answer and keeps the row readable. */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+
+	.perellion-industrycards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.perellion-cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.perellion-apps {
+		grid-auto-flow: row;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* The partner bands keep two columns down to 1024, but the gap gets
+	   tight well before that, so it closes up rather than squeezing the
+	   copy column. */
+	.perellion-partner__grid {
+		gap: var(--wp--preset--spacing--32);
+	}
+}
+
+@media (max-width: 600px) {
+
+	.perellion-industrycards {
+		grid-template-columns: 1fr;
+	}
+
+	.perellion-partner__grid {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--32);
+	}
+
+	/* Stacked, the quote can no longer sit over the image, so it follows
+	   the image instead of overlapping it. */
+	.perellion-partner__quote {
+		grid-column: auto;
+		grid-row: auto;
+		max-width: none;
+	}
+
+	.perellion-partner.is-mirrored .perellion-partner__text {
+		order: 0;
+	}
+}
+
+/* ======================================================================
+   Round 2 feedback, 18 November 2026
+   Monday board 18436087623, Design feedback group. Every rule below cites
+   the subitem it answers.
+
+   Written as rules rather than per-page nudges on purpose. Round 1's
+   headline fix was applied to Defense alone and came back on three more
+   pages in round 2; anything stated once here applies everywhere it is
+   true.
+   ====================================================================== */
+
+/* ---- Global: image and copy centered to each other -------------------
+   13577549129: "The images and content should be centered across all
+   sections, on every page. Right now, each image aligns with the top of
+   the text box."
+
+   The base .perellion-split rule is already align-items:center, so the
+   static layout was never wrong. The top-aligned reading comes from the
+   pinned state, where a 700px panel in a ~715px viewport has to sit high
+   and its lower edge falls past the fold. That is a panel-sizing question
+   and is with Sovo; nothing is forced here, so the static layout stays
+   centered as drawn. */
+
+/* ---- Global: hero headline on two lines ------------------------------
+   13577221845 (Advanced Manufacturing), 13577442190 (MedTech),
+   13577560694 (Energy), and originally Defense R1 [02].
+
+   The 26ch measure was tuned to Defense's 47-character headline and
+   forces a third line on the longer ones. Round 2 asks for about 1200px,
+   which is wide enough for every current headline to balance onto two
+   lines. Stated in px because that is how the note is stated, capped at
+   100% so it cannot overflow a narrower column. */
+@media (min-width: 1025px) {
+	h1.perellion-hero__title {
+		max-width: min(1200px, 100%);
+	}
+}
+
+/* ---- Global: no gap between eyebrow and section heading --------------
+   13577446979 (MedTech: "There shouldn't be any space between the eyebrow
+   text box (23px height) and the Industry Challenges text box (75px
+   height)"), 13577924539 (Energy, same for Applications). */
+.perellion-split__text .perellion-eyebrow,
+.perellion-section__head .perellion-eyebrow,
+.perellion-eyebrow {
+	margin-block-end: 0;
+}
+
+.perellion-eyebrow + h2,
+.perellion-eyebrow + h3,
+.perellion-eyebrow + .wp-block-heading {
+	margin-block-start: 0;
+}
+
+/* ---- Global: Overview to anchor bar spacing --------------------------
+   13577539234: "Spacing between the Overview content and anchor text
+   should be about 48px." */
+/* The hero's own jump nav is .perellion-sectionnav; .perellion-anchorbar
+   is the FIXED clone that docks under the header mid-scroll. 1.19-1.27
+   put this margin on the clone, which pushed the docked bar 48px down
+   and let copy show through the gap (Jess, 20 Nov). Frame measures
+   53px ink-to-ink from headline to nav text, which is 48px of box gap. */
+.perellion-sectionnav {
+	margin-block-start: 48px !important;  /* the block carries spacing|60 inline */
+}
+
+/* ---- Global: Get in touch band proportions --------------------------
+   13577406705 and 13577496743, filed separately on Advanced
+   Manufacturing and MedTech with identical wording, so treated as one
+   global rule: "The testimonial text box is too large. should be about
+   205 px high, while person image should be about 345px high, and
+   testimonial should be centered with image."
+
+   Note the portrait is 345 WIDE and 471 tall in the frame; the note's
+   345 is read as the height it should present at, so the figure is
+   constrained on height and the aspect ratio carries the width. */
+@media (min-width: 861px) {
+	#contact figure.perellion-panel__media {
+		height: 345px;
+		width: auto;
+		aspect-ratio: 345 / 471;
+	}
+
+	.perellion-quote {
+		/* 205px was the R2 number, but the quote plus attribution needs
+		   ~318px at this width and the caption was hanging off the card
+		   bottom on every industry page (measured 20 Nov). The card now
+		   fits its content and 205 is the floor. */
+		height: auto;
+		min-height: 205px;
+		/* Centered on the portrait rather than offset down from its top,
+		   which is what "centered with image" asks for. Replaces the
+		   R1 offset of 50% - 149.83px. */
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+/* ---- Global: Get in touch decoration alignment ----------------------
+   13578168382: "One of the triangular graphics is set too far behind the
+   image. It should be aligned with the graphic above it." */
+#contact .perellion-panel {
+	--perellion-art-pos: center top;
+}
+
+/* ---- Decoration: the two positions every page agrees on -------------
+   Applications, top right: 13577406462 (Advanced Manufacturing) and
+   13577492080 (MedTech) both ask for it, so it is applied to all six
+   rather than waiting for the other four to be filed.
+
+   Future / lifecycle, one right and one bottom: 13578082934 (Aerospace,
+   "Program lifecycles") and 13586216449 (Defense, "Evolving defense
+   requirements") both ask for it. Same reasoning.
+
+   CORRECTION, verified against dev: neither #applications nor
+   #example-applications exists on any page. On Energy the section is
+   #extra-2; on MedTech and Advanced Manufacturing "Example applications"
+   is a heading INSIDE #risk with no section of its own. The rules below
+   target what is actually in the markup.
+
+   PRE-LAUNCH CLEANUP: #extra-1 and #extra-2 are generated names and will
+   outlive this project if left. They should become #solutions and
+   #applications, which also gives 13578012476 ("Applications is missing
+   from all of the hero nav bars") something to link to -- on two pages
+   there is currently no section to link at all. That is a change to page
+   structure Sovo has already reviewed, so it is logged, not done here.
+
+   On MedTech and Advanced Manufacturing the section carrying id "risk"
+   is not a risk section at all: its only heading is "Example
+   applications" and it holds a single panel. Those two pages have no
+   risk section. Energy does, and its applications section (#extra-2)
+   contains no panel, which is why no decoration note was ever filed
+   against it.
+
+   MISLABELED NAV, worth raising: because #risk carries the applications
+   content on those two pages, their jump-nav offers "Reduced Risk" and
+   lands the reader on "Example applications". That is the substance of
+   13578012476, and it cannot be fixed by adding a link.
+
+   RESOLVED 19 Nov: the section id on those two pages is being corrected
+   from "risk" to "applications" and the jump-nav label from "Reduced Risk"
+   to "Applications", which is what the content is. Both ids are matched
+   below so the rule holds before and after the page edit lands. */
+.perellion-page--medical-technology #risk .perellion-panel,
+.perellion-page--medical-technology #applications .perellion-panel,
+.perellion-page--advanced-manufacturing #risk .perellion-panel,
+.perellion-page--advanced-manufacturing #applications .perellion-panel {
+	--perellion-art-pos: right top;
+}
+
+#future .perellion-panel {
+	--perellion-art-pos: right center;
+	--perellion-art-2: var(--perellion-art);
+	--perellion-art-pos-2: center bottom;
+}
+
+/* ---- Decoration: page-specific positions ----------------------------
+   These genuinely differ per page, so each cites its own subitem. */
+
+/* Defense */
+.perellion-page--defense #overview .perellion-panel { --perellion-art-pos: center top; }   /* 13586178874 */
+.perellion-page--defense #help .perellion-panel     { --perellion-art-pos: right center; } /* 13586161643 */
+.perellion-page--defense #risk .perellion-panel     { --perellion-art-pos: center top; }   /* 13586159221 */
+
+/* Aerospace */
+.perellion-page--aerospace #risk .perellion-panel { --perellion-art-pos: right center; }   /* 13578094474 */
+.perellion-page--aerospace #help .perellion-panel {                                        /* 13578054263 */
+	--perellion-art-pos: right 35%;
+	--perellion-art-2: var(--perellion-art);
+	--perellion-art-pos-2: right 65%;
+}
+
+/* Space */
+.perellion-page--space #overview .perellion-panel { --perellion-art-pos: left center; }    /* 13578080680 */
+.perellion-page--space #help .perellion-panel     { --perellion-art-pos: right center; }   /* 13578057626 */
+
+/* Energy */
+.perellion-page--energy #help .perellion-panel { --perellion-art-pos: left center; }       /* 13577570071 */
+
+/* Advanced Manufacturing: 13577324446 and 13577322672. The note also asks
+   for the chevrons to read grey rather than yellow, which is the only
+   color change in the whole round and may be a system decision filed
+   once rather than a page exception. Position is applied; the color is
+   held pending Sovo. */
+.perellion-page--advanced-manufacturing #help .perellion-panel {
+	--perellion-art-pos: center top;
+}
+
+/* ---- Help section media shape ---------------------------------------
+   13577473690 (MedTech) and 13577575249 (Energy): "Should be square
+   instead of circular." Scoped to the two pages that asked. Whether it
+   applies to all six is with Sovo. */
+.perellion-page--medical-technology #help .perellion-panel__media,
+.perellion-page--energy #help .perellion-panel__media {
+	aspect-ratio: 1;
+	border-radius: var(--perellion-radius-sm);
+}
+
+/* ---- Energy: manufacturing solutions measure ------------------------
+   13577589025: "Make the text box for the Manufacturing solutions about
+   854px so the paragraph doesn't take up so much vertical space." */
+/* CORRECTED: Energy's "Manufacturing Solutions" section is #extra-1, not
+   #solutions. See the pre-launch cleanup note above. */
+.perellion-page--energy #extra-1 p {
+	max-width: 854px;
+}
+
+/* ======================================================================
+   Core page templates
+   Classes introduced by the About page pattern (patterns/page-about.php),
+   built from Figma 298:85231. Written generically rather than scoped to
+   About, because What We Do, Insights and the team profile all reuse the
+   same card band, section head and standfirst shapes.
+   ====================================================================== */
+
+/* ---- Page hero -------------------------------------------------------
+   The industry hero carries an eyebrow and jump-nav; a core page hero is
+   just the headline and a line of body. */
+.perellion-hero--page {
+	background: linear-gradient(180deg,
+		var(--wp--preset--color--canvas) 0%,
+		var(--wp--preset--color--white) 100%);
+}
+
+.perellion-hero__body {
+	max-width: 620px;
+	font-size: var(--wp--preset--font-size--lead);
+	color: var(--wp--preset--color--graphite);
+	margin-block-start: var(--wp--preset--spacing--24);
+}
+
+/* Four words stacked, as the frame draws them. Each line is its own
+   addressable box so that if Sovo confirms these rotate rather than
+   stack, the markup does not have to change. */
+.perellion-wordstack {
+	line-height: 1.05;
+}
+
+/* ---- Standfirst ------------------------------------------------------
+   The larger lead line between a section heading and its body copy. */
+.perellion-standfirst {
+	font-size: var(--wp--preset--font-size--lead);
+	color: var(--wp--preset--color--charcoal);
+	margin-block-end: var(--wp--preset--spacing--24);
+}
+
+/* ---- Section head ---------------------------------------------------
+   A centered heading with optional body, used for Our culture and
+   Certifications. Round 2 asked for no gap between an eyebrow and its
+   heading, which the global rule above already handles. */
+.perellion-sectionhead h2 {
+	margin-block-end: var(--wp--preset--spacing--16);
+}
+
+.perellion-sectionhead p {
+	color: var(--wp--preset--color--graphite);
+	margin-inline: auto;
+	max-width: 62ch;
+}
+
+/* ---- Card band and grid ---------------------------------------------
+   Four across on desktop, two on tablet, one on phone. The grid is set
+   here rather than relying on the block editor's columnCount alone, so a
+   query loop and a hand-built row of cards align identically. */
+.perellion-cardband h2 {
+	margin-block-end: var(--wp--preset--spacing--32);
+}
+
+.perellion-cardgrid__list {
+	display: grid;
+	gap: var(--wp--preset--spacing--32);
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	align-items: start;
+}
+
+@media (max-width: 1024px) {
+	.perellion-cardgrid__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+	.perellion-cardgrid__list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Certification cards sit three across at every width above phone, since
+   each one carries a full paragraph rather than a name and a role. */
+.perellion-cardband .perellion-cardgrid__list:has(.perellion-card:nth-child(3):last-child) {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 860px) {
+	.perellion-cardband .perellion-cardgrid__list:has(.perellion-card:nth-child(3):last-child) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.perellion-card__media img,
+.perellion-card .wp-block-post-featured-image img {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	border-radius: var(--perellion-radius-sm);
+	display: block;
+}
+
+.perellion-card__tag {
+	margin-block: var(--wp--preset--spacing--16) var(--wp--preset--spacing--8);
+	color: var(--wp--preset--color--action-primary);
+}
+
+.perellion-card h3,
+.perellion-card .wp-block-post-title {
+	margin: 0;
+}
+
+.perellion-card h3 a,
+.perellion-card .wp-block-post-title a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.perellion-card h3 a:hover,
+.perellion-card .wp-block-post-title a:hover {
+	text-decoration: underline;
+}
+
+.perellion-card__role,
+.perellion-card .wp-block-post-excerpt {
+	margin-block-start: var(--wp--preset--spacing--8);
+	color: var(--wp--preset--color--graphite);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.perellion-card__link,
+.perellion-card .wp-block-read-more {
+	display: inline-block;
+	margin-block-start: var(--wp--preset--spacing--16);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--action-primary);
+	text-decoration: none;
+}
+
+.perellion-card__link:hover,
+.perellion-card .wp-block-read-more:hover {
+	text-decoration: underline;
+}
+
+/* ---- Arrow link -----------------------------------------------------
+   The section-level link the frame draws with a chevron, used under the
+   team band and the related-content carousels. */
+.perellion-arrowlink {
+	margin-block-start: var(--wp--preset--spacing--32);
+}
+
+.perellion-arrowlink a {
+	font-size: var(--wp--preset--font-size--small);
+	text-decoration: none;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-arrowlink a::after {
+	content: " \203A";
+	color: var(--wp--preset--color--action-primary);
+}
+
+.perellion-arrowlink a:hover {
+	text-decoration: underline;
+}
+
+/* ---- Quotes awaiting a real source ----------------------------------
+   Every testimonial in the handoff except Cody Brown's is an anonymised
+   component default. Marked in the markup with data-awaiting-source so
+   it is visible in the editor and greppable before launch, without
+   changing how it renders for a reviewer looking at layout. */
+.perellion-quote[data-awaiting-source] .perellion-quote__source::after {
+	content: " (placeholder source)";
+	font-style: italic;
+	opacity: 0.65;
+}
+
+/* ---- What We Do: capability page ------------------------------------
+   Built from Figma 298:85283 and the 1443w / 834w / 390w exports Jess
+   supplied on 19 Nov. The exports resolved four sub-capability
+   descriptions the extraction had flagged as unreadable, the contact
+   email, and the nav structure. */
+
+/* Tinted band. The desktop export alternates: Machines and Manufacturing
+   sit on canvas, Aerospace and Engineering on white. The sub-capability
+   row below each block carries the same tint so the pair reads as one
+   section. */
+.perellion-band--tint {
+	background-color: var(--wp--preset--color--canvas);
+}
+
+/* The accent run in the page headline. The export shows the second half
+   of "We love solving hard problems" in the brand blue. */
+.perellion-accent {
+	color: var(--wp--preset--color--action-primary);
+}
+
+/* ---- Capability jump nav --------------------------------------------
+   Four links under the hero, uppercase, brand blue, centered. Distinct
+   from the industry pages' docked anchor bar: this one does not stick. */
+.perellion-jumpnav {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--48);
+	margin-block-start: var(--wp--preset--spacing--32);
+	text-align: center;
+}
+
+.perellion-jumpnav a {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--wp--preset--color--action-primary);
+	max-width: 14ch;
+	line-height: 1.4;
+}
+
+.perellion-jumpnav a:hover {
+	text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+	.perellion-jumpnav {
+		gap: var(--wp--preset--spacing--24);
+	}
+}
+
+/* ---- Sub-capability row ---------------------------------------------
+   The one genuinely new component on the core pages. Four across on
+   desktop, two at 834w, one at 390w -- which is what the three exports
+   draw. Circular icon badge, title, one line of description, centered. */
+.perellion-subcaps__row {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--wp--preset--spacing--48) var(--wp--preset--spacing--32);
+	max-width: 1280px;
+	margin-inline: auto;
+}
+
+@media (max-width: 1024px) {
+	.perellion-subcaps__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+	.perellion-subcaps__row { grid-template-columns: minmax(0, 1fr); }
+}
+
+.perellion-subcap {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--wp--preset--spacing--16);
+}
+
+/* The badge is a 72px circle on light grey. The glyphs themselves were
+   not supplied as assets and are not in Sovo's Drive folder, so the
+   awaiting-asset treatment applies: deliberately unmissable, because a
+   plain grey circle would look finished and ship by accident. */
+.perellion-subcap__icon {
+	display: block;
+	width: 72px;
+	height: 72px;
+	border-radius: var(--perellion-radius-pill);
+	background-color: var(--wp--preset--color--light-grey);
+	flex: none;
+}
+
+.perellion-subcap__icon.is-awaiting-asset {
+	background-image: repeating-linear-gradient(45deg,
+		#ECECEC 0 8px, #E981E9 8px 16px);
+}
+
+.perellion-subcap__title {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--card);
+	line-height: 1.3;
+	max-width: 18ch;
+}
+
+.perellion-subcap__desc {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--graphite);
+	max-width: 30ch;
+	line-height: 1.5;
+}
+
+/* An anchor kept alive for inbound links but drawing nothing. */
+.perellion-anchor-stub {
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+
+/* ---- Contact page ---------------------------------------------------
+   Figma 298:85612. A centered single column over a map band. No form
+   exists on the frame at any breakpoint, so there is no form styling
+   here either. */
+.perellion-contactpage {
+	text-align: center;
+}
+
+.perellion-contact--centered {
+	margin-block: var(--wp--preset--spacing--32);
+}
+
+.perellion-contact--centered .perellion-contact__lines {
+	text-align: center;
+	line-height: 2.25;
+}
+
+/* The map band runs full width with no vertical padding, so it meets the
+   section above it edge to edge as the frame draws it. */
+.perellion-mapband__slot {
+	min-height: 420px;
+	display: grid;
+	place-content: center;
+	gap: var(--wp--preset--spacing--8);
+	text-align: center;
+	background-color: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+}
+
+.perellion-mapband__slot.is-awaiting-asset {
+	background-image: repeating-linear-gradient(45deg,
+		rgba(255, 255, 255, 0.04) 0 16px,
+		rgba(233, 129, 233, 0.22) 16px 32px);
+}
+
+.perellion-mapband__label {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--card);
+	color: var(--wp--preset--color--spectrum-gold);
+}
+
+.perellion-mapband__note {
+	font-size: var(--wp--preset--font-size--small);
+	opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+	.perellion-mapband__slot { min-height: 280px; }
+}
+
+/* ======================================================================
+   Pinned scroll, readable-copy model
+   Ported from production MedTech on 19 Nov. Sovo, 17 Nov: "I really like
+   how you changed the text pinning and lost the fade" and "Yes, please
+   carry the same treatment across the other five industry pages."
+
+   Production MedTech runs the identical motion.js to this theme; the
+   difference is entirely these rules. They neutralize the copy window
+   the script builds -- no mask, no fade, no height cap, no translate --
+   so the copy reads in full while the visual panel still sticks beside
+   it. The columns take the copy's natural height instead of the fixed
+   900px hold.
+
+   !important is required and deliberate: the script writes height and
+   transform as inline styles every frame, and only !important beats an
+   inline style. The script's measurement work is now wasted effort on
+   these pages but is harmless; removing it is a later cleanup, not a
+   behavior change, and is left alone so the port matches production
+   byte for byte in effect.
+   ====================================================================== */
+@media (min-width: 861px) {
+	.perellion-motion .perellion-split.is-pinned .perellion-col--text > .perellion-split__text {
+		height: auto !important;
+		max-height: none !important;
+		-webkit-mask-image: none !important;
+		        mask-image: none !important;
+		overflow: visible !important;
+	}
+
+	.perellion-motion .perellion-split.is-pinned .perellion-copy__inner {
+		transform: none !important;
+	}
+
+	.perellion-motion .perellion-split.is-pinned .perellion-col--media,
+	.perellion-motion .perellion-split.is-pinned .perellion-col--text {
+		height: auto !important;
+		align-self: stretch !important;
+	}
+
+	/* ---- Panel fits the viewport while pinned -------------------------
+	   Round 2, 13577549129: the visual read as top-anchored. Measured on
+	   dev: a 700px panel pinned at 110px in a ~715px viewport leaves its
+	   lower 93px below the fold, so it can only ever sit high. Capping the
+	   pinned panel to the space below the header keeps the whole circle
+	   in view on every screen. The aspect ratio carries the width, so the
+	   artwork and photograph scale together. Full size on tall screens,
+	   smaller on laptops. */
+	.perellion-motion .perellion-split.is-pinned .perellion-col--media > .perellion-panel {
+		width: min(100%, calc((100vh - var(--perellion-header-h, 86px) - 48px) * 720 / 700));
+		margin-inline: auto;
+	}
+}
+
+/* ---- Panel C: warm side of the glow faces right ------------------------
+   13586202342 ("the gradient should be orange for this image"). Measured
+   against all six desktop frames on 19 Nov: every image on every page
+   carries the cool tone on its left and the warm tone on its right,
+   whichever side of the copy the image sits. Panel A and B already do.
+   Panel C was drawn warm top-left / cool bottom-right, so on the Reduced
+   Risk and Example applications sections it reads blue where the frame
+   reads orange. panel-c-warm-right.png is panel-c.png with the glow
+   mirrored and the chevrons and lattice left exactly where they were.
+   The original asset is kept alongside, untouched. */
+.perellion-panel--c { --perellion-art: url("assets/img/panel-c-warm-right.png"); }
+
+/* ---- Section bands, measured from the six desktop frames, 19 Nov --------
+   Sampled the page margin of each export at 4px steps. Tinted bands are:
+     Defense       Challenges, FAQ
+     Aerospace     Challenges, Reduced Risk, FAQ
+     Space         Challenges, Reduced Risk, FAQ
+     Energy        Challenges, Manufacturing Solutions, Reduced Risk
+     MedTech       Challenges, Example applications
+     Adv Mfg       Challenges, Example applications
+   Everything else, including How Perellion Helps on all six, is white.
+   The tint is one color throughout (Canvas, the surface the infographics
+   were re-tinted onto on 11 Nov), so FAQ drops its darker Panel gray. */
+main section.alignfull#help {
+	background-color: var(--wp--preset--color--white) !important;
+}
+
+main section.alignfull#faq {
+	background-color: var(--wp--preset--color--canvas) !important;
+}
+
+/* Must outweigh the main section.alignfull#faq rule above, so the page
+   class is combined with the same selector rather than the bare id. */
+.perellion-page--energy main section.alignfull#faq,
+.perellion-page--medical-technology main section.alignfull#faq,
+.perellion-page--advanced-manufacturing main section.alignfull#faq {
+	background-color: var(--wp--preset--color--white) !important;
+}
+
+.perellion-page--aerospace #risk,
+.perellion-page--space #risk,
+.perellion-page--energy #risk,
+.perellion-page--medical-technology #applications,
+.perellion-page--advanced-manufacturing #applications {
+	background-color: var(--wp--preset--color--canvas) !important;
+}
+
+/* ---- Per-section decoration, cut from the six desktop frames, 19 Nov ----
+   The frames do not reuse one artwork: chevrons, lattice and the two-tone
+   glow sit differently around every photo, and the Round 2 notes
+   ("one right side and one on the bottom", "orange for this image") were
+   describing those differences. Three generic panel PNGs cannot express
+   them, so each section's decoration is now the frame's own pixels:
+   a 1100x900 window centered on the 467px photo, lifted off the band color
+   into alpha, with the photo and the copy column blanked. Built by
+   perellion-content/build-art-crops.py; the geometry below maps that
+   window onto the 720x700 panel so the photo lands where it was drawn.
+   Exports are 1x, so these read slightly soft on retina; 2x frame exports
+   through the same script would sharpen them without any CSS change. */
+.perellion-page--defense #overview .perellion-panel,
+.perellion-page--defense #help .perellion-panel,
+.perellion-page--defense #risk .perellion-panel,
+.perellion-page--defense #future .perellion-panel,
+.perellion-page--aerospace #overview .perellion-panel,
+.perellion-page--aerospace #help .perellion-panel,
+.perellion-page--aerospace #risk .perellion-panel,
+.perellion-page--aerospace #future .perellion-panel,
+.perellion-page--space #overview .perellion-panel,
+.perellion-page--space #help .perellion-panel,
+.perellion-page--space #risk .perellion-panel,
+.perellion-page--space #future .perellion-panel,
+.perellion-page--energy #overview .perellion-panel,
+.perellion-page--energy #help .perellion-panel,
+.perellion-page--energy #future .perellion-panel,
+.perellion-page--energy #risk .perellion-panel,
+.perellion-page--medical-technology #overview .perellion-panel,
+.perellion-page--medical-technology #help .perellion-panel,
+.perellion-page--medical-technology #applications .perellion-panel,
+.perellion-page--advanced-manufacturing #overview .perellion-panel,
+.perellion-page--advanced-manufacturing #help .perellion-panel,
+.perellion-page--advanced-manufacturing #applications .perellion-panel {
+	--perellion-art-2: none;
+	--perellion-art-pos: center;
+}
+
+.perellion-page--defense #overview .perellion-panel::before,
+.perellion-page--defense #help .perellion-panel::before,
+.perellion-page--defense #risk .perellion-panel::before,
+.perellion-page--defense #future .perellion-panel::before,
+.perellion-page--aerospace #overview .perellion-panel::before,
+.perellion-page--aerospace #help .perellion-panel::before,
+.perellion-page--aerospace #risk .perellion-panel::before,
+.perellion-page--aerospace #future .perellion-panel::before,
+.perellion-page--space #overview .perellion-panel::before,
+.perellion-page--space #help .perellion-panel::before,
+.perellion-page--space #risk .perellion-panel::before,
+.perellion-page--space #future .perellion-panel::before,
+.perellion-page--energy #overview .perellion-panel::before,
+.perellion-page--energy #help .perellion-panel::before,
+.perellion-page--energy #future .perellion-panel::before,
+.perellion-page--energy #risk .perellion-panel::before,
+.perellion-page--medical-technology #overview .perellion-panel::before,
+.perellion-page--medical-technology #help .perellion-panel::before,
+.perellion-page--medical-technology #applications .perellion-panel::before,
+.perellion-page--advanced-manufacturing #overview .perellion-panel::before,
+.perellion-page--advanced-manufacturing #help .perellion-panel::before,
+.perellion-page--advanced-manufacturing #applications .perellion-panel::before {
+	inset: -14.29% -26.39%;        /* (900-700)/2/700, (1100-720)/2/720 */
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+.perellion-page--defense #overview .perellion-panel { --perellion-art: url("assets/img/art/defense-overview.webp"); }
+.perellion-page--defense #help .perellion-panel { --perellion-art: url("assets/img/art/defense-help.webp"); }
+.perellion-page--defense #risk .perellion-panel { --perellion-art: url("assets/img/art/defense-risk.webp"); }
+.perellion-page--defense #future .perellion-panel { --perellion-art: url("assets/img/art/defense-future.webp"); }
+.perellion-page--aerospace #overview .perellion-panel { --perellion-art: url("assets/img/art/aerospace-overview.webp"); }
+.perellion-page--aerospace #help .perellion-panel { --perellion-art: url("assets/img/art/aerospace-help.webp"); }
+.perellion-page--aerospace #risk .perellion-panel { --perellion-art: url("assets/img/art/aerospace-risk.webp"); }
+.perellion-page--aerospace #future .perellion-panel { --perellion-art: url("assets/img/art/aerospace-future.webp"); }
+.perellion-page--space #overview .perellion-panel { --perellion-art: url("assets/img/art/space-overview.webp"); }
+.perellion-page--space #help .perellion-panel { --perellion-art: url("assets/img/art/space-help.webp"); }
+.perellion-page--space #risk .perellion-panel { --perellion-art: url("assets/img/art/space-risk.webp"); }
+.perellion-page--space #future .perellion-panel { --perellion-art: url("assets/img/art/space-future.webp"); }
+.perellion-page--energy #overview .perellion-panel { --perellion-art: url("assets/img/art/energy-overview.webp"); }
+.perellion-page--energy #help .perellion-panel { --perellion-art: url("assets/img/art/energy-help.webp"); }
+.perellion-page--energy #future .perellion-panel { --perellion-art: url("assets/img/art/energy-future.webp"); }
+.perellion-page--energy #risk .perellion-panel { --perellion-art: url("assets/img/art/energy-risk.webp"); }
+.perellion-page--medical-technology #overview .perellion-panel { --perellion-art: url("assets/img/art/medical-technology-overview.webp"); }
+.perellion-page--medical-technology #help .perellion-panel { --perellion-art: url("assets/img/art/medical-technology-help.webp"); }
+.perellion-page--medical-technology #applications .perellion-panel { --perellion-art: url("assets/img/art/medical-technology-applications.webp"); }
+.perellion-page--advanced-manufacturing #overview .perellion-panel { --perellion-art: url("assets/img/art/advanced-manufacturing-overview.webp"); }
+.perellion-page--advanced-manufacturing #help .perellion-panel { --perellion-art: url("assets/img/art/advanced-manufacturing-help.webp"); }
+.perellion-page--advanced-manufacturing #applications .perellion-panel { --perellion-art: url("assets/img/art/advanced-manufacturing-applications.webp"); }
+
+/* ---- Get in touch decoration, same source ------------------------------
+   The frames draw the portrait at 345x475 with the quote card over its
+   right edge; chevrons sit top-left of the portrait, a lattice to its
+   left, the glow cool on the left and warm behind the card. The Round 2
+   note sets the portrait to 253x345 on dev (0.733 of the frame), so the
+   crop is drawn at that scale in pixels around the portrait rather than
+   as a share of the panel, which keeps it attached to the portrait at
+   every viewport. Flagged for Sovo: 345 is the frame's portrait WIDTH;
+   the note may have meant that rather than the height. */
+.perellion-page--defense #contact .perellion-panel,
+.perellion-page--aerospace #contact .perellion-panel,
+.perellion-page--space #contact .perellion-panel,
+.perellion-page--energy #contact .perellion-panel,
+.perellion-page--medical-technology #contact .perellion-panel,
+.perellion-page--advanced-manufacturing #contact .perellion-panel {
+	--perellion-art-2: none;
+}
+
+.perellion-page--defense #contact .perellion-panel::before,
+.perellion-page--aerospace #contact .perellion-panel::before,
+.perellion-page--space #contact .perellion-panel::before,
+.perellion-page--energy #contact .perellion-panel::before,
+.perellion-page--medical-technology #contact .perellion-panel::before,
+.perellion-page--advanced-manufacturing #contact .perellion-panel::before {
+	inset: auto;
+	left: 50%;
+	top: 50%;
+	width: 807px;    /* 1100 x 0.733 */
+	height: 660px;   /*  900 x 0.733 */
+	transform: translate(-50%, -50%);
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+.perellion-page--defense #contact .perellion-panel { --perellion-art: url("assets/img/art/defense-contact.webp"); }
+.perellion-page--aerospace #contact .perellion-panel { --perellion-art: url("assets/img/art/aerospace-contact.webp"); }
+.perellion-page--space #contact .perellion-panel { --perellion-art: url("assets/img/art/space-contact.webp"); }
+.perellion-page--energy #contact .perellion-panel { --perellion-art: url("assets/img/art/energy-contact.webp"); }
+.perellion-page--medical-technology #contact .perellion-panel { --perellion-art: url("assets/img/art/medical-technology-contact.webp"); }
+.perellion-page--advanced-manufacturing #contact .perellion-panel { --perellion-art: url("assets/img/art/advanced-manufacturing-contact.webp"); }
+
+/* ======================================================================
+   About us, rebuilt from the frame (about-3up.png desktop column), 21 Nov
+   Classes are generic where another page will reuse the shape (carousel,
+   certification cards, wide panel, quote variants) and page-scoped only
+   for the decoration crops.
+   ====================================================================== */
+
+/* ---- Hero: word stack right-aligned on the left half, body on the right,
+   vertically centered. Blue full stops are their own span. */
+.perellion-hero--about {
+	position: relative;
+	background: var(--wp--preset--color--white);
+}
+
+.perellion-hero--about::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: url("assets/img/art/about-hero.webp") center top / 1440px 640px no-repeat;
+	pointer-events: none;
+}
+
+.perellion-hero--about > * {
+	position: relative;
+}
+
+.perellion-hero--about {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 720px));
+	justify-content: center;
+	align-items: center;
+	column-gap: 0;
+}
+
+.perellion-hero--about .perellion-wordstack {
+	text-align: right;
+	margin: 0;
+	padding-right: 5px;             /* stack ends at x=715 on the frame */
+	line-height: 1.25;
+}
+
+.perellion-hero--about .perellion-hero__body {
+	margin: 0;
+	padding-left: 35px;             /* body starts at x=755 */
+	max-width: 620px;
+	font-size: var(--wp--preset--font-size--lead);
+	line-height: 1.6;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-dot {
+	color: var(--wp--preset--color--action-primary);
+}
+
+@media (max-width: 860px) {
+	.perellion-hero--about {
+		grid-template-columns: 1fr;
+		row-gap: var(--wp--preset--spacing--24);
+	}
+	.perellion-hero--about .perellion-wordstack {
+		text-align: center;
+		padding: 0;
+	}
+	.perellion-hero--about .perellion-hero__body {
+		padding: 0;
+		text-align: center;
+		margin-inline: auto;
+	}
+	.perellion-hero--about::before {
+		background-size: 200% auto;
+	}
+}
+
+/* ---- Quote card variants. The base card hangs off the photo's right
+   edge (Get in touch). The frame also draws it off the LEFT edge (Who we
+   are), close on the right of a circle (Our culture), and standing beside
+   the portrait as a narrow column (Join the team). Positions measured
+   from the frame against the photo center. */
+@media (min-width: 861px) {
+	.perellion-quote--left {
+		left: auto;
+		right: calc(50% + 183px);
+	}
+	.perellion-quote--near {
+		left: calc(50% + 55px);
+	}
+	.perellion-quote--beside {
+		left: auto;
+		right: calc(50% + 232px);
+		width: 148px;
+		min-height: 0;
+		padding: 20px;
+		background-color: transparent;
+		border: 0;
+		-webkit-backdrop-filter: none;
+		        backdrop-filter: none;
+	}
+	.perellion-quote--beside .perellion-quote__body p {
+		font-size: 15px;
+		line-height: 1.5;
+	}
+}
+
+/* ---- Panel variants used on About ---------------------------------- */
+/* What we do: the frame's image is a 467 square with a 4px radius. */
+.perellion-page--about #what-we-do .perellion-panel--rect .perellion-panel__media {
+	aspect-ratio: 1;
+}
+
+/* Portrait panel: the 345x471 contact-style portrait, generic. */
+.perellion-panel--portrait .perellion-panel__media,
+.perellion-panel--portrait figure.perellion-panel__media {
+	width: 47.92%;
+	aspect-ratio: 345 / 471;
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+}
+
+/* Wide panel: one centered landscape photo, 838x480 on the frame. */
+.perellion-panel--wide {
+	aspect-ratio: 838 / 480;
+	width: min(838px, 100%);
+	margin: var(--wp--preset--spacing--48) auto 0;
+}
+
+.perellion-panel--wide .perellion-panel__media,
+.perellion-panel--wide figure.perellion-panel__media {
+	width: 100%;
+	aspect-ratio: 838 / 480;
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+}
+
+.perellion-panel--wide::before {
+	inset: -33.33% -27.57%;         /* 1300x800 crop around an 838x480 photo */
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+.perellion-culture {
+	padding-bottom: 0 !important;
+}
+
+.perellion-culture .perellion-sectionhead,
+.perellion-culture h2 {
+	margin-block-end: var(--wp--preset--spacing--12);
+}
+
+/* ---- Team carousel ---------------------------------------------------
+   Cards 343 wide with 20 between, scrolling horizontally from x=160 and
+   running off the right edge, with stacked prev/next buttons at x=60. */
+.perellion-teamband {
+	overflow: hidden;
+}
+
+.perellion-teamband .perellion-eyebrow {
+	margin-block-end: var(--wp--preset--spacing--24);
+}
+
+.perellion-carousel {
+	position: relative;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding-left: 160px;
+}
+
+.perellion-carousel__nav {
+	position: absolute;
+	left: 60px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	z-index: 2;
+}
+
+.perellion-carousel__btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 999px;
+	border: 1px solid rgba(35, 31, 32, 0.08);
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--charcoal);
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	box-shadow: var(--wp--preset--shadow--card);
+	padding: 0;
+}
+
+.perellion-carousel__btn:hover {
+	background: var(--wp--preset--color--canvas);
+}
+
+.perellion-carousel__viewport {
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+	padding-bottom: 8px;
+}
+
+.perellion-carousel__viewport::-webkit-scrollbar {
+	display: none;
+}
+
+.perellion-carousel__track {
+	display: flex !important;
+	gap: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0 24px 0 0;
+}
+
+.perellion-carousel__track > li {
+	flex: 0 0 343px;
+	scroll-snap-align: start;
+	margin: 0;
+}
+
+.perellion-card--team {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+	padding: 0 0 24px;
+	height: 100%;
+}
+
+.perellion-card--team .wp-block-post-featured-image img {
+	aspect-ratio: 343 / 210;
+	border-radius: var(--perellion-radius-sm) var(--perellion-radius-sm) 0 0;
+}
+
+.perellion-card--team .perellion-card__pill {
+	display: inline-block;
+	margin: 24px 24px 12px;
+	padding: 4px 12px;
+	border-radius: 999px;
+	background: var(--wp--preset--color--panel);
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	line-height: 1.6;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-card--team .wp-block-post-title,
+.perellion-card--team .wp-block-post-excerpt,
+.perellion-card--team .wp-block-read-more {
+	margin-inline: 24px;
+}
+
+.perellion-card--team .wp-block-post-title {
+	font-size: var(--wp--preset--font-size--card);
+	font-weight: 500;
+	line-height: 1.25;
+}
+
+.perellion-card--team .wp-block-post-excerpt {
+	margin-block-start: 0;
+	font-size: var(--wp--preset--font-size--card);
+	font-weight: 500;
+	line-height: 1.25;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-card--team .wp-block-post-excerpt p {
+	margin: 0;
+	line-height: 1.25;
+}
+
+.perellion-card--team .wp-block-read-more {
+	margin-block-start: 16px;
+}
+
+@media (max-width: 860px) {
+	.perellion-carousel { padding-left: 24px; }
+	.perellion-carousel__nav { display: none; }
+	.perellion-carousel__track > li { flex-basis: 280px; }
+}
+
+/* ---- Certification cards -------------------------------------------- */
+.perellion-certs .perellion-certs__grid {
+	margin-top: var(--wp--preset--spacing--48);
+	gap: 24px;
+}
+
+.perellion-certcard {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--perellion-radius-sm);
+	box-shadow: var(--wp--preset--shadow--card);
+	padding: 32px 28px;
+	text-align: center;
+}
+
+.perellion-certcard__badge {
+	display: block;
+	width: 96px;
+	height: auto;
+	margin: 0 auto 20px;
+}
+
+.perellion-certcard h3 {
+	margin: 0 0 12px;
+}
+
+.perellion-certcard p {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.6;
+	letter-spacing: 0.5px;
+	max-width: none;
+}
+
+@media (max-width: 860px) {
+	.perellion-certs .perellion-certs__grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Join the team: the split with the narrow quote beside the portrait */
+.perellion-join .perellion-split__text .perellion-standfirst {
+	font-size: var(--wp--preset--font-size--body);
+	font-weight: 600;
+	line-height: 1.9;
+	margin-block-end: var(--wp--preset--spacing--24);
+}
+
+/* ---- Decoration crops for About, same mapping as the industry pages -- */
+.perellion-page--about #who-we-are .perellion-panel { --perellion-art: url("assets/img/art/about-who-we-are.webp"); }
+.perellion-page--about #what-we-do .perellion-panel { --perellion-art: url("assets/img/art/about-what-we-do.webp"); }
+.perellion-page--about #our-culture .perellion-panel--wide { --perellion-art: url("assets/img/art/about-culture-wide.webp"); }
+.perellion-page--about .perellion-culture-split .perellion-panel { --perellion-art: url("assets/img/art/about-culture.webp"); }
+.perellion-page--about #join .perellion-panel { --perellion-art: url("assets/img/art/about-join.webp"); }
+
+.perellion-page--about #who-we-are .perellion-panel,
+.perellion-page--about #what-we-do .perellion-panel,
+.perellion-page--about .perellion-culture-split .perellion-panel,
+.perellion-page--about #join .perellion-panel {
+	--perellion-art-2: none;
+	--perellion-art-pos: center;
+}
+
+.perellion-page--about #who-we-are .perellion-panel::before,
+.perellion-page--about #what-we-do .perellion-panel::before,
+.perellion-page--about .perellion-culture-split .perellion-panel::before,
+.perellion-page--about #join .perellion-panel::before {
+	inset: -14.29% -26.39%;
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+/* ======================================================================
+   Content types: team profile, archives, Insights, search, 404 (21 Nov)
+   ====================================================================== */
+
+/* ---- Team profile: "Name Role" on one line, name in action blue ----- */
+.perellion-profile__title {
+	gap: 0 0.35em;
+	align-items: baseline;
+}
+
+.perellion-profile__name {
+	margin: 0;
+	color: var(--wp--preset--color--action-primary);
+	font-size: var(--wp--preset--font-size--heading);
+	font-weight: 500;
+	line-height: 1.2;
+}
+
+.perellion-profile__role,
+.perellion-profile__role p {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--heading);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-profile__portrait .perellion-panel {
+	width: min(720px, 100%);
+	margin-inline: auto;
+}
+
+.perellion-profile__portrait .perellion-panel .wp-block-post-featured-image {
+	position: relative;
+	z-index: 1;
+	width: 64.86%;
+	aspect-ratio: 1;
+	border-radius: var(--perellion-radius-pill);
+	overflow: hidden;
+	box-shadow: var(--wp--preset--shadow--lifted);
+	margin: 0;
+}
+
+.perellion-profile__portrait .perellion-panel .wp-block-post-featured-image img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 30%;
+}
+
+.perellion-profile__bio p {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 2.1;
+	letter-spacing: 0.5px;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-profile__bio > * + * {
+	margin-top: var(--wp--preset--spacing--32);
+}
+
+/* ---- Tag row (Insights and the three archives) ----------------------- */
+.perellion-tagrow {
+	gap: 12px;
+	margin-top: var(--wp--preset--spacing--24);
+}
+
+.perellion-tagrow p {
+	margin: 0;
+}
+
+.perellion-tag {
+	display: inline-block;
+	padding: 8px 18px;
+	border-radius: 999px;
+	border: 1px solid rgba(35, 31, 32, 0.14);
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--charcoal);
+	font-size: var(--wp--preset--font-size--small);
+	letter-spacing: 0.5px;
+	text-decoration: none;
+}
+
+.perellion-tag:hover,
+.perellion-tag.is-current {
+	background: var(--wp--preset--color--charcoal);
+	border-color: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+}
+
+/* ---- Card grid on archives and Insights: three across, cards as on the
+   About carousel. */
+.perellion-insightgrid {
+	gap: 24px !important;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.perellion-insightgrid > li {
+	margin: 0;
+}
+
+@media (max-width: 1024px) {
+	.perellion-insightgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 640px) {
+	.perellion-insightgrid { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* Pill text written from the post type, so one Insights loop serves all three. */
+.perellion-card__pill--auto:empty { display: none; }
+li.type-team_member .perellion-card__pill--auto::before { content: "Meet the team"; }
+li.type-case_study  .perellion-card__pill--auto::before { content: "Case study"; }
+li.type-job_posting .perellion-card__pill--auto::before { content: "Join the team"; }
+li.type-team_member .perellion-card__pill--auto,
+li.type-case_study  .perellion-card__pill--auto,
+li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
+
+/* Archive pagination in the frame's own idiom: a "More" button. */
+.wp-block-query-pagination {
+	margin-top: var(--wp--preset--spacing--48);
+	gap: 16px;
+}
+
+.wp-block-query-pagination a,
+.wp-block-query-pagination .page-numbers {
+	font-size: var(--wp--preset--font-size--small);
+	text-decoration: none;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.wp-block-query-pagination-next {
+	padding: 10px 22px;
+	border-radius: 999px;
+	background: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white) !important;
+}
+
+/* ---- Search form and 404 --------------------------------------------- */
+.perellion-search {
+	max-width: 520px;
+	margin: var(--wp--preset--spacing--32) auto 0;
+}
+
+.perellion-search .wp-block-search__input {
+	border: 1px solid rgba(35, 31, 32, 0.2);
+	border-radius: 999px;
+	padding: 10px 18px;
+	font-family: var(--wp--preset--font-family--poppins);
+}
+
+.perellion-search .wp-block-search__button {
+	border-radius: 999px;
+	background: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+	border: 0;
+	padding: 10px 20px;
+	margin-left: 8px;
+}
+
+.perellion-hero--404 .perellion-hero__body {
+	margin-inline: auto;
+}
+
+.perellion-hero--404 .wp-block-buttons {
+	margin-top: var(--wp--preset--spacing--32);
+}
+
+/* Article-style singles (case studies, job postings). */
+.perellion-article__body p,
+.perellion-article__body li {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: var(--wp--preset--font-size--body);
+	line-height: 2;
+	letter-spacing: 0.5px;
+}
+
+.perellion-article__body h2,
+.perellion-article__body h3 {
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.perellion-article__media .wp-block-post-featured-image img {
+	border-radius: var(--perellion-radius-sm);
 }
