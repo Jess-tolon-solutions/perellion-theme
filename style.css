@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.31.12
+Version: 1.32.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4645,4 +4645,90 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
    rule was centering it. */
 figure.perellion-quote figcaption.perellion-quote__source {
 	text-align: left;
+}
+
+/* ======================================================================
+   Phone layouts, from the 390w frames (Home 298:85213, About 298:85267),
+   21 Nov. The frames stack every split as photo, testimonial, then copy;
+   testimonials are bare and centered under the photo; the home showcase
+   and Get in touch portraits bleed to the screen edges.
+   ====================================================================== */
+@media (max-width: 860px) {
+	/* photo first, copy after, on every split (not only mirrored ones) */
+	.perellion-split .perellion-col--media,
+	.perellion-split .perellion-split__media { order: -1; }
+
+	/* testimonial: in flow under the photo, centered, no card */
+	.perellion-quote,
+	.perellion-quote--left,
+	.perellion-quote--near,
+	.perellion-quote--beside,
+	.perellion-quote--over,
+	.perellion-quote--rect,
+	.perellion-quote--showcase,
+	#contact .perellion-quote {
+		display: flex;
+		position: static;
+		transform: none;
+		width: min(320px, 100%);
+		min-height: 0;
+		margin: 24px auto 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		-webkit-backdrop-filter: none;
+		        backdrop-filter: none;
+		text-align: center;
+		align-items: center;
+	}
+	.perellion-quote .perellion-quote__mark { margin: 0 auto; }
+	figure.perellion-quote figcaption.perellion-quote__source { text-align: center; }
+
+	/* the panel grows to hold the photo plus the quote beneath it */
+	.perellion-panel,
+	.perellion-panel--round,
+	.perellion-panel--rect,
+	.perellion-panel--portrait {
+		aspect-ratio: auto;
+		height: auto;
+		padding-block: 24px;
+	}
+	.perellion-panel .perellion-panel__media,
+	.perellion-panel figure.perellion-panel__media {
+		position: relative;
+		width: 86%;
+		margin: 0 auto;
+	}
+	.perellion-panel--round .perellion-panel__media { aspect-ratio: 1; }
+	.perellion-panel--rect .perellion-panel__media { aspect-ratio: 1; }
+	.perellion-panel--portrait .perellion-panel__media { aspect-ratio: 345 / 471; translate: 0; width: 86%; }
+	.perellion-panel--wide .perellion-panel__media { width: 100%; aspect-ratio: 838 / 480; }
+
+	/* team: the frame stacks the first three cards; the rest wait for
+	   Meet the team */
+	.perellion-carousel { padding: 0 24px; }
+	.perellion-carousel::before { top: 60px; }
+	.perellion-carousel::after { display: none; }
+	.perellion-carousel__viewport { overflow: visible; }
+	.perellion-carousel__track { flex-direction: column; padding: 0; gap: 20px; }
+	.perellion-carousel__track > li { flex-basis: auto; width: 100%; }
+	.perellion-carousel__track > li:nth-child(n + 4) { display: none; }
+
+	/* certification cards stack with the stripe behind the middle */
+	.perellion-certs .perellion-certs__grid::before { display: none; }
+}
+
+@media (max-width: 600px) {
+	/* home showcase and Get in touch portrait bleed edge to edge */
+	.perellion-showcase { padding-inline: 0 !important; }
+	.perellion-showcase .perellion-panel--wide .perellion-panel__media { width: 100%; border-radius: 0; }
+	.perellion-cta .perellion-panel--portrait .perellion-panel__media,
+	#contact .perellion-panel--rect .perellion-panel__media { width: 100%; border-radius: 0; aspect-ratio: 4 / 3; }
+	#contact { padding-inline: 0 !important; }
+	#contact .perellion-split__text { padding-inline: 24px; text-align: center; }
+	#contact .wp-block-buttons { justify-content: center; }
+	/* copy centered as the frame draws it */
+	.perellion-split__text, .perellion-split__text h2, .perellion-split__text p { text-align: center; }
+	.perellion-split__text .wp-block-buttons { justify-content: center; }
+	.perellion-capcard + .perellion-capcard { margin-top: 40px; }
 }
