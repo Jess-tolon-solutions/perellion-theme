@@ -21,6 +21,25 @@
  * with Sovo.
  */
 $t = get_stylesheet_directory_uri();
+/**
+ * Photos: the Figma handoff file's "Photo sources" masters, sideloaded into
+ * the media library on 21 Nov (ids below). The frame crops in
+ * assets/img/hub/ remain as fallbacks if an attachment is missing.
+ */
+$img = function ( $id, $fallback ) use ( $t ) {
+	$u = $id ? wp_get_attachment_image_url( $id, 'large' ) : '';
+	return $u ? $u : $t . '/assets/img/hub/' . $fallback;
+};
+$media = array(
+	'advanced-manufacturing' => 859,
+	'medical-technology'     => 860,
+	'aerospace'              => 861,
+	'space'                  => 862,
+	'energy'                 => 863,
+	'defense'                => 864,
+	'fanuc'                  => 857,
+	'coriolis'               => 858,
+);
 $cards = array(
 	array( 'advanced-manufacturing', 'Advanced Manufacturing' ),
 	array( 'medical-technology', 'Medical Technology' ),
@@ -41,7 +60,7 @@ $cards = array(
 <ul class="perellion-industrygrid">
 <?php foreach ( $cards as $c ) : ?>
   <li class="perellion-card perellion-card--industry">
-    <a class="perellion-card__media" href="/<?php echo esc_attr( $c[0] ); ?>/"><img src="<?php echo esc_url( $t ); ?>/assets/img/hub/card-<?php echo esc_attr( $c[0] ); ?>.jpg" width="345" height="205" alt="" loading="lazy"></a>
+    <a class="perellion-card__media" href="/<?php echo esc_attr( $c[0] ); ?>/"><img src="<?php echo esc_url( $img( $media[ $c[0] ], 'card-' . $c[0] . '.jpg' ) ); ?>" width="345" height="205" alt="" loading="lazy"></a>
     <h3 class="perellion-card__title"><a href="/<?php echo esc_attr( $c[0] ); ?>/"><?php echo esc_html( $c[1] ); ?></a></h3>
     <a class="perellion-card__link" href="/<?php echo esc_attr( $c[0] ); ?>/">Read more</a>
   </li>
@@ -57,7 +76,7 @@ $cards = array(
 <!-- wp:group {"className":"perellion-split__media perellion-panel perellion-panel--round perellion-panel--a perellion-parallax","layout":{"type":"constrained"}} -->
 <div class="wp-block-group perellion-split__media perellion-panel perellion-panel--round perellion-panel--a perellion-parallax">
 <!-- wp:html -->
-<figure class="perellion-panel__media"><img src="<?php echo esc_url( $t ); ?>/assets/img/hub/partner-fanuc.jpg" alt="FANUC robot integrated by Perellion" width="467" height="467"></figure>
+<figure class="perellion-panel__media"><img src="<?php echo esc_url( $img( $media['fanuc'], 'partner-fanuc.jpg' ) ); ?>" alt="FANUC robot integrated by Perellion" width="467" height="467"></figure>
 <figure class="perellion-quote perellion-quote--left">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
   <blockquote class="perellion-quote__body"><p>FANUC has extremely good customer service</p></blockquote>
@@ -112,7 +131,7 @@ $cards = array(
 <!-- wp:group {"className":"perellion-split__media perellion-panel perellion-panel--rect perellion-panel--b perellion-parallax","layout":{"type":"constrained"}} -->
 <div class="wp-block-group perellion-split__media perellion-panel perellion-panel--rect perellion-panel--b perellion-parallax">
 <!-- wp:html -->
-<figure class="perellion-panel__media"><img src="<?php echo esc_url( $t ); ?>/assets/img/hub/partner-coriolis.jpg" alt="Coriolis automated fiber placement head" width="467" height="571"></figure>
+<figure class="perellion-panel__media"><img src="<?php echo esc_url( $img( $media['coriolis'], 'partner-coriolis.jpg' ) ); ?>" alt="Coriolis automated fiber placement head" width="467" height="571"></figure>
 <figure class="perellion-quote perellion-quote--rect">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
   <blockquote class="perellion-quote__body"><p>We share a strong culture of exceptional customer service and cutting edge technology.</p></blockquote>

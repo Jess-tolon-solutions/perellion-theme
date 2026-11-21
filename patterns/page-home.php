@@ -16,6 +16,15 @@
  * Copy is verbatim from the frame.
  */
 $t = get_stylesheet_directory_uri();
+/**
+ * Fixture photos: the frame's showcase is three photos side by side
+ * (portrait, landscape, portrait) — the Figma "Photo sources 2" masters,
+ * sideloaded into the media library on 21 Nov as 866 / 865 / 867.
+ */
+$fix = array();
+foreach ( array( 866, 865, 867 ) as $id ) {
+	$fix[] = wp_get_attachment_image_url( $id, 'large' );
+}
 $caps = array(
 	array( 'machines', 'Machines &amp;<br>Automation', '/what-we-do/#machine-automation' ),
 	array( 'aerospace', 'Aerospace<br>&amp; Defense', '/what-we-do/#aerospace-defense' ),
@@ -40,7 +49,11 @@ $caps = array(
 <!-- wp:group {"className":"perellion-panel perellion-panel--wide perellion-panel--c perellion-parallax","layout":{"type":"constrained"}} -->
 <div class="wp-block-group perellion-panel perellion-panel--wide perellion-panel--c perellion-parallax">
 <!-- wp:html -->
+<?php if ( $fix[0] && $fix[1] && $fix[2] ) : ?>
+<figure class="perellion-panel__media perellion-triptych"><img src="<?php echo esc_url( $fix[0] ); ?>" alt="" width="206" height="470"><img src="<?php echo esc_url( $fix[1] ); ?>" alt="Perellion assembly fixture on the shop floor" width="418" height="470"><img src="<?php echo esc_url( $fix[2] ); ?>" alt="" width="213" height="470"></figure>
+<?php else : ?>
 <figure class="perellion-panel__media"><img src="<?php echo esc_url( $t ); ?>/assets/img/home/hero-fixture.jpg" alt="Perellion assembly fixture on the shop floor" width="838" height="470"></figure>
+<?php endif; ?>
 <figure class="perellion-quote perellion-quote--showcase" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
   <blockquote class="perellion-quote__body"><p>[Perellion] has done a great job for me. Really enjoyed working with you and your crew.</p></blockquote>
