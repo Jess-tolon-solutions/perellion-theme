@@ -101,7 +101,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:html -->
 <figure class="perellion-quote" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote><p>(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.</p></blockquote>
+  <blockquote class="perellion-quote__body"><p>(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.</p></blockquote>
   <hr class="perellion-quote__rule">
   <figcaption class="perellion-quote__source">Program Manager at a Fortune 100</figcaption>
 </figure>
@@ -169,7 +169,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:html -->
 <figure class="perellion-quote" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote><p>This team has some of the best resumes around for automated aircraft assembly.</p></blockquote>
+  <blockquote class="perellion-quote__body"><p>This team has some of the best resumes around for automated aircraft assembly.</p></blockquote>
   <hr class="perellion-quote__rule">
   <figcaption class="perellion-quote__source">CTO at a well-known company</figcaption>
 </figure>
@@ -230,7 +230,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:html -->
 <figure class="perellion-quote" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote><p>Overall, everyone is quite happy. (This is a) major upgrade in that process.</p></blockquote>
+  <blockquote class="perellion-quote__body"><p>Overall, everyone is quite happy. (This is a) major upgrade in that process.</p></blockquote>
   <hr class="perellion-quote__rule">
   <figcaption class="perellion-quote__source">Senior Engineer at electric aviation company</figcaption>
 </figure>
@@ -302,7 +302,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:html -->
 <figure class="perellion-quote" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote><p>This is by far the most well put together Alpha I have ever seen.</p></blockquote>
+  <blockquote class="perellion-quote__body"><p>This is by far the most well put together Alpha I have ever seen.</p></blockquote>
   <hr class="perellion-quote__rule">
   <figcaption class="perellion-quote__source">Lead engineer at a Fortune 100</figcaption>
 </figure>
@@ -397,7 +397,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 ?>
 <figure class="perellion-quote" data-awaiting-source="true">
   <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote><p>Some of the cleanest and clearest reports I&rsquo;ve seen.</p></blockquote>
+  <blockquote class="perellion-quote__body"><p>Some of the cleanest and clearest reports I&rsquo;ve seen.</p></blockquote>
   <hr class="perellion-quote__rule">
   <figcaption class="perellion-quote__source">Blue Origin Stress Analyst</figcaption>
 </figure>
