@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.31.1
+Version: 1.31.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -1889,6 +1889,7 @@ header.wp-block-template-part {
 }
 
 .perellion-quote__source {
+	text-align: left;
 	font-family: var(--wp--preset--font-family--poppins);
 	font-size: 13px;
 	font-weight: 400;
@@ -3026,8 +3027,22 @@ header.wp-block-template-part {
 
 /* The accent run in the page headline. The export shows the second half
    of "We love solving hard problems" in the brand blue. */
+/* "hard problems": blue to violet gradient lettering, as the What we do
+   hero draws it (sampled #2b5cff at the left of the phrase to #6a4cff at
+   its end). Solid brand blue stays as the fallback for browsers without
+   background-clip:text. */
 .perellion-accent {
 	color: var(--wp--preset--color--action-primary);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+	.perellion-accent {
+		background: linear-gradient(90deg, #2b5cff 0%, #4d52ff 55%, #6a4cff 100%);
+		-webkit-background-clip: text;
+		        background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
 }
 
 /* ---- Capability jump nav --------------------------------------------
@@ -3572,7 +3587,9 @@ main section.alignfull#faq {
 	}
 	.perellion-quote--near {
 		left: calc(50% + 78px);
-		background-color: rgba(255, 255, 255, 0.96);
+		background-color: #fff;        /* the frame's card is solid white */
+		-webkit-backdrop-filter: none;
+		        backdrop-filter: none;
 	}
 	.perellion-quote--beside {
 		left: auto;
@@ -4480,4 +4497,81 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item {
 		transition: none;
 	}
+}
+
+/* ======================================================================
+   Insights, from 04 / Insights / Desktop (Figma 298:85446), 21 Nov
+   ====================================================================== */
+.perellion-hero--insights__row {
+	gap: 40px;
+	align-items: center;
+}
+
+.perellion-hero--insights .perellion-hero__title {
+	margin: 0;
+	font-size: 60px;
+	line-height: 1.1;
+}
+
+.perellion-hero--insights .perellion-hero__body {
+	margin: 0;
+	max-width: 520px;
+	font-size: 20px;
+	line-height: 1.7;
+	color: var(--wp--preset--color--charcoal);
+}
+
+.perellion-hero--insights .perellion-tagrow {
+	margin-top: 32px;
+}
+
+/* First tag filled, as the frame's selected state. */
+.perellion-tag.is-current {
+	background: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+}
+
+/* Gray band behind the card rows: from 85px under the grid's top to 40px
+   above its bottom (frame: band 440..1180 behind cards 356..1150). */
+.perellion-archive__grid--insights {
+	position: relative;
+}
+
+.perellion-archive__grid--insights::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 110px;
+	bottom: 120px;
+	background: var(--wp--preset--color--canvas);
+	z-index: -1;
+}
+
+.perellion-archive__grid--insights .perellion-insightgrid {
+	gap: 20px;
+}
+
+/* "More": the dark pill, centered; no previous link on the first page. */
+.perellion-more {
+	margin-top: 40px;
+}
+
+.perellion-more .wp-block-query-pagination-next {
+	display: inline-block;
+	padding: 12px 44px;
+	border-radius: 999px;
+	background: var(--wp--preset--color--charcoal);
+	color: var(--wp--preset--color--white);
+	font-family: var(--wp--preset--font-family--poppins);
+	font-weight: 500;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+.perellion-more .wp-block-query-pagination-previous {
+	font-family: var(--wp--preset--font-family--poppins);
+	font-size: 14px;
+	color: var(--wp--preset--color--charcoal);
+	margin-right: 16px;
 }
