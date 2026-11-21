@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.30.0
+Version: 1.30.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -3459,12 +3459,14 @@ main section.alignfull#faq {
 
 /* ---- Hero: word stack right-aligned on the left half, body on the right,
    vertically centered. Blue full stops are their own span. */
-.perellion-hero--about {
+.perellion-hero--about,
+.perellion-hero--home {
 	position: relative;
 	background: var(--wp--preset--color--white);
 }
 
-.perellion-hero--about::before {
+.perellion-hero--about::before,
+.perellion-hero--home::before {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -3472,11 +3474,13 @@ main section.alignfull#faq {
 	pointer-events: none;
 }
 
-.perellion-hero--about > * {
+.perellion-hero--about > *,
+.perellion-hero--home > * {
 	position: relative;
 }
 
-.perellion-hero--about {
+.perellion-hero--about,
+.perellion-hero--home {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 720px));
 	justify-content: center;
@@ -3484,14 +3488,16 @@ main section.alignfull#faq {
 	column-gap: 0;
 }
 
-.perellion-hero--about .perellion-wordstack {
+.perellion-hero--about .perellion-wordstack,
+.perellion-hero--home .perellion-wordstack {
 	text-align: right;
 	margin: 0;
 	padding-right: 5px;             /* stack ends at x=715 on the frame */
 	line-height: 1.25;
 }
 
-.perellion-hero--about .perellion-hero__body {
+.perellion-hero--about .perellion-hero__body,
+.perellion-hero--home .perellion-hero__body {
 	margin: 0;
 	padding-left: 35px;             /* body starts at x=755 */
 	max-width: 620px;
@@ -3505,20 +3511,24 @@ main section.alignfull#faq {
 }
 
 @media (max-width: 860px) {
-	.perellion-hero--about {
+	.perellion-hero--about,
+	.perellion-hero--home {
 		grid-template-columns: 1fr;
 		row-gap: var(--wp--preset--spacing--24);
 	}
-	.perellion-hero--about .perellion-wordstack {
+	.perellion-hero--about .perellion-wordstack,
+	.perellion-hero--home .perellion-wordstack {
 		text-align: center;
 		padding: 0;
 	}
-	.perellion-hero--about .perellion-hero__body {
+	.perellion-hero--about .perellion-hero__body,
+	.perellion-hero--home .perellion-hero__body {
 		padding: 0;
 		text-align: center;
 		margin-inline: auto;
 	}
-	.perellion-hero--about::before {
+	.perellion-hero--about::before,
+	.perellion-hero--home::before {
 		background-size: 200% auto;
 	}
 }
@@ -4180,4 +4190,88 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 
 @media (max-width: 1100px) {
 	.perellion-industrygrid { grid-template-columns: repeat(auto-fit, minmax(280px, 345px)); }
+}
+
+/* ======================================================================
+   Home, built from the 01 / Home / Desktop frame, 21 Nov
+   ====================================================================== */
+
+/* The fixture photo is the wide panel (838 x 470) with the testimonial card
+   over its right edge: card x 1080..1290 on a panel at x 301..1139, top 72px
+   under the photo's top. */
+.perellion-showcase .perellion-panel--wide {
+	margin-inline: auto;
+}
+
+@media (min-width: 861px) {
+	.perellion-quote--showcase {
+		left: calc(50% + 360px);
+		top: calc(50% - 163px);
+		width: 210px;
+		min-height: 0;
+	}
+}
+
+.perellion-showcase__arrow {
+	margin: 72px 0 0;
+}
+
+/* Core Capabilities: four 96px icon circles 320px apart, two-line titles,
+   Read more in action blue. */
+.perellion-capabilities .perellion-capgrid {
+	display: grid;
+	grid-template-columns: repeat(4, 320px);
+	justify-content: center;
+	gap: 0;
+	list-style: none;
+	margin: 50px 0 0;
+	padding: 0;
+	text-align: center;
+}
+
+.perellion-capgrid > li {
+	margin: 0;
+}
+
+.perellion-capcard__icon {
+	display: block;
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 32px;
+	border-radius: 999px;
+	overflow: hidden;
+	line-height: 0;
+}
+
+.perellion-capcard__icon img {
+	width: 96px;
+	height: 96px;
+	display: block;
+}
+
+.perellion-capcard__title {
+	margin: 0 0 24px;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 1.3;
+}
+
+.perellion-capcard__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.perellion-capcard__link {
+	font-family: var(--wp--preset--font-family--inter, Inter, sans-serif);
+	font-size: 16px;
+	color: var(--wp--preset--color--action-primary);
+	text-decoration: none;
+}
+
+@media (max-width: 1300px) {
+	.perellion-capabilities .perellion-capgrid { grid-template-columns: repeat(2, minmax(0, 320px)); row-gap: 48px; }
+}
+
+@media (max-width: 600px) {
+	.perellion-capabilities .perellion-capgrid { grid-template-columns: 1fr; }
 }
