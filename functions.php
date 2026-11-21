@@ -168,3 +168,21 @@ add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 	}
 	return $query;
 }, 10, 2 );
+
+/**
+ * Team profile subline: the tenure string production kept as the post
+ * excerpt ("... with Perellion since 2022"), stored by the migration in
+ * post meta. Fills the empty paragraph the single-team_member template
+ * reserves for it; the paragraph stays empty (and hidden) when there is none.
+ */
+add_filter( 'render_block_core/paragraph', 'perellion_profile_tenure', 10, 2 );
+function perellion_profile_tenure( $content, $block ) {
+	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'perellion-profile__tenure' ) ) {
+		return $content;
+	}
+	$tenure = get_post_meta( get_the_ID(), 'perellion_tenure', true );
+	if ( ! $tenure ) {
+		return $content;
+	}
+	return str_replace( '></p>', '>' . esc_html( $tenure ) . '</p>', $content );
+}
