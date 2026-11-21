@@ -76,8 +76,11 @@ $t = get_stylesheet_directory_uri();
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","anchor":"team","className":"perellion-reveal perellion-teamband","backgroundColor":"canvas","style":{"spacing":{"padding":{"top":"var:preset|spacing|48","bottom":"var:preset|spacing|60","left":"0","right":"0"}}},"layout":{"type":"default"}} -->
-<section id="team" class="wp-block-group alignfull perellion-reveal perellion-teamband has-canvas-background-color has-background" style="padding-top:var(--wp--preset--spacing--48);padding-right:0;padding-bottom:var(--wp--preset--spacing--60);padding-left:0">
+<!-- wp:group {"tagName":"section","align":"full","anchor":"team","className":"perellion-reveal perellion-teamband","backgroundColor":"white","style":{"spacing":{"padding":{"top":"8px","bottom":"42px","left":"0","right":"0"}}},"layout":{"type":"default"}} -->
+<section id="team" class="wp-block-group alignfull perellion-reveal perellion-teamband has-white-background-color has-background" style="padding-top:8px;padding-right:0;padding-bottom:42px;padding-left:0">
+<!-- wp:html -->
+<p class="perellion-teamband__arrow" aria-hidden="true"><svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 1v21M2 16l6 6 6-6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+<!-- /wp:html -->
 <!-- wp:paragraph {"align":"center","className":"perellion-overline perellion-eyebrow"} -->
 <p class="has-text-align-center perellion-overline perellion-eyebrow">Meet the team</p>
 <!-- /wp:paragraph -->
