@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.30.9
+Version: 1.30.10
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4306,4 +4306,19 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
    from its top edge. */
 .perellion-page--medical-technology #applications .perellion-panel__media img {
 	object-position: 50% 8%;
+}
+/* 13549427820 R2_Spacing_01 (1440): space under the Challenges infographic.
+   Frame: 100px from the graphic to the band edge on every industry page. */
+@media (min-width: 861px) {
+	main section.alignfull#challenges {
+		padding-bottom: 100px !important;   /* over the pattern's inline 48 */
+	}
+}
+/* 13549427820 R2_Spacing_03 (390): FAQ copy was set at 37px leading on
+   14px type; the body copy elsewhere runs 2.25, so the FAQ matches it. */
+@media (max-width: 860px) {
+	#faq summary,
+	#faq p {
+		line-height: 2.25;
+	}
 }
