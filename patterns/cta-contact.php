@@ -54,8 +54,16 @@
 
 <!-- wp:group {"className":"perellion-split__media perellion-panel perellion-panel--rect perellion-panel--b perellion-parallax","layout":{"type":"constrained"}} -->
 <div class="wp-block-group perellion-split__media perellion-panel perellion-panel--rect perellion-panel--b perellion-parallax">
+<?php
+// Portrait: the Figma "perellion-engineering-team-contact" master (media id
+// 868, sideloaded 21 Nov), falling back to the R2 345x471 crop (515) and
+// then the theme placeholder, so the pattern never renders empty.
+$portrait = wp_get_attachment_image_url( 868, 'large' );
+if ( ! $portrait ) { $portrait = wp_get_attachment_image_url( 515, 'full' ); }
+if ( ! $portrait ) { $portrait = get_stylesheet_directory_uri() . '/assets/img/placeholder-feature.svg'; }
+?>
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
-<figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/img/placeholder-feature.svg" alt="Perellion engineering team"/></figure>
+<figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $portrait ); ?>" alt="Perellion engineer in the shop"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:html -->

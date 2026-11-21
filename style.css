@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.31.4
+Version: 1.31.5
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4309,7 +4309,7 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 .perellion-capcard__icon img {
 	width: 96px;
 	height: 96px;
-	display: block;
+	display: block;              /* 192px files, drawn at 96 for retina */
 }
 
 .perellion-capcard__title {
