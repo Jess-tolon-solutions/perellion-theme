@@ -429,12 +429,22 @@ function perellion_dev_migrate( WP_REST_Request $req ) {
 		// tenure string ("... with Perellion since 2022") is kept in meta
 		// until Sovo decides where, if anywhere, it is shown.
 		$tenure = '';
-		if ( 'team_member' === $post_type && preg_match( '#^\s*<p>(.*?)</p>#s', $html, $m ) ) {
-			$role = trim( wp_strip_all_tags( $m[1] ) );
-			if ( $role !== '' && strlen( $role ) < 90 && strpos( $role, '. ' ) === false ) {
-				$tenure  = $excerpt;
-				$excerpt = $role;
-				$html    = substr( $html, strlen( $m[0] ) );
+		if ( 'team_member' === $post_type ) {
+			// Production's excerpt is the full role ("President & Co-founder",
+			// "Mechanical Engineer with Perellion since August 2024"); the
+			// frame's profile title uses the role and its FPO subline fits the
+			// tenure, so the excerpt is split on "with Perellion since".
+			if ( preg_match( '#^(.*?)\s+with Perellion since\s+(.+)$#i', $excerpt, $t ) ) {
+				$excerpt = trim( $t[1] );
+				$tenure  = 'With Perellion since ' . trim( $t[2] );
+			}
+			// The bare role line production opens each bio with is dropped
+			// from the body; the title row carries it.
+			if ( preg_match( '#^\s*<p>(.*?)</p>#s', $html, $m ) ) {
+				$role = trim( wp_strip_all_tags( $m[1] ) );
+				if ( $role !== '' && strlen( $role ) < 90 && strpos( $role, '. ' ) === false ) {
+					$html = substr( $html, strlen( $m[0] ) );
+				}
 			}
 		}
 		// Paragraphs to paragraph blocks; anything else stays as a classic HTML block.
@@ -469,7 +479,7 @@ function perellion_dev_migrate( WP_REST_Request $req ) {
 		}
 		update_post_meta( $id, '_perellion_prod_id', $prod_id );
 		update_post_meta( $id, '_perellion_prod_link', esc_url_raw( $p['link'] ) );
-		if ( $tenure !== '' ) {
+		if ( 'team_member' === $post_type ) {
 			update_post_meta( $id, 'perellion_tenure', $tenure );
 		}
 		$row['id'] = $id;
