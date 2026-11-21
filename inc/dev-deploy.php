@@ -243,8 +243,10 @@ function perellion_dev_deploy( WP_REST_Request $req ) {
 		require_once ABSPATH . 'wp-admin/includes/image.php';
 		foreach ( $sideload as $item ) {
 			$url = isset( $item['url'] ) ? esc_url_raw( $item['url'] ) : '';
-			if ( ! preg_match( '#^https://(www\.)?perellion\.com/#', $url ) ) {
-				$errors[] = array( 'path' => $url, 'error' => 'sideload only from perellion.com' );
+			// perellion.com (the live site's own media) and Figma's MCP asset
+			// exports from the handoff file; nothing else.
+			if ( ! preg_match( '#^https://((www\.)?perellion\.com/|www\.figma\.com/api/mcp/asset/)#', $url ) ) {
+				$errors[] = array( 'path' => $url, 'error' => 'sideload only from perellion.com or the Figma handoff file' );
 				continue;
 			}
 			$title = isset( $item['title'] ) ? sanitize_text_field( $item['title'] ) : '';
