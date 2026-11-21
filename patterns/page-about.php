@@ -88,8 +88,8 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:html -->
 <div class="perellion-carousel" data-carousel>
   <div class="perellion-carousel__nav" aria-hidden="false">
-    <button type="button" class="perellion-carousel__btn" data-carousel-prev aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="perellion-carousel__btn" data-carousel-next aria-label="Next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="perellion-carousel__btn" data-carousel-prev aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
 <!-- /wp:html -->
 

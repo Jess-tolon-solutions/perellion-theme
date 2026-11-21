@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.29.3
+Version: 1.29.4
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -1810,6 +1810,7 @@ header.wp-block-template-part {
 	display: none;
 	margin: 0;
 	box-sizing: border-box;
+	text-align: left;              /* every card in the frames is left-aligned */
 	flex-direction: column;
 	gap: 20px;
 	padding: 24px;
@@ -3001,11 +3002,8 @@ header.wp-block-template-part {
    component default. Marked in the markup with data-awaiting-source so
    it is visible in the editor and greppable before launch, without
    changing how it renders for a reviewer looking at layout. */
-.perellion-quote[data-awaiting-source] .perellion-quote__source::after {
-	content: " (placeholder source)";
-	font-style: italic;
-	opacity: 0.65;
-}
+/* No visible marker: the dev site is reviewed by Sovo and Perellion, and the
+   attribution reads exactly as the frame has it. Grep the attribute instead. */
 
 /* ---- What We Do: capability page ------------------------------------
    Built from Figma 298:85283 and the 1443w / 834w / 390w exports Jess
@@ -3415,6 +3413,49 @@ main section.alignfull#faq {
    for the decoration crops.
    ====================================================================== */
 
+/* The About pattern puts its halves in frame order (media first where the
+   photo is on the left), so the mirror modifier must not re-order them;
+   it keeps only its copy inset. */
+@media (min-width: 861px) {
+	.perellion-page--about .perellion-split--mirror .perellion-col--media,
+	.perellion-page--about .perellion-split--mirror .perellion-split__media {
+		order: 1;
+	}
+}
+
+/* About frame measure: body 16/31.5 (the industry frames run 16/37),
+   standfirst 18/36 medium. */
+.perellion-page--about .perellion-split__text p {
+	line-height: 1.96875;
+}
+
+/* Our culture: one-line subline, and the wide photo sits 150px under it so
+   the lattice shows above the photo as in the frame. */
+.perellion-page--about #our-culture .perellion-subline,
+.perellion-page--about #our-culture h2 + p {
+	max-width: 780px;
+}
+
+.perellion-page--about #our-culture .perellion-panel--wide {
+	margin-top: 150px;
+}
+
+.perellion-page--about .perellion-split__text .perellion-standfirst {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 2;
+	letter-spacing: 0.5px;
+}
+
+/* "Who we are" card is drawn without a box, left-aligned. */
+.perellion-quote--left {
+	background: transparent;
+	border: 0;
+	-webkit-backdrop-filter: none;
+	        backdrop-filter: none;
+	text-align: left;
+}
+
 /* ---- Hero: word stack right-aligned on the left half, body on the right,
    vertically centered. Blue full stops are their own span. */
 .perellion-hero--about {
@@ -3496,10 +3537,11 @@ main section.alignfull#faq {
 	}
 	.perellion-quote--beside {
 		left: auto;
-		right: calc(50% + 232px);
-		width: 148px;
+		right: calc(50% + 175px);      /* frame: card x 752..905 beside a panel centered at 1080 */
+		width: 153px;
 		min-height: 0;
-		padding: 20px;
+		padding: 0;
+		top: calc(50% - 158px);
 		background-color: transparent;
 		border: 0;
 		-webkit-backdrop-filter: none;
@@ -3522,6 +3564,7 @@ main section.alignfull#faq {
 .perellion-panel--portrait figure.perellion-panel__media {
 	width: 47.92%;
 	aspect-ratio: 345 / 471;
+	translate: 26px 0;             /* frame: portrait at x 933, 26px right of the panel's center */
 	border-radius: var(--perellion-radius-sm);
 	box-shadow: var(--wp--preset--shadow--card);
 }
@@ -3754,9 +3797,10 @@ main section.alignfull#faq {
 
 .perellion-certcard__badge {
 	display: block;
-	width: 170px;
-	height: auto;
+	width: auto;
+	height: 190px;                 /* same box for all three so the headings align */
 	margin: 0 auto 24px;
+	object-fit: contain;
 }
 
 .perellion-certcard h3 {
