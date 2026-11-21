@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.30.15
+Version: 1.31.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4356,5 +4356,114 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 	#faq details p,
 	#faq details li {
 		line-height: 2.25;
+	}
+}
+
+/* ======================================================================
+   Header: brand-expression gradient and dropdown states
+   From "03B — Navigation & footers / Menu — polished states" (Figma
+   1:3087) and its Animation Notes (93:47246), 21 Nov.
+   ====================================================================== */
+
+/* The gradient band under the nav (13577513837 "Nav bar gradient"):
+   sampled across the frame's top edge — cyan at the left, lavender in the
+   middle, peach at the right — fading to white 70px down. Drawn as CSS so
+   no asset is needed. */
+.perellion-header {
+	position: relative;
+}
+
+.perellion-header::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background:
+		linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.55) 36px, #fff 72px),
+		linear-gradient(to right, #f8fdff 0%, #e6fbff 12%, #d0e4ff 25%, #c8cce9 37%, #cac6df 50%, #dac8dc 62%, #e9d3d9 75%, #feeee2 100%);
+}
+
+/* Current page underlined, as the frame shows. */
+.perellion-header .wp-block-navigation .current-menu-item > a,
+.perellion-header .wp-block-navigation .current-menu-ancestor > a,
+.perellion-header .wp-block-navigation .current-menu-ancestor > .wp-block-navigation-item__content {
+	text-decoration: underline;
+	text-underline-offset: 6px;
+}
+
+/* Dropdowns: a white panel under the bar, items 21px medium on a 45px
+   line, left-aligned under their parent, no border or shadow. */
+@media (min-width: 861px) {
+	.perellion-header .wp-block-navigation .has-child .wp-block-navigation__submenu-container {
+		min-width: 260px;
+		padding: 48px 32px 32px;
+		border: 0;
+		box-shadow: none;
+		background: var(--wp--preset--color--white);
+		left: -32px;
+		top: 100%;
+		/* Animation notes: background expands downward, 450ms ease-out. */
+		transform-origin: top;
+		transform: scaleY(0.6);
+		opacity: 0;
+		transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out, visibility 0s linear 450ms;
+	}
+
+	.perellion-header .wp-block-navigation .has-child:hover > .wp-block-navigation__submenu-container,
+	.perellion-header .wp-block-navigation .has-child:focus-within > .wp-block-navigation__submenu-container {
+		transform: scaleY(1);
+		opacity: 1;
+		visibility: visible;
+		transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out, visibility 0s;
+	}
+
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item {
+		/* Items fade in with an 8px slide, staggered 70ms. */
+		opacity: 0;
+		transform: translateY(8px);
+		transition: opacity 320ms ease-out, transform 320ms ease-out;
+	}
+
+	.perellion-header .wp-block-navigation .has-child:hover .wp-block-navigation__submenu-container .wp-block-navigation-item,
+	.perellion-header .wp-block-navigation .has-child:focus-within .wp-block-navigation__submenu-container .wp-block-navigation-item {
+		opacity: 1;
+		transform: none;
+	}
+
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(1) { transition-delay: 70ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(2) { transition-delay: 140ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(3) { transition-delay: 210ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(4) { transition-delay: 280ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(5) { transition-delay: 350ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(6) { transition-delay: 420ms; }
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item:nth-child(7) { transition-delay: 490ms; }
+
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+		padding: 0;
+		font-family: var(--wp--preset--font-family--poppins);
+		font-size: 21px;
+		font-weight: 500;
+		line-height: 45px;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
+		color: var(--wp--preset--color--charcoal);
+	}
+
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
+		color: var(--wp--preset--color--action-primary);
+		text-decoration: none;
+	}
+
+	/* The submenu caret the frame hides on closed items. */
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-icon {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.perellion-header .wp-block-navigation .has-child .wp-block-navigation__submenu-container,
+	.perellion-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item {
+		transition: none;
 	}
 }
