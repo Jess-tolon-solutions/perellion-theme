@@ -11,7 +11,8 @@
  * straddling its bottom edge; FANUC white; Coriolis gray; Siemens white;
  * Get in touch white (shared cta-contact pattern).
  *
- * Photos: the three partner photos and the six card photos are cut from the
+ * Photos: the Siemens photo is Sovo's own (Drive, Industry Hub Page folder,
+ * 12 Nov, 2x). The FANUC and Coriolis photos and the six card photos are cut from the
  * frame export at 1x as stand-ins (assets/img/hub/). They are to be replaced
  * with the Figma exports once supplied; the markup stays the same.
  *
