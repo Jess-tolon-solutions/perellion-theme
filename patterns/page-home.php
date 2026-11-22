@@ -69,7 +69,7 @@ $caps = array(
 <ul class="perellion-capgrid">
 <?php foreach ( $caps as $c ) : ?>
   <li class="perellion-capcard">
-    <a class="perellion-capcard__icon" href="<?php echo esc_url( $c[2] ); ?>"><img src="<?php echo esc_url( $t ); ?>/assets/img/home/icon-<?php echo esc_attr( $c[0] ); ?>.png" width="96" height="96" alt=""></a>
+    <a class="perellion-capcard__icon" href="<?php echo esc_url( $c[2] ); ?>" aria-label="<?php echo esc_attr( wp_strip_all_tags( str_replace( '<br>', ' ', $c[1] ) ) ); ?>"><img src="<?php echo esc_url( $t ); ?>/assets/img/home/icon-<?php echo esc_attr( $c[0] ); ?>.png" width="96" height="96" alt=""></a>
     <h3 class="perellion-capcard__title"><a href="<?php echo esc_url( $c[2] ); ?>"><?php echo $c[1]; ?></a></h3>
     <a class="perellion-capcard__link" href="<?php echo esc_url( $c[2] ); ?>">Read more</a>
   </li>
