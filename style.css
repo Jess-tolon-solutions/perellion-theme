@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.34.1
+Version: 1.34.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -1609,14 +1609,6 @@ main section.alignfull#faq {
 	}
 }
 
-/* The contact portrait is drawn at 345 wide in the frame, not the 467
-   the circular panels use, so it was rendering a third wider than it
-   should and read as the biggest image on the page. 345 of 720. */
-#contact .perellion-panel__media,
-#contact figure.perellion-panel__media {
-	width: 47.92%;
-}
-
 /* Until a 2x export of the infographic arrives, the file is held to its
    own pixel width rather than being stretched to the 965 it is drawn
    at. Smaller than the frame, but sharp; raising the cap is a one-line
@@ -1802,9 +1794,6 @@ header.wp-block-template-part {
      rule      32 wide, 2px, text colour at 20%
      source    Poppins Regular 13 / 19.94, tracking 1
    Expressed against the photo's own box so it holds if the panel moves. */
-#contact .perellion-panel__media {
-	position: relative;
-}
 
 .perellion-quote__mark {
 	display: block;
@@ -2751,7 +2740,7 @@ header.wp-block-template-part {
    applies to all six is with Sovo. */
 .perellion-page--medical-technology #help .perellion-panel__media,
 .perellion-page--energy #help .perellion-panel__media {
-	aspect-ratio: 1;
+	aspect-ratio: 467 / 471;
 	border-radius: var(--perellion-radius-sm);
 }
 
@@ -3495,11 +3484,6 @@ main section.alignfull#faq {
 }
 
 /* ---- Panel variants used on About ---------------------------------- */
-/* What we do: the frame's image is a 467 square with a 4px radius. */
-.perellion-page--about #what-we-do .perellion-panel--rect .perellion-panel__media {
-	aspect-ratio: 1;
-	width: 64.86%;                 /* 467 of 720 */
-}
 
 /* Portrait panel: the 345x471 contact-style portrait, generic. */
 .perellion-panel--portrait .perellion-panel__media,
@@ -3512,10 +3496,13 @@ main section.alignfull#faq {
 }
 
 /* Wide panel: one centered landscape photo, 838x480 on the frame. */
+/* The wide panel is the same 720 x 700 Visual as every other; the photo
+   overhangs it (837 x 471 at -7.53%, Figma). Section spacing stays. */
 .perellion-panel--wide {
-	aspect-ratio: 838 / 480;
-	width: min(838px, 100%);
-	margin: var(--wp--preset--spacing--48) auto 0;
+	aspect-ratio: 720 / 700;
+	width: min(720px, 100%);
+	margin: 0 auto;
+	overflow: visible;
 }
 
 .perellion-panel--wide .perellion-panel__media,
@@ -3527,7 +3514,7 @@ main section.alignfull#faq {
 }
 
 .perellion-panel--wide::before {
-	inset: -33.33% -27.57%;         /* 1300x800 crop around an 838x480 photo */
+	inset: -7.14% -40.28%;          /* 1300 x 800 crop centered on the 720 x 700 panel */
 	background-size: 100% 100%;
 	background-position: center;
 }
@@ -3842,14 +3829,10 @@ main section.alignfull#faq {
 }
 
 .perellion-profile__portrait .perellion-panel .wp-block-post-featured-image {
-	position: relative;
 	z-index: 1;
-	width: 64.86%;
-	aspect-ratio: 1;
 	border-radius: var(--perellion-radius-pill);
 	overflow: hidden;
 	box-shadow: var(--wp--preset--shadow--lifted);
-	margin: 0;
 }
 
 .perellion-profile__portrait .perellion-panel .wp-block-post-featured-image img {
@@ -4477,7 +4460,7 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 }
 
 .perellion-page--home .perellion-showcase .perellion-panel--wide::before {
-	inset: -41.67% -27.57%;         /* 1300 x 800 crop on the 838 x 480 panel */
+	inset: -7.14% -40.28%;          /* 1300 x 800 crop centered on the 720 x 700 panel */
 	background-size: 100% 100%;
 }
 
