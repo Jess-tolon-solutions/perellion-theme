@@ -647,6 +647,16 @@
 		 * alongside this. */
 		var dir = img.src.replace( /[^\/]+$/, '' );
 
+		/* 21 Nov: a src that already names a tier (…-xs-1x.jpg) carries its
+		 * own directory and stem, wherever it lives. Sovo's 14 Nov typo-fixed
+		 * Aerospace set ships inside the theme under assets/img/infographics
+		 * this way. */
+		var tiered = img.src.match( /^(.*\/)([^\/]+)-(xl|m|xs)-(1x|2x)\.jpg$/ );
+		if ( tiered ) {
+			dir = tiered[ 1 ];
+			stem = tiered[ 2 ];
+		}
+
 		/* The Defense page predates the generator: its markup was copied
 		 * from patterns/section-challenges.php at insert time and still
 		 * carries the single theme-hosted PNG, because a pattern change
@@ -658,7 +668,7 @@
 		 * /wp-content/uploads/2026/11/...-xs-1x.jpg is all it needs to
 		 * join the other five, and then defense-challenges-infographic.png
 		 * can come out of the theme too. Held until the R2 freeze lifts. */
-		if ( dir.indexOf( '/themes/' ) !== -1 ) {
+		if ( ! tiered && dir.indexOf( '/themes/' ) !== -1 ) {
 			return;
 		}
 
