@@ -98,14 +98,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['machines'] ); ?>" alt="Machines &amp; Automation"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Program Manager at a Fortune 100</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( '(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.', 'Program Manager at a Fortune 100', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 </section>
@@ -166,14 +159,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['aerospace'] ); ?>" alt="Aerospace &amp; Defense"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>This team has some of the best resumes around for automated aircraft assembly.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">CTO at a well-known company</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( 'This team has some of the best resumes around for automated aircraft assembly.', 'CTO at a well-known company', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 </section>
@@ -227,14 +213,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['logistics'] ); ?>" alt="Manufacturing &amp; Logistics"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>Overall, everyone is quite happy. (This is a) major upgrade in that process.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Senior Engineer at electric aviation company</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( 'Overall, everyone is quite happy. (This is a) major upgrade in that process.', 'Senior Engineer at electric aviation company', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 </section>
@@ -299,14 +278,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['engineering'] ); ?>" alt="Engineering Services"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>This is by far the most well put together Alpha I have ever seen.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Lead engineer at a Fortune 100</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( 'This is by far the most well put together Alpha I have ever seen.', 'Lead engineer at a Fortune 100', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 </section>

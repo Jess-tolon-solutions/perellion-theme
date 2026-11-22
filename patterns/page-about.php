@@ -46,14 +46,7 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:image {"id":720,"sizeSlug":"full","className":"perellion-panel__media"} -->
 <figure class="wp-block-image size-full perellion-panel__media"><img src="<?php echo $u; ?>cody-brown-ceo.png" alt="Cody Brown, Cofounder" class="wp-image-720"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote perellion-quote--left">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>Everything we do requires teamwork.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Cody Brown,<br>Cofounder</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( 'Everything we do requires teamwork.', 'Cody Brown,<br>Cofounder', 'left' ); ?>
 </div>
 <!-- /wp:group -->
 
@@ -173,21 +166,10 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:image {"id":728,"sizeSlug":"full","className":"perellion-panel__media"} -->
 <figure class="wp-block-image size-full perellion-panel__media"><img src="<?php echo $u; ?>life-work-balance.png" alt="Engineer with his son" class="wp-image-728"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
 <?php
-/**
- * PLACEHOLDER ATTRIBUTION. "Program Manager at a Fortune 100" is the
- * component's anonymised default on the frame. Marked so it cannot ship
- * unnoticed; open with Sovo alongside the other anonymous quotes.
- */
-?>
-<figure class="perellion-quote perellion-quote--near" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>We would not be where we are today without Perellion.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Program Manager at a Fortune 100</figcaption>
-</figure>
-<!-- /wp:html -->
+/* PLACEHOLDER ATTRIBUTION. "Program Manager at a Fortune 100" is the
+   component's anonymized default on the frame; open with Sovo. */
+echo perellion_quote( 'We would not be where we are today without Perellion.', 'Program Manager at a Fortune 100', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 
@@ -307,14 +289,7 @@ $t = get_stylesheet_directory_uri();
 <!-- wp:image {"id":729,"sizeSlug":"full","className":"perellion-panel__media"} -->
 <figure class="wp-block-image size-full perellion-panel__media"><img src="<?php echo $u; ?>company-workplace.jpg" alt="Engineer with dog at the workshop" class="wp-image-729"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="perellion-quote perellion-quote--beside" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Program Manager at a Fortune 100</figcaption>
-</figure>
-<!-- /wp:html -->
+<?php echo perellion_quote( '(Perellion was) selected for their creative engineering and expertise in complex automation, and ease of collaboration.', 'Program Manager at a Fortune 100', 'left', true ); ?>
 </div>
 <!-- /wp:group -->
 </section>

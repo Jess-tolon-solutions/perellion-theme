@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.33.1
+Version: 1.34.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -1806,52 +1806,6 @@ header.wp-block-template-part {
 	position: relative;
 }
 
-.perellion-quote {
-	display: none;
-	margin: 0;
-	box-sizing: border-box;
-	text-align: left;              /* every card in the frames is left-aligned */
-	flex-direction: column;
-	gap: 20px;
-	padding: 24px;
-	border: 1px solid #fff;
-	border-radius: 2px;
-	background-color: rgba(255, 255, 255, 0.9);
-	-webkit-backdrop-filter: blur(14px);
-	        backdrop-filter: blur(14px);
-}
-
-/* The overlap is a desktop instruction; below the split breakpoint the
-   photo goes full width and a card hanging off its right edge would push
-   the page sideways, so it sits under the photo instead. */
-@media (min-width: 601px) {
-	/* 834 frame keeps this card over the portrait; phones stack it (see
-	   the phone block at the end of the file).
-	   WordPress renders the card as a SIBLING of the image figure, not
-	   inside it, so its containing block is the 720-wide panel and the
-	   percentages above resolved against that: a 429px card overlapping
-	   by 20 instead of a 206px card overlapping by 99.
-
-	   Measured on dev, the photo is centred in the panel at 345x471, so
-	   the card is anchored off the panel's centre instead:
-	     left  50% + 345/2 - 99.48 overlap  = 50% + 73.02px
-	     top   50% - 471/2 + 85.67 from top = 50% - 149.83px
-	   Width and height are the frame's own, in px, since they do not
-	   scale with the panel. */
-	.perellion-quote {
-		display: flex;
-		position: absolute;
-		z-index: 2;
-		width: 205.71px;
-		min-height: 314px;
-		left: calc(50% + 73.02px);
-		top: calc(50% - 149.83px);
-	}
-}
-
-/* Phones and tablets: the 390/834 frames (21 Nov) stack the card under
-   the photo; those rules live in the phone block at the end of the file. */
-
 .perellion-quote__mark {
 	display: block;
 	width: 32px;
@@ -2697,35 +2651,9 @@ header.wp-block-template-part {
    205 px high, while person image should be about 345px high, and
    testimonial should be centered with image."
 
-   Note the portrait is 345 WIDE and 471 tall in the frame; the note's
-   345 is read as the height it should present at, so the figure is
-   constrained on height and the aspect ratio carries the width. */
-@media (min-width: 861px) {
-	#contact figure.perellion-panel__media {
-		height: 345px;
-		width: auto;
-		aspect-ratio: 345 / 471;
-	}
-
-	.perellion-quote {
-		/* 205px was the R2 number, but the quote plus attribution needs
-		   ~318px at this width and the caption was hanging off the card
-		   bottom on every industry page (measured 20 Nov). The card now
-		   fits its content and 205 is the floor. */
-		height: auto;
-		min-height: 205px;
-	}
-
-	/* Centered on the portrait rather than offset down from its top,
-	   which is what "centered with image" asks for. Replaces the R1
-	   offset of 50% - 149.83px. Scoped to Get in touch (the R2 note's
-	   subject); the About, hub and home cards carry their own frame
-	   positions. */
-	#contact .perellion-quote {
-		top: 50%;
-		transform: translateY(-50%);
-	}
-}
+   Superseded 21 Nov: the Figma component is the rule (see "Testimonial
+   card and photo panel" at the end of this file). The portrait is 345
+   wide by 471 tall there. */
 
 /* ---- Global: Get in touch decoration alignment ----------------------
    13578168382: "One of the triangular graphics is set too far behind the
@@ -3490,15 +3418,6 @@ main section.alignfull#faq {
 	letter-spacing: 0.5px;
 }
 
-/* "Who we are" card is drawn without a box, left-aligned. */
-.perellion-quote--left {
-	background: transparent;
-	border: 0;
-	-webkit-backdrop-filter: none;
-	        backdrop-filter: none;
-	text-align: left;
-}
-
 /* ---- Hero: word stack right-aligned on the left half, body on the right,
    vertically centered. Blue full stops are their own span. */
 .perellion-hero--about,
@@ -3572,41 +3491,6 @@ main section.alignfull#faq {
 	.perellion-hero--about::before,
 	.perellion-hero--home::before {
 		background-size: 200% auto;
-	}
-}
-
-/* ---- Quote card variants. The base card hangs off the photo's right
-   edge (Get in touch). The frame also draws it off the LEFT edge (Who we
-   are), close on the right of a circle (Our culture), and standing beside
-   the portrait as a narrow column (Join the team). Positions measured
-   from the frame against the photo center. */
-@media (min-width: 861px) {
-	.perellion-quote--left {
-		left: auto;
-		right: calc(50% + 170px);      /* card x 12..190 on a panel centered at 360 */
-		width: 178px;
-	}
-	.perellion-quote--near {
-		left: calc(50% + 78px);
-		background-color: #fff;        /* the frame's card is solid white */
-		-webkit-backdrop-filter: none;
-		        backdrop-filter: none;
-	}
-	.perellion-quote--beside {
-		left: auto;
-		right: calc(50% + 175px);      /* frame: card x 752..905 beside a panel centered at 1080 */
-		width: 153px;
-		min-height: 0;
-		padding: 0;
-		top: calc(50% - 120px);        /* frame: quote mark 115px under the portrait's top */
-		background-color: transparent;
-		border: 0;
-		-webkit-backdrop-filter: none;
-		        backdrop-filter: none;
-	}
-	.perellion-quote--beside .perellion-quote__body p {
-		font-size: 15px;
-		line-height: 1.5;
 	}
 }
 
@@ -3992,18 +3876,6 @@ main section.alignfull#faq {
 	display: none;
 }
 
-/* Testimonial card hanging off the portrait's right edge: frame x 883..1045
-   against a 720 panel centered on the page (left 360), card top 109px above
-   the circle's center. */
-@media (min-width: 861px) {
-	.perellion-quote--over {
-		left: calc(50% + 163px);
-		top: calc(50% - 124px);
-		width: 162px;
-		min-height: 0;
-	}
-}
-
 .perellion-profile__bio p {
 	font-family: var(--wp--preset--font-family--poppins);
 	font-size: var(--wp--preset--font-size--small);
@@ -4228,16 +4100,7 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 	.perellion-partner.perellion-split--mirror .perellion-col--media,
 	.perellion-partner.perellion-split--mirror .perellion-split__media {
 		order: 1;
-	}
-	/* Coriolis photo is 467 x 571 with the card over its right edge, the
-	   card's top 210px above the photo's center. */
-	#coriolis .perellion-panel--rect .perellion-panel__media {
-		aspect-ratio: 467 / 571;
-	}
-	.perellion-quote--rect {
-		top: calc(50% - 210px);
-	}
-}
+	}}
 
 .perellion-partner .perellion-split__text p {
 	line-height: 1.96875;
@@ -4261,15 +4124,6 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
    under the photo's top. */
 .perellion-showcase .perellion-panel--wide {
 	margin-inline: auto;
-}
-
-@media (min-width: 861px) {
-	.perellion-quote--showcase {
-		left: calc(50% + 360px);
-		top: calc(50% - 163px);
-		width: 210px;
-		min-height: 0;
-	}
 }
 
 .perellion-showcase__arrow {
@@ -4751,4 +4605,120 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	.perellion-split__text, .perellion-split__text h2, .perellion-split__text p { text-align: center; }
 	.perellion-split__text .wp-block-buttons { justify-content: center; }
 	.perellion-capcard + .perellion-capcard { margin-top: 40px; }
+}
+
+/* ======================================================================
+   Testimonial card and photo panel, ONE system (21 Nov).
+   Read from the Figma components directly (get_design_context on the
+   About, Home, What we do, Industries, Insights, Team profile frames):
+
+   Body Component = 1440 wide, two 720 x 700 halves: Visual + Content.
+   Visual media, all vertically centered 7px above the panel's middle:
+     circle    467 x 467, left 18.19%           (Perellion/Feature media)
+     rect      467 x 471, radius 4, left 18.19%
+     portrait  345 x 471, radius 4, left 29.44%
+     wide      837 x 471, radius 4, left -7.53% (home showcase)
+   Testimonial (Perellion/Testimonial Left | Right), one component:
+     205.71 wide (28.57%), padding 24, gap 20, radius 2, 1px white border,
+     white fill, whole card at 90% opacity, ~7px backdrop blur, vertically
+     centered on the panel. Left variant keeps a 314px height.
+     Left beside a circle   left -1.81%   (hangs off the panel edge)
+     Left beside a portrait left  0.96%
+     Right over a rect      left 60.76%
+     Right off the wide     left 99.72%
+   The About "Join" card is the same component without the fill.
+   Every per-page position that used to live elsewhere in this file is
+   removed; pages only choose a side (and the panel shape says the rest).
+   ====================================================================== */
+.perellion-panel { --perellion-media-y: -7.17px; }
+
+.perellion-quote {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 24px;
+	text-align: left;
+	border: 1px solid #fff;
+	border-radius: 2px;
+	background-color: #fff;
+	opacity: 0.9;
+	-webkit-backdrop-filter: blur(7px);
+	        backdrop-filter: blur(7px);
+}
+.perellion-quote--bare { background-color: transparent; }
+
+@media (min-width: 861px) {
+	.perellion-panel figure.perellion-panel__media,
+	.perellion-panel .perellion-panel__media {
+		position: absolute;
+		top: 50%;
+		transform: translateY(calc(-50% + var(--perellion-media-y)));
+		margin: 0;
+	}
+	.perellion-panel--round figure.perellion-panel__media,
+	.perellion-panel--round .perellion-panel__media { left: 18.19%; width: 64.86%; aspect-ratio: 1; }
+	.perellion-panel--rect figure.perellion-panel__media,
+	.perellion-panel--rect .perellion-panel__media { left: 18.19%; width: 64.86%; aspect-ratio: 467 / 471; border-radius: 4px; }
+	.perellion-panel--portrait figure.perellion-panel__media,
+	.perellion-panel--portrait .perellion-panel__media { left: 29.44%; width: 47.92%; aspect-ratio: 345 / 471; border-radius: 4px; translate: 0; }
+	.perellion-panel--wide figure.perellion-panel__media,
+	.perellion-panel--wide .perellion-panel__media { left: -7.53%; width: 116.3%; aspect-ratio: 837 / 471; border-radius: 4px; }
+	#coriolis .perellion-panel--rect .perellion-panel__media { aspect-ratio: 467 / 471; }
+
+	.perellion-quote,
+	#contact .perellion-quote,
+	.perellion-quote--left, .perellion-quote--near, .perellion-quote--beside,
+	.perellion-quote--over, .perellion-quote--rect, .perellion-quote--showcase {
+		position: absolute;
+		z-index: 2;
+		top: 50%;
+		right: auto;
+		transform: translateY(-50%);
+		width: 28.57%;
+		min-height: 0;
+		height: auto;
+	}
+	/* right of the photo (default, Get in touch and every rect) */
+	.perellion-quote { left: 60.76%; }
+	.perellion-panel--wide .perellion-quote { left: 99.72%; }
+	/* left of the photo */
+	.perellion-quote--left { left: -1.81%; min-height: 314px; }
+	.perellion-panel--portrait .perellion-quote--left { left: 0.96%; }
+	/* legacy side names still in page markup until the patterns are re-saved */
+	.perellion-quote--beside { left: 0.96%; min-height: 314px; }
+	.perellion-quote--near, .perellion-quote--rect, .perellion-quote--over, .perellion-quote--showcase { left: 60.76%; }
+	.perellion-panel--wide .perellion-quote--showcase { left: 99.72%; }
+	.perellion-quote--beside .perellion-quote__body p { font-size: 16px; line-height: 23.26px; }
+	/* team profile (frame 298:85546): circle centered in its band, card
+	   over its right edge, 83px of overlap */
+	.perellion-profile__portrait .perellion-panel--round .perellion-panel__media { left: 17.57%; }
+	.perellion-profile__portrait .perellion-quote { left: 71.5%; }
+	/* Get in touch, card over the portrait's right edge (industry frames):
+	   99.48 over the photo, 106.23 past it */
+	.perellion-panel--portrait .perellion-quote:not(.perellion-quote--left) { left: 63.54%; }
+}
+
+/* tablet (601-860): the 834 frame keeps Get in touch as portrait + card;
+   every other section stacks (rules in the phone block above) */
+@media (min-width: 601px) and (max-width: 860px) {
+	#contact .perellion-panel--portrait figure.perellion-panel__media,
+	#contact .perellion-panel--portrait .perellion-panel__media,
+	#contact .perellion-panel--rect figure.perellion-panel__media,
+	#contact .perellion-panel--rect .perellion-panel__media {
+		position: absolute; top: 50%; transform: translateY(calc(-50% + var(--perellion-media-y))); margin: 0;
+		left: 29.44%; width: 47.92%; aspect-ratio: 345 / 471; border-radius: 4px; translate: 0;
+	}
+	#contact .perellion-quote {
+		position: absolute; z-index: 2; top: 50%; left: 60.76%; right: auto; transform: translateY(-50%);
+		width: 28.57%; min-height: 0; height: auto;
+	}
+}
+
+/* the two 720 halves meet edge to edge in the frame, so the split section
+   carries no side padding at desktop (the pattern's inline 24px would
+   shrink the halves to 696 and the circle to 451) */
+@media (min-width: 1440px) {
+	section.perellion-split { padding-inline: 0 !important; }
 }

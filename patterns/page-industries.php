@@ -77,13 +77,8 @@ $cards = array(
 <div class="wp-block-group perellion-split__media perellion-panel perellion-panel--round perellion-panel--a perellion-parallax">
 <!-- wp:html -->
 <figure class="perellion-panel__media"><img src="<?php echo esc_url( $img( $media['fanuc'], 'partner-fanuc.jpg' ) ); ?>" alt="FANUC robot integrated by Perellion" width="467" height="467"></figure>
-<figure class="perellion-quote perellion-quote--left">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>FANUC has extremely good customer service</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Reese Allen<br>Perellion VP &amp; Co-Founder</figcaption>
-</figure>
 <!-- /wp:html -->
+<?php echo perellion_quote( 'FANUC has extremely good customer service', 'Reese Allen<br>Perellion VP &amp; Co-Founder', 'left' ); ?>
 </div>
 <!-- /wp:group -->
 
@@ -132,13 +127,8 @@ $cards = array(
 <div class="wp-block-group perellion-split__media perellion-panel perellion-panel--rect perellion-panel--b perellion-parallax">
 <!-- wp:html -->
 <figure class="perellion-panel__media"><img src="<?php echo esc_url( $img( $media['coriolis'], 'partner-coriolis.jpg' ) ); ?>" alt="Coriolis automated fiber placement head" width="467" height="571"></figure>
-<figure class="perellion-quote perellion-quote--rect">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>We share a strong culture of exceptional customer service and cutting edge technology.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Cody Brown<br>Perellion Cofounder &amp; CEO</figcaption>
-</figure>
 <!-- /wp:html -->
+<?php echo perellion_quote( 'We share a strong culture of exceptional customer service and cutting edge technology.', 'Cody Brown<br>Perellion Cofounder &amp; CEO', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 </section>

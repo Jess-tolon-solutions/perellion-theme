@@ -47,13 +47,8 @@ $caps = array(
 <div class="wp-block-group perellion-panel perellion-panel--wide perellion-panel--c perellion-parallax">
 <!-- wp:html -->
 <figure class="perellion-panel__media"><img src="<?php echo esc_url( $fixture ? $fixture : $t . '/assets/img/home/hero-fixture.jpg' ); ?>" alt="Perellion assembly fixture on the shop floor" width="838" height="470"></figure>
-<figure class="perellion-quote perellion-quote--showcase" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="<?php echo esc_url( $t ); ?>/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>[Perellion] has done a great job for me. Really enjoyed working with you and your crew.</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">Lead engineer at a space technology company</figcaption>
-</figure>
 <!-- /wp:html -->
+<?php echo perellion_quote( '[Perellion] has done a great job for me. Really enjoyed working with you and your crew.', 'Lead engineer at a space technology company', 'right' ); ?>
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->

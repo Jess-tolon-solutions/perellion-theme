@@ -36,11 +36,9 @@ function perellion_cta_markup( array $a = array() ): string {
 		? '<br>\n    <b>Address</b> <a href="https://maps.google.com/?q=6700+Hardeson+Rd+%23104+Everett+WA+98203" rel="noopener">6700 Hardeson Rd #104<br>Everett, WA 98203</a>'
 		: '\n    <b>Address</b> 6700 Hardeson Rd #104 Everett, WA 98203';
 	$address = str_replace( '\n', "\n", $address );
-	$cardClass = 'beside' === $a['card'] ? 'perellion-quote perellion-quote--beside' : 'perellion-quote';
-	$quote  = esc_html( $a['quote'] );
-	$source = wp_kses( $a['source'], array( 'br' => array() ) );
 	$alt    = esc_attr( $a['alt'] );
-	$panel  = 'beside' === $a['card'] ? 'perellion-panel--portrait' : 'perellion-panel--rect';
+	$panel  = 'perellion-panel--portrait';   /* every Get in touch frame: 345 x 471 portrait */
+	$card   = perellion_quote( $a['quote'], $a['source'], 'beside' === $a['card'] ? 'left' : 'right' );
 	return <<<HTML
 <!-- wp:group {"tagName":"section","align":"full","anchor":"contact","className":"perellion-reveal perellion-split perellion-cta","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
 <section id="contact" class="wp-block-group alignfull perellion-reveal perellion-split perellion-cta" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">
@@ -75,14 +73,7 @@ function perellion_cta_markup( array $a = array() ): string {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="{$src}" alt="{$alt}"/></figure>
 <!-- /wp:image -->
-<!-- wp:html -->
-<figure class="{$cardClass}" data-awaiting-source="true">
-  <img class="perellion-quote__mark" src="{$t}/assets/img/quote-mark.svg" width="32" height="32" alt="" aria-hidden="true">
-  <blockquote class="perellion-quote__body"><p>{$quote}</p></blockquote>
-  <hr class="perellion-quote__rule">
-  <figcaption class="perellion-quote__source">{$source}</figcaption>
-</figure>
-<!-- /wp:html -->
+{$card}
 </div>
 <!-- /wp:group -->
 
