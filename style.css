@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.34.2
+Version: 1.34.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4526,9 +4526,11 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	.perellion-panel:not(#contact *) .perellion-panel__media,
 	.perellion-panel:not(#contact *) figure.perellion-panel__media {
 		position: relative;
-		width: 86%;
+		width: min(86%, 467px);        /* never larger than the frame's 467 */
 		margin: 0 auto;
 	}
+	.perellion-panel--portrait:not(#contact *) .perellion-panel__media,
+	.perellion-panel--portrait:not(#contact *) figure.perellion-panel__media { width: min(86%, 345px); }
 	.perellion-panel--round .perellion-panel__media { aspect-ratio: 1; }
 	.perellion-panel--rect .perellion-panel__media { aspect-ratio: 1; }
 	.perellion-panel--portrait:not(#contact *) .perellion-panel__media,
@@ -4565,8 +4567,8 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	/* 390 frame: the showcase photo sits on white with only the faint
 	   lattice at the edges; the desktop glow crop is not drawn */
 	.perellion-page--home .perellion-showcase .perellion-panel--wide::before { display: none; }
-	.perellion-showcase .perellion-panel--wide .perellion-panel__media,
-	.perellion-showcase .perellion-panel--wide figure.perellion-panel__media { width: 100vw; margin-left: calc(50% - 50vw) !important; margin-right: 0 !important; border-radius: 0; }
+	.perellion-showcase .perellion-panel--wide:not(#contact *) .perellion-panel__media,
+	.perellion-showcase .perellion-panel--wide:not(#contact *) figure.perellion-panel__media { width: 100vw; margin-left: calc(50% - 50vw) !important; margin-right: 0 !important; border-radius: 0; }
 	#contact .perellion-quote {
 		display: flex; position: static; transform: none; width: min(320px, 100%); min-height: 0;
 		margin: 24px auto 0; padding: 0; border: 0; background: transparent;
