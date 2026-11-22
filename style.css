@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.35.1
+Version: 1.35.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4731,4 +4731,16 @@ figure.perellion-quote figcaption.perellion-quote__source {
    and is hidden where the Contact pill shows instead. */
 @media (min-width: 861px) {
 	.perellion-header .wp-block-navigation-item.perellion-nav--contact { display: none; }
+}
+
+/* Audit I-04: on phones the compliance-mark column follows the viewport.
+   The desktop 345px basis above kept winning at 320 (computed 345px), so
+   this is explicit and scoped. */
+@media (max-width: 600px) {
+	.perellion-proof-band .wp-block-column:has(.perellion-marks--stacked) {
+		flex-basis: 100% !important;
+		max-width: 100% !important;
+		width: 100%;
+	}
+	.perellion-marks--stacked { width: 100%; }
 }
