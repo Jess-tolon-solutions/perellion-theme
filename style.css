@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.3
+Version: 1.37.4
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4915,8 +4915,11 @@ figure.perellion-quote figcaption.perellion-quote__source {
    places its own artwork at the Figma offsets inside the 720 x 700 Visual
    (percentages of the panel, so it scales with it); the Content-side marks
    sit in the copy half at (101, 13). Atmosphere Grey (1:574) is drawn over
-   the Visual artwork, as in the layer order. Every section clips at its own
-   edges, so nothing bleeds into the neighbouring band. Sections not listed
+   the Visual artwork, as in the layer order. Where a master runs past the
+   720 x 700 Visual (3f2eb9 by 16.7px at the bottom, e798fe by 10.3px at the
+   right) the layer is clipped at the panel edge, so nothing bleeds into the
+   neighbouring band; the sections themselves are not clipped, so content
+   (testimonial cards) is never cut. Sections not listed
    here keep their previous artwork (see ASSET_MAPPING_REPORT.md).
    ====================================================================== */
 
@@ -4929,7 +4932,6 @@ figure.perellion-quote figcaption.perellion-quote__source {
 .perellion-page--industries #contact {
 	position: relative;
 	isolation: isolate;
-	overflow: clip;
 }
 
 /* The showcase artwork carries the frame's down arrow (Brand Expression
@@ -4972,6 +4974,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
 		background-size: 19.5556% auto, 100% auto;
 		background-position: 44.6869% 3.7562%, 0% 0%;
+		clip-path: inset(0 0.1911% 2.3897% 0);
 	}
 }
 @media (min-width: 861px) {
@@ -5059,6 +5062,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-e798fe.svg");
 		background-size: 19.214% auto, 100% auto;
 		background-position: 44.2613% 0%, 0% 100%;
+		clip-path: inset(0 1.4978% 0 0);
 	}
 }
 @media (min-width: 861px) {
@@ -5117,6 +5121,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
 		background-size: 19.5556% auto, 100% auto;
 		background-position: 44.6869% 3.7562%, 0% 0%;
+		clip-path: inset(0 0.1911% 2.3897% 0);
 	}
 }
 @media (min-width: 861px) {
