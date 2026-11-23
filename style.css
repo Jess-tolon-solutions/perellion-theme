@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.5
+Version: 1.37.6
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5243,5 +5243,16 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		font-size: clamp(11px, 0.9028vw, 13px);
 		line-height: 1.5338;              /* 19.94 / 13 */
 		letter-spacing: clamp(0.5px, 0.0694vw, 1px);
+	}
+}
+
+/* Home showcase between 861 and 1439px (1.37.6): the testimonial card sits
+   past the wide panel's right edge (99.72%), so with the panel held at
+   720px it ran off-screen below ~1300 (card to x 1064 at 1000). The panel
+   now narrows just enough to keep photo + card on screen with 16px to
+   spare: right edge = 50vw + 0.7829 x panel. 1440 and wider unchanged. */
+@media (min-width: 861px) and (max-width: 1439px) {
+	.perellion-showcase .perellion-panel--wide {
+		width: min(720px, calc((50vw - 16px) * 1.2773));
 	}
 }

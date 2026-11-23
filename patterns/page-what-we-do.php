@@ -159,7 +159,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['aerospace'] ); ?>" alt="Aerospace &amp; Defense"/></figure>
 <!-- /wp:image -->
-<?php echo perellion_quote( 'This team has some of the best resumes around for automated aircraft assembly.', 'CTO at a well-known company', 'right' ); ?>
+<?php echo perellion_quote( 'This team has some of the best resumes around for automated aircraft assembly.', 'CTO at a well-known company', 'left' ); ?>
 </div>
 <!-- /wp:group -->
 </section>
@@ -278,7 +278,7 @@ $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 <!-- wp:image {"className":"perellion-panel__media","sizeSlug":"full"} -->
 <figure class="wp-block-image perellion-panel__media"><img src="<?php echo esc_url( $wwd_photo['engineering'] ); ?>" alt="Engineering Services"/></figure>
 <!-- /wp:image -->
-<?php echo perellion_quote( 'This is by far the most well put together Alpha I have ever seen.', 'Lead engineer at a Fortune 100', 'right' ); ?>
+<?php echo perellion_quote( 'This is by far the most well put together Alpha I have ever seen.', 'Lead engineer at a Fortune 100', 'left' ); ?>
 </div>
 <!-- /wp:group -->
 </section>
