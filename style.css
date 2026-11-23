@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.35.2
+Version: 1.35.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4277,6 +4277,14 @@ li.type-job_posting .perellion-card__pill--auto { display: inline-block; }
 		transform: scaleY(1);
 		opacity: 1;
 		visibility: visible;
+		/* Keyboard: WordPress keeps an open-on-hover-click submenu at 0x0
+		   and relies on the caret button, which this header hides. Opening
+		   on :focus-within needs the size too, or Tab reaches the parent
+		   and the panel stays collapsed (QA, 23 Nov). */
+		width: auto;
+		height: auto;
+		min-width: 260px;
+		overflow: visible;
 		transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out, visibility 0s;
 	}
 
