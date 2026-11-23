@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.2
+Version: 1.37.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4935,34 +4935,44 @@ figure.perellion-quote figcaption.perellion-quote__source {
 /* The showcase artwork carries the frame's down arrow (Brand Expression
    Options > Arrow); the separate arrow element would draw it twice. Its
    space is kept so the section height does not change. */
-.perellion-page--home .perellion-showcase__arrow {
-	visibility: hidden;
+@media (min-width: 861px) {
+	.perellion-page--home .perellion-showcase__arrow {
+		visibility: hidden;
+	}
 }
 
+/* Tablet and phone (860 and below) use other Figma variants ("Visual
+   configuration" 834 / 390, different compositions), which have not been
+   exported and verified yet; those widths keep the 1.36.5 artwork. */
+
 /* Home showcase: Body Component Visual, Brand Expression Options 1:2967 (instance I298:85179;1:2967 = master, sub-pixel rounding only) + Atmosphere Grey 1:574 */
-.perellion-page--home #showcase .perellion-panel::before {
-	inset: auto;
-	left: -19.7847%;
-	top: 1.4286%;
-	width: 153.8889%;
-	height: auto;
-	aspect-ratio: 1108 / 677;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-brand-expression-options-1-2967.svg");
-	background-size: 11.9134% auto, 100% auto;
-	background-position: 44.1998% 5.4936%, 0% 0%;
+@media (min-width: 861px) {
+	.perellion-page--home #showcase .perellion-panel::before {
+		inset: auto;
+		left: -19.7847%;
+		top: 1.4286%;
+		width: 153.8889%;
+		height: auto;
+		aspect-ratio: 1108 / 677;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-brand-expression-options-1-2967.svg");
+		background-size: 11.9134% auto, 100% auto;
+		background-position: 44.1998% 5.4936%, 0% 0%;
+	}
 }
 
 /* Home Get in touch (298:85190): Visual 3f2eb9 + Atmosphere Grey; Content b92a7e */
-.perellion-page--home #contact .perellion-panel::before {
-	inset: auto;
-	left: 6.4292%;
-	top: 2.6686%;
-	width: 93.75%;
-	height: auto;
-	aspect-ratio: 675 / 698;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
-	background-size: 19.5556% auto, 100% auto;
-	background-position: 44.6869% 3.7562%, 0% 0%;
+@media (min-width: 861px) {
+	.perellion-page--home #contact .perellion-panel::before {
+		inset: auto;
+		left: 6.4292%;
+		top: 2.6686%;
+		width: 93.75%;
+		height: auto;
+		aspect-ratio: 675 / 698;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
+		background-size: 19.5556% auto, 100% auto;
+		background-position: 44.6869% 3.7562%, 0% 0%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--home #contact .perellion-panel::after {
@@ -4980,16 +4990,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 
 /* About Who we are (298:85234): Visual c534e2 + Atmosphere Grey; Content ab6b67 */
-.perellion-page--about #who-we-are .perellion-panel::before {
-	inset: auto;
-	left: 10.1611%;
-	top: 5.7057%;
-	width: 89.4444%;
-	height: auto;
-	aspect-ratio: 644 / 649.52;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-defense-decorative-engineering-artwork-c534e2.svg");
-	background-size: 20.4969% auto, 100% auto;
-	background-position: 42.1445% 0%, 0% 100%;
+@media (min-width: 861px) {
+	.perellion-page--about #who-we-are .perellion-panel::before {
+		inset: auto;
+		left: 10.1611%;
+		top: 5.7057%;
+		width: 89.4444%;
+		height: auto;
+		aspect-ratio: 644 / 649.52;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-defense-decorative-engineering-artwork-c534e2.svg");
+		background-size: 20.4969% auto, 100% auto;
+		background-position: 42.1445% 0%, 0% 100%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--about #who-we-are .perellion-panel::after {
@@ -5007,16 +5019,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 
 /* Hub FANUC (130:14912): Visual 9bdc3a + Atmosphere Grey; Content ab6b67 */
-.perellion-page--industries #fanuc .perellion-panel::before {
-	inset: auto;
-	left: 10.1611%;
-	top: 5.7057%;
-	width: 89.4444%;
-	height: auto;
-	aspect-ratio: 644 / 658.52;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-9bdc3a.svg");
-	background-size: 20.4969% auto, 100% auto;
-	background-position: 42.1445% 0%, 0% 100%;
+@media (min-width: 861px) {
+	.perellion-page--industries #fanuc .perellion-panel::before {
+		inset: auto;
+		left: 10.1611%;
+		top: 5.7057%;
+		width: 89.4444%;
+		height: auto;
+		aspect-ratio: 644 / 658.52;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-9bdc3a.svg");
+		background-size: 20.4969% auto, 100% auto;
+		background-position: 42.1445% 0%, 0% 100%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--industries #fanuc .perellion-panel::after {
@@ -5034,16 +5048,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 
 /* Hub Coriolis (12:91569): Visual e798fe + Atmosphere Grey; Content b633b0 */
-.perellion-page--industries #coriolis .perellion-panel::before {
-	inset: auto;
-	left: 6.0125%;
-	top: 5.7057%;
-	width: 95.4167%;
-	height: auto;
-	aspect-ratio: 687 / 637.84;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-e798fe.svg");
-	background-size: 19.214% auto, 100% auto;
-	background-position: 44.2613% 0%, 0% 100%;
+@media (min-width: 861px) {
+	.perellion-page--industries #coriolis .perellion-panel::before {
+		inset: auto;
+		left: 6.0125%;
+		top: 5.7057%;
+		width: 95.4167%;
+		height: auto;
+		aspect-ratio: 687 / 637.84;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-e798fe.svg");
+		background-size: 19.214% auto, 100% auto;
+		background-position: 44.2613% 0%, 0% 100%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--industries #coriolis .perellion-panel::after {
@@ -5061,16 +5077,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 
 /* Hub Siemens (12:91567): Visual c534e2 + Atmosphere Grey; Content ab6b67 */
-.perellion-page--industries #siemens .perellion-panel::before {
-	inset: auto;
-	left: 10.1625%;
-	top: 5.7057%;
-	width: 89.4444%;
-	height: auto;
-	aspect-ratio: 644 / 649.52;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-defense-decorative-engineering-artwork-c534e2.svg");
-	background-size: 20.4969% auto, 100% auto;
-	background-position: 42.1426% 0%, 0% 100%;
+@media (min-width: 861px) {
+	.perellion-page--industries #siemens .perellion-panel::before {
+		inset: auto;
+		left: 10.1625%;
+		top: 5.7057%;
+		width: 89.4444%;
+		height: auto;
+		aspect-ratio: 644 / 649.52;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-defense-decorative-engineering-artwork-c534e2.svg");
+		background-size: 20.4969% auto, 100% auto;
+		background-position: 42.1426% 0%, 0% 100%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--industries #siemens .perellion-panel::after {
@@ -5088,16 +5106,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 
 /* Hub Get in touch (12:91573): Visual 3f2eb9 + Atmosphere Grey; Content b92a7e */
-.perellion-page--industries #contact .perellion-panel::before {
-	inset: auto;
-	left: 6.4292%;
-	top: 2.6686%;
-	width: 93.75%;
-	height: auto;
-	aspect-ratio: 675 / 698;
-	background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
-	background-size: 19.5556% auto, 100% auto;
-	background-position: 44.6869% 3.7562%, 0% 0%;
+@media (min-width: 861px) {
+	.perellion-page--industries #contact .perellion-panel::before {
+		inset: auto;
+		left: 6.4292%;
+		top: 2.6686%;
+		width: 93.75%;
+		height: auto;
+		aspect-ratio: 675 / 698;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
+		background-size: 19.5556% auto, 100% auto;
+		background-position: 44.6869% 3.7562%, 0% 0%;
+	}
 }
 @media (min-width: 861px) {
 	.perellion-page--industries #contact .perellion-panel::after {
