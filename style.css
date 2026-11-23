@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.36.4
+Version: 1.36.5
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4778,7 +4778,7 @@ main .wp-block-button__link {
 /* At 320 the 40px shims push "Explore open positions" onto two lines;
    the component keeps its 48px height with narrower shims there. */
 @media (max-width: 360px) {
-	main .wp-block-button__link { padding-inline: 20px !important; }
+	main .wp-block-button__link { padding-inline: 20px !important; font-size: 14px !important; }   /* "Advanced manufacturing" + 1px tracking is 250px at 16px; 272 available */
 }
 
 /* F-2 · Secondary Button (Contact pill): 14 Medium / 20, 20px sides → 32px. */
