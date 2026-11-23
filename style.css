@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.4
+Version: 1.37.5
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5212,5 +5212,36 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		height: 1223px;
 		background: url("assets/img/art/figma/perellion-industry-hub-card-house-background-12-97509.svg") 0 0 / 1440px 1223px no-repeat;
 		pointer-events: none;
+	}
+}
+
+/* Testimonial card between 861 and 1439px (1.37.5). The card is 28.57% of
+   the panel wide, as drawn, but its type was fixed at the 1440 sizes, so
+   below ~1200 the copy wrapped to one or two words a line and the card ran
+   above and below its section (Get in touch, 861-1100). Every size now
+   scales with the viewport from the 1440 values, with a floor, so the card
+   keeps the frame's proportions; 1440 and wider are unchanged. */
+@media (min-width: 861px) and (max-width: 1439px) {
+	.perellion-panel figure.perellion-quote {
+		padding: clamp(12px, 1.6667vw, 24px);
+		gap: clamp(8px, 1.3889vw, 20px);
+	}
+	.perellion-panel figure.perellion-quote--left,
+	.perellion-panel figure.perellion-quote--beside {
+		min-height: 21.806vw;            /* 314 at 1440 */
+	}
+	.perellion-panel figure.perellion-quote .perellion-quote__mark {
+		width: clamp(20px, 2.2222vw, 32px);
+		height: clamp(20px, 2.2222vw, 32px);
+	}
+	.perellion-panel figure.perellion-quote .perellion-quote__body p {
+		font-size: clamp(12px, 1.1111vw, 16px);
+		line-height: 1.4538;              /* 23.26 / 16 */
+		letter-spacing: clamp(0.5px, 0.0694vw, 1px);
+	}
+	.perellion-panel figure.perellion-quote figcaption.perellion-quote__source {
+		font-size: clamp(11px, 0.9028vw, 13px);
+		line-height: 1.5338;              /* 19.94 / 13 */
+		letter-spacing: clamp(0.5px, 0.0694vw, 1px);
 	}
 }

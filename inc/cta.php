@@ -19,7 +19,7 @@ function perellion_cta_markup( array $a = array() ): string {
 		'source'   => 'CTO at a well-known company',
 		'portrait' => array( 868, 515 ),
 		'alt'      => 'Perellion engineer in the shop',
-		'card'     => 'over',      // 'over' = white card on the photo's right edge; 'beside' = bare card left of it
+		'card'     => 'over',      // 'over' = white card on the photo's right edge; 'beside' = bare card left of it; 'none' = no card
 		'address_line' => false,   // true = Address on its own line in action blue (core pages)
 	);
 	$a = array_merge( $d, $a );
@@ -38,7 +38,8 @@ function perellion_cta_markup( array $a = array() ): string {
 	$address = str_replace( '\n', "\n", $address );
 	$alt    = esc_attr( $a['alt'] );
 	$panel  = 'perellion-panel--portrait';   /* every Get in touch frame: 345 x 471 portrait */
-	$card   = perellion_quote( $a['quote'], $a['source'], 'beside' === $a['card'] ? 'left' : 'right' );
+	/* 'none': the frame has no testimonial here (Industries hub, 12:91573: Quote Options empty). */
+	$card   = 'none' === $a['card'] ? '' : perellion_quote( $a['quote'], $a['source'], 'beside' === $a['card'] ? 'left' : 'right' );
 	return <<<HTML
 <!-- wp:group {"tagName":"section","align":"full","anchor":"contact","className":"perellion-reveal perellion-split perellion-cta","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|24","right":"var:preset|spacing|24"}}},"layout":{"type":"default"}} -->
 <section id="contact" class="wp-block-group alignfull perellion-reveal perellion-split perellion-cta" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--24)">

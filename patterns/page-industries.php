@@ -165,4 +165,4 @@ $cards = array(
 </section>
 <!-- /wp:group -->
 
-<?php echo perellion_cta_markup( array( 'eyebrow' => false, 'email' => 'info@perellion.com', 'address_line' => true, 'card' => 'beside', 'portrait' => array( 868 ), 'quote' => 'We can\'t lose access to your team\'s skill sets.', 'source' => 'Aerospace Supply Chain Manager' ) ); ?>
+<?php echo perellion_cta_markup( array( 'eyebrow' => false, 'email' => 'info@perellion.com', 'address_line' => true, 'card' => 'none', 'portrait' => array( 868 ) ) ); ?>
