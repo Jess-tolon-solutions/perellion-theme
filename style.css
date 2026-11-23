@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.36.0
+Version: 1.36.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4848,8 +4848,10 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	font-weight: 500;
 }
 
-/* F-1 · Section spacing, per section, to the frame dimension. Pages store
-   the padding inline from the block attributes, hence !important. Values
+/* F-1 · Section spacing, per section, to the frame dimension. The theme's
+   `main section.alignfull` rule (≈1178) sets 60/60 with !important over the
+   patterns' inline padding, so these selectors outrank it (id, or the same
+   compound plus a class). Values
    are the frame height minus the section's measured content height at
    1440 (before: 60/60 everywhere). */
 @media (min-width: 861px) {
@@ -4859,38 +4861,38 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	section.perellion-split > .perellion-col + .perellion-col { margin-block-start: 0; }
 
 	/* Get in touch (Body Component 700) on every page */
-	section.perellion-cta,
-	#join.perellion-join { padding-block: 0 !important; }
+	main section.alignfull.perellion-cta,
+	main section.alignfull#join { padding-block: 0 !important; }
 
 	/* Home: hero 289, showcase 774, capability header 147 + bar 292 */
-	.perellion-hero--home { padding-block: 32px !important; }
+	main section.alignfull.perellion-hero--home { padding-block: 32px !important; }
 	#showcase { padding-block: 0 !important; }
 	#capabilities { padding-block: 16px 12px !important; }
 
 	/* About: hero 357, Who we are 774, Team 550, What we do 844 (pinned),
 	   culture header 188 + wide 718, culture 713, certs 205 + 690 */
-	.perellion-hero--about { padding-block: 28px !important; }
+	main section.alignfull.perellion-hero--about { padding-block: 28px !important; }
 	#who-we-are { padding-block: 37px !important; }
 	#team { padding-block: 0 !important; }
 	.perellion-page--about #what-we-do { padding-block: 0 !important; }
 	#our-culture { padding-block: 0 !important; }
-	.perellion-culture-split { padding-block: 6px 7px !important; }
+	main section.alignfull.perellion-culture-split { padding-block: 6px 7px !important; }
 	#certifications { padding-block: 73px !important; }
 
 	/* What we do: hero 238 + 96, sections 713 */
-	.perellion-page--what-we-do .perellion-hero--page { padding-block: 55px !important; }
+	.perellion-page--what-we-do main section.alignfull.perellion-hero--page { padding-block: 55px !important; }
 	#machine-automation, #aerospace-defense, #manufacturing-logistics, #engineering-services { padding-block: 0 !important; }
 
 	/* Industries hub: partner splits hug the 700 visual */
 	#fanuc, #coriolis, #siemens { padding-block: 0 !important; }
 
 	/* Insights: hero 178; the grid follows directly */
-	.perellion-hero--insights { padding-block: 4px 0 !important; }
-	.perellion-archive__grid--insights { padding-block: 0 !important; }
+	main section.alignfull.perellion-hero--insights { padding-block: 4px 0 !important; }
+	main section.alignfull.perellion-archive__grid--insights { padding-block: 0 !important; }
 
 	/* Team profile: hero 218, portrait hugs the 700 visual */
-	.perellion-hero--profile { padding-block: 73px !important; }
-	.perellion-profile__portrait { padding-block: 0 !important; }
+	main section.alignfull.perellion-hero--profile { padding-block: 73px !important; }
+	main section.alignfull.perellion-profile__portrait { padding-block: 0 !important; }
 
 	/* Industry pages: the four split sections hug their content (pinned
 	   travel itself is F-3, unchanged). Hero, Challenges 48/100, Security
