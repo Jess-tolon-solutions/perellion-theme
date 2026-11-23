@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.36.1
+Version: 1.36.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4768,7 +4768,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
    sides → 48px tall, radius 34, #231F20. The inline padding baked into
    each page's button block is what made two button sizes coexist. */
 main .wp-block-button__link {
-	font-size: 16px;
+	font-size: 16px !important;   /* over has-small-font-size on four pages */
 	line-height: 24px;
 	font-weight: 600;
 	padding: 12px 40px !important;
@@ -4813,7 +4813,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 /* F-4 · Hero intro 21 / 37 on the core pages; About standfirst 16 / 36
    Medium (Content text). */
 @media (min-width: 861px) {
-	.perellion-hero--page .perellion-hero__body {
+	.perellion-hero--page:not(.perellion-hero--insights) .perellion-hero__body {
 		font-size: 21px;
 		line-height: 37px;
 	}
@@ -4880,7 +4880,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	#certifications { padding-block: 73px !important; }
 
 	/* What we do: hero 238 + 96, sections 713 */
-	.perellion-page--what-we-do main section.alignfull.perellion-hero--page { padding-block: 55px !important; }
+	.perellion-page--what-we-do main section.alignfull.perellion-hero--page { padding-block: 50px !important; }
 	#machine-automation, #aerospace-defense, #manufacturing-logistics, #engineering-services { padding-block: 0 !important; }
 
 	/* Industries hub: partner splits hug the 700 visual */
