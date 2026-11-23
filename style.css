@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.35.4
+Version: 1.36.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4753,4 +4753,147 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		width: 100%;
 	}
 	.perellion-marks--stacked { width: 100%; }
+}
+
+/* ======================================================================
+   Batch B (23 Nov 2026) — shared design tokens aligned to the Figma
+   components (FINAL_VISUAL_ACCEPTANCE_REPORT F-1, F-2, F-4, F-6, F-7, F-8).
+   Approved by Jess 23 Nov. Section spacing is set per section to the
+   frame's own dimension; heroes, Challenges, Security, FAQ and the
+   certification band keep their intentional values. Pinned scroll (F-3)
+   and industry tablet gutters (F-5) are untouched.
+   ====================================================================== */
+
+/* F-2 · Primary Button component: 16 SemiBold / 24, 12px shims, 40px
+   sides → 48px tall, radius 34, #231F20. The inline padding baked into
+   each page's button block is what made two button sizes coexist. */
+main .wp-block-button__link {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 600;
+	padding: 12px 40px !important;
+	border-radius: 34px;
+}
+
+/* F-2 · Secondary Button (Contact pill): 14 Medium / 20, 20px sides → 32px. */
+.perellion-header .wp-block-button__link {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+	padding: 6px 20px !important;
+	border-radius: 34px;
+}
+
+/* F-4 · Nav items: 16 Medium, tracking 0.8 (Menu — polished states). The
+   navigation block carries has-small-font-size, which WordPress sets with
+   !important. */
+.perellion-header .wp-block-navigation {
+	font-size: 16px !important;
+}
+.perellion-header .wp-block-navigation .wp-block-navigation-item__content {
+	letter-spacing: 0.8px;
+}
+
+/* F-4 · Footer: Inter 16 / 24 (Perellion Footer). The paragraphs carry
+   has-caption-font-size (13px, !important). */
+.perellion-footer__legal,
+.perellion-footer__links {
+	font-size: 16px !important;
+	line-height: 24px;
+}
+
+/* F-4 · Testimonial attribution 13 / 19.94 Regular. The theme-level
+   `div[class*="wp-block-"] figcaption` rule (0,1,1) outranked the
+   single-class rule above. */
+figure.perellion-quote figcaption.perellion-quote__source {
+	font-size: 13px;
+	line-height: 19.94px;
+}
+
+/* F-4 · Hero intro 21 / 37 on the core pages; About standfirst 16 / 36
+   Medium (Content text). */
+@media (min-width: 861px) {
+	.perellion-hero--page .perellion-hero__body {
+		font-size: 21px;
+		line-height: 37px;
+	}
+	.perellion-page--about .perellion-split__text .perellion-standfirst {
+		font-size: 16px;
+		line-height: 36px;
+		font-weight: 500;
+	}
+}
+
+/* F-6 · Body text is text/primary #231F20 in every frame; the hero intro
+   was graphite on What we do, Contact and Insights. */
+.perellion-hero__body {
+	color: var(--wp--preset--color--charcoal);
+}
+
+/* F-7 · What we do capability bars: 400px (Capability Bar component). */
+@media (min-width: 861px) {
+	.perellion-page--what-we-do .perellion-subcaps {
+		box-sizing: border-box;
+		min-height: 400px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+/* F-8 · Contact heading: 40 / 75 Medium (06/Contact). */
+.perellion-page--contact .perellion-hero__title {
+	font-size: 40px !important;
+	line-height: 75px;
+	font-weight: 500;
+}
+
+/* F-1 · Section spacing, per section, to the frame dimension. Pages store
+   the padding inline from the block attributes, hence !important. Values
+   are the frame height minus the section's measured content height at
+   1440 (before: 60/60 everywhere). */
+@media (min-width: 861px) {
+	/* The two halves of a split are flow children, so WordPress gave the
+	   second column a 24px block gap — the photo panel sat 24px lower than
+	   the copy. Side by side, there is no gap in the frame. */
+	section.perellion-split > .perellion-col + .perellion-col { margin-block-start: 0; }
+
+	/* Get in touch (Body Component 700) on every page */
+	section.perellion-cta,
+	#join.perellion-join { padding-block: 0 !important; }
+
+	/* Home: hero 289, showcase 774, capability header 147 + bar 292 */
+	.perellion-hero--home { padding-block: 32px !important; }
+	#showcase { padding-block: 0 !important; }
+	#capabilities { padding-block: 16px 12px !important; }
+
+	/* About: hero 357, Who we are 774, Team 550, What we do 844 (pinned),
+	   culture header 188 + wide 718, culture 713, certs 205 + 690 */
+	.perellion-hero--about { padding-block: 28px !important; }
+	#who-we-are { padding-block: 37px !important; }
+	#team { padding-block: 0 !important; }
+	.perellion-page--about #what-we-do { padding-block: 0 !important; }
+	#our-culture { padding-block: 0 !important; }
+	.perellion-culture-split { padding-block: 6px 7px !important; }
+	#certifications { padding-block: 73px !important; }
+
+	/* What we do: hero 238 + 96, sections 713 */
+	.perellion-page--what-we-do .perellion-hero--page { padding-block: 55px !important; }
+	#machine-automation, #aerospace-defense, #manufacturing-logistics, #engineering-services { padding-block: 0 !important; }
+
+	/* Industries hub: partner splits hug the 700 visual */
+	#fanuc, #coriolis, #siemens { padding-block: 0 !important; }
+
+	/* Insights: hero 178; the grid follows directly */
+	.perellion-hero--insights { padding-block: 4px 0 !important; }
+	.perellion-archive__grid--insights { padding-block: 0 !important; }
+
+	/* Team profile: hero 218, portrait hugs the 700 visual */
+	.perellion-hero--profile { padding-block: 73px !important; }
+	.perellion-profile__portrait { padding-block: 0 !important; }
+
+	/* Industry pages: the four split sections hug their content (pinned
+	   travel itself is F-3, unchanged). Hero, Challenges 48/100, Security
+	   and FAQ 48/48 keep their values. */
+	#overview, #help, #risk, #future { padding-block: 0 !important; }
 }
