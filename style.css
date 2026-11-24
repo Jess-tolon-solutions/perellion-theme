@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.6
+Version: 1.43.7
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6185,4 +6185,95 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-page--insights #contact .perellion-quote .perellion-quote__body{font-size:16px !important; line-height:23.26px !important; font-weight:500; letter-spacing:1px !important}
   .perellion-page--insights #contact .perellion-quote hr{width:32px !important}
   .perellion-page--insights #contact .perellion-split__text p{font-size:16px !important; line-height:36px !important}
+}
+
+/* 1.43.7 — About tablet (298:85244). It was falling back to the phone treatment.
+   Splits (Who we are, What we do, culture split, Join): the same 834×700 Visual pattern as the
+   What we do tablet frame (photo over copy, Testimonial card at the right of the photo, copy
+   inset 80, full measure), body 14/31.5. Meet the team: 2×2 grid of 342 cards at x60, 24
+   gutter (4th card faded at the edge as on desktop). Certifications: two 342 columns. Our
+   culture photo: 700 wide. */
+@media (min-width: 601px) and (max-width: 860px) {
+	.perellion-page--about main section.alignfull.perellion-split {
+		padding: 0 0 60px !important;
+		row-gap: 24px !important;
+	}
+	.perellion-page--about .perellion-split > .perellion-panel,
+	.perellion-page--about .perellion-split .perellion-col--media > .perellion-panel {
+		display: block !important;
+		position: relative !important;
+		width: 100% !important;
+		aspect-ratio: 834 / 700 !important;
+		margin: 0 !important;
+	}
+	.perellion-page--about .perellion-split .perellion-panel > .perellion-panel__media,
+	.perellion-page--about .perellion-split .perellion-panel > figure.perellion-panel__media {
+		position: absolute !important;
+		margin: 0 !important;
+		left: 20.86% !important;
+		top: 14.29% !important;
+		width: 56% !important;
+		aspect-ratio: 467 / 471 !important;
+		translate: none !important;
+	}
+	.perellion-page--about .perellion-split .perellion-panel--round > .perellion-panel__media,
+	.perellion-page--about .perellion-split .perellion-panel--round > figure.perellion-panel__media {
+		left: 20.62% !important;
+		width: 58.75% !important;
+		aspect-ratio: 1 !important;
+	}
+	.perellion-page--about #contact .perellion-panel > .perellion-panel__media,
+	.perellion-page--about #contact .perellion-panel > figure.perellion-panel__media {
+		left: 28.54% !important;
+		width: 43.05% !important;
+		aspect-ratio: 359 / 490 !important;
+		border-radius: 4px !important;
+	}
+	.perellion-page--about .perellion-split .perellion-panel .perellion-quote {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 20px !important;
+		position: absolute !important;
+		z-index: 2 !important;
+		left: 65.47% !important;
+		right: auto !important;
+		top: 30% !important;
+		transform: none !important;
+		width: 24.7% !important;
+		min-height: 0 !important;
+		margin: 0 !important;
+		padding: 24px !important;
+		border: 1px solid #fff !important;
+		background-color: #fff !important;
+		opacity: 0.9 !important;
+		-webkit-backdrop-filter: blur(7px) !important;
+		        backdrop-filter: blur(7px);
+		text-align: left !important;
+		align-items: stretch !important;
+	}
+	.perellion-page--about .perellion-split .perellion-panel .perellion-quote .perellion-quote__mark { margin: 0 !important; }
+	.perellion-page--about .perellion-split .perellion-panel figure.perellion-quote figcaption.perellion-quote__source { text-align: left !important; }
+	.perellion-page--about .perellion-split .perellion-split__text,
+	.perellion-page--about .perellion-split .perellion-col--text > .perellion-split__text {
+		margin: 0 !important;
+		padding-inline: 9.59% !important;
+		max-width: none !important;
+	}
+	.perellion-page--about .perellion-split .perellion-split__text p {
+		font-size: 14px !important;
+		line-height: 31.5px !important;
+	}
+}
+@media (min-width: 601px) and (max-width: 860px){
+  .perellion-page--about .perellion-split .perellion-split__text > *,
+  .perellion-page--about .perellion-copy__inner,
+  .perellion-page--about .perellion-copy__inner > *{max-width:none !important}
+  .perellion-page--about #team .perellion-carousel{padding:0 60px !important}
+  .perellion-page--about #team .perellion-carousel__track{display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:24px !important; flex-direction:initial !important}
+  .perellion-page--about #team .perellion-carousel__track > li{width:auto !important}
+  .perellion-page--about #team .perellion-carousel__track > li:nth-child(4){display:block !important; opacity:.5}
+  .perellion-page--about #team .perellion-carousel__track > li:nth-child(n+5){display:none !important}
+  .perellion-page--about #certifications .perellion-certs__grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:24px !important; padding-inline:36px !important}
+  .perellion-page--about .perellion-panel--wide .perellion-panel__media,
+  .perellion-page--about .perellion-panel--wide figure.perellion-panel__media{width:min(700px,100%) !important; max-width:none !important; margin-inline:auto !important}
 }
