@@ -33,17 +33,17 @@ $wwd_img = function ( $id, $fallback ) use ( $t ) {
 	return $u ? $u : $fallback;
 };
 $wwd_photo = array(
-	'machines'    => $wwd_img( 865, $t . '/assets/img/placeholder-feature.svg' ),
+	'machines'    => $wwd_img( 950, $t . '/assets/img/placeholder-feature.svg' ),
 	'aerospace'   => $wwd_img( 908, $t . '/assets/img/placeholder-feature.svg' ),
 	'logistics'   => $wwd_img( 905, $t . '/assets/img/placeholder-feature.svg' ),
-	'engineering' => $t . '/assets/img/hub/partner-siemens.jpg',
+	'engineering' => $wwd_img( 951, $t . '/assets/img/hub/partner-siemens.jpg' ),   /* Figma 3802da68 (270:42106) */
 	'contact'     => $wwd_img( 868, $wwd_img( 515, $t . '/assets/img/placeholder-feature.svg' ) ),
 );
-$wwd_icon = array(
-	'Custom Machine Tools' => 888, 'Robotic Systems' => 887, 'Composite Automation' => 889, 'Additive Manufacturing' => 890,
-	'Wing and Fuselage Assembly' => 892, 'Final Assembly Lines' => 891, 'Composite Fabrication' => 893, 'Drilling and Fastening' => 894,
-	'Assembly Lines' => 896, 'Layout &amp; Material Flow' => 895, 'Material Handling' => 897, 'Assembly Tooling' => 898,
-	'Design for Manufacturing' => 899, 'Factory Layout Planning' => 900, 'Automation Feasibility' => 901, 'Process Development' => 902,
+$wwd_icon = array(   /* Figma capability images per card (298:85296/306/316/326), sideloaded 23 Nov */
+	'Custom Machine Tools' => 953, 'Robotic Systems' => 954, 'Composite Automation' => 955, 'Additive Manufacturing' => 956,
+	'Wing and Fuselage Assembly' => 957, 'Final Assembly Lines' => 958, 'Composite Fabrication' => 959, 'Drilling and Fastening' => 960,
+	'Assembly Lines' => 961, 'Layout &amp; Material Flow' => 962, 'Material Handling' => 963, 'Assembly Tooling' => 964,
+	'Design for Manufacturing' => 965, 'Factory Layout Planning' => 966, 'Automation Feasibility' => 967, 'Process Development' => 968,
 );
 $wwd_icon_tag = function ( $title ) use ( $wwd_icon ) {
 	$id = isset( $wwd_icon[ $title ] ) ? $wwd_icon[ $title ] : 0;
