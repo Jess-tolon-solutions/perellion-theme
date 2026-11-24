@@ -26,7 +26,7 @@
 <h1 class="wp-block-heading perellion-hero__title has-display-font-size"><span class="perellion-accent">Insights</span></h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"perellion-hero__body"} -->
-<p class="perellion-hero__body">Lorem News overview Get to know our world-class team thinks and works through in-depth team profiles, news case studies and more.</p>
+<p class="perellion-hero__body">Get to know the people behind Perellion. Explore our team, discover career opportunities, and see how our engineering expertise brings complex ideas to life.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
