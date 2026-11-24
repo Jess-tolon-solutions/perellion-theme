@@ -12,7 +12,7 @@
 <p class="has-text-align-center perellion-overline perellion-eyebrow ">Defense</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":1,"textAlign":"center","className":"perellion-hero__title","fontSize":"display","fontFamily":"poppins"} -->
-<h1 class="wp-block-heading has-text-align-center perellion-hero__title has-poppins-font-family has-display-font-size">Trusted Engineering for <span class="perellion-gradient-text">Secure Defense</span> Programs</h1>
+<h1 class="wp-block-heading has-text-align-center perellion-hero__title has-poppins-font-family has-display-font-size">Trusted Engineering for Secure <span class="perellion-gradient-text">Defense</span> Programs</h1>
 <!-- /wp:heading -->
 
 <!-- wp:group {"className":"perellion-sectionnav","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"},"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
