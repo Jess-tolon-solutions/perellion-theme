@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.42.7
+Version: 1.42.8
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6066,4 +6066,26 @@ figure.perellion-quote figcaption.perellion-quote__source {
     padding:0 0 8px 1px !important; margin:0 !important; background:none !important; border:0 !important}
   .perellion-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content{
     padding:0 !important; font-size:21px !important; line-height:55px !important; font-weight:500 !important; letter-spacing:1px !important; color:#231f20 !important; background:none !important}
+}
+
+/* 1.42.8 — Dropdown animation actually plays. The panel goes display:none → flex when it
+   opens, and transitions never run from display:none, so the 450ms expand and the 70ms item
+   stagger (Animation Notes 93:47246) were skipped: the panel and all items appeared at once
+   (sampled every ~70ms: opacity 1, offset 0 from the first frame). Same timings, as keyframes,
+   which do run on a display change. */
+@keyframes perellion-dropdown-band { from { transform: scaleY(.6); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+@keyframes perellion-dropdown-item { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (min-width: 861px) and (prefers-reduced-motion: no-preference){
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container{
+    animation: perellion-dropdown-band 450ms cubic-bezier(0.22, 1, 0.36, 1) both}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item{
+    animation: perellion-dropdown-item 320ms ease-out both}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(1){animation-delay:70ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(2){animation-delay:140ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(3){animation-delay:210ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(4){animation-delay:280ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(5){animation-delay:350ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(6){animation-delay:420ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(7){animation-delay:490ms}
+  .perellion-header .wp-block-navigation .has-child:is(:hover,:focus-within) > .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(8){animation-delay:560ms}
 }
