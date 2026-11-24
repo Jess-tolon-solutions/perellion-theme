@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.41.5
+Version: 1.41.6
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5913,4 +5913,14 @@ figure.perellion-quote figcaption.perellion-quote__source {
    (31.5px, the body line height) in the frame; the build used 16px. */
 @media (min-width: 861px){
   .perellion-page--about #what-we-do .perellion-split__text p:not(:first-of-type) + p{margin-top:31.5px !important}
+}
+
+/* 1.41.6 — Advanced Manufacturing · Example applications (12:75401).
+   Photo: the frame crops the 683×1024 photograph to its lower part (CROP x .07–.92,
+   y .40–.97); the build showed the upper-middle (object-position 50% 35%). With cover on a
+   square, the matching window is centred at 90% down.
+   List: the frame indents the bullets 10px from the copy column (indentation 1). */
+.perellion-page--advanced-manufacturing #applications .perellion-panel__media img{object-position:50% 90% !important}
+@media (min-width: 861px){
+  .perellion-page--advanced-manufacturing #applications .perellion-ticklist{padding-left:10px !important}
 }
