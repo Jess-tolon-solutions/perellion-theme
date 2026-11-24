@@ -11,6 +11,29 @@
 ( function () {
 	'use strict';
 
+	/* ---- 0. Dropdown band (layout, not motion; runs for everyone) -------
+	 * The frame's open dropdown is a white band from the left edge of the
+	 * window to the right. The panel itself sits under its parent link, so
+	 * the band is drawn from the panel and needs the panel's distance from
+	 * the window edge, which only the page knows. */
+	function placeDropdownBands() {
+		var w = document.documentElement.clientWidth;
+		document.querySelectorAll( '.perellion-header .wp-block-navigation .has-child' ).forEach( function ( li ) {
+			var sub = li.querySelector( '.wp-block-navigation__submenu-container' );
+			if ( ! sub ) { return; }
+			var left = li.getBoundingClientRect().left - 32; // panel sits at left:-32px
+			sub.style.setProperty( '--perellion-band-x', ( -left ) + 'px' );
+			sub.style.setProperty( '--perellion-band-w', w + 'px' );
+		} );
+		document.documentElement.classList.add( 'perellion-bands' );
+	}
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', placeDropdownBands );
+	} else {
+		placeDropdownBands();
+	}
+	window.addEventListener( 'resize', placeDropdownBands );
+
 	var reduce = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 	if ( reduce.matches ) {
 		document.documentElement.classList.add( 'perellion-no-motion' );
