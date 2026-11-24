@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.5
+Version: 1.43.6
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6156,4 +6156,33 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (min-width: 601px) and (max-width: 860px){
   .perellion-page--insights main section.alignfull.perellion-archive__grid--insights{padding-inline:60px !important}
   .perellion-page--insights #contact .perellion-split__text{padding-inline:80px !important; max-width:none !important}
+}
+
+/* 1.43.6 — Insights at ≤600 (298:85525): intro 16/28 centred; filter chips one horizontally
+   scrolling row, inactive chips filled grey (no outline); cards: name and job title left-
+   aligned, both 28/36 Medium (the frame sets them as one two-line title); Get in touch as the
+   Home/WWD 390 frames (portrait 318×434 at x36, 260 testimonial card, 40/44 heading). */
+@media (max-width: 600px){
+  .perellion-page--insights .perellion-hero__body{font-size:16px !important; line-height:28px !important; text-align:center !important}
+  .perellion-page--insights .perellion-tagrow{justify-content:flex-start !important; flex-wrap:nowrap !important; overflow-x:auto; scrollbar-width:none; margin-inline:-24px !important; padding-inline:20px !important; max-width:none !important; width:auto !important}
+  .perellion-page--insights .perellion-tagrow::-webkit-scrollbar{display:none}
+  .perellion-page--insights .perellion-tagrow p{white-space:nowrap; display:flex; gap:20px; margin:0}
+  .perellion-page--insights .perellion-tag:not(.is-current){background:#ededed !important; border-color:#ededed !important}
+  .perellion-page--insights .perellion-archive__grid--insights .wp-block-post-title,
+  .perellion-page--insights .perellion-archive__grid--insights .wp-block-post-title a,
+  .perellion-page--insights .perellion-archive__grid--insights .wp-block-post-excerpt__excerpt{
+    text-align:left !important; font-size:28px !important; line-height:36px !important; font-weight:500 !important}
+  .perellion-page--insights #contact h2{font-size:40px !important; line-height:44px !important}
+  .perellion-page--insights #contact .perellion-panel{padding:24px 0 0 !important; margin:0 24px !important; width:auto !important; max-width:none !important; aspect-ratio:auto !important}
+  body.perellion-page--insights #contact .perellion-panel .perellion-panel__media{position:relative !important; left:auto !important; top:auto !important; width:318px !important; max-width:100% !important; margin:0 auto !important; aspect-ratio:auto !important; height:auto !important}
+  .perellion-page--insights #contact .perellion-panel__media img{position:static !important; inset:auto !important; display:block !important; width:100% !important; height:auto !important; aspect-ratio:318/434 !important; object-fit:cover !important}
+  .perellion-page--insights #contact .perellion-panel::before{clip-path:inset(0 0 calc(100% - 520px) 0)}
+  .perellion-page--insights #contact .perellion-quote{
+    position:relative !important; left:auto !important; top:auto !important; right:auto !important; box-sizing:border-box !important; width:260px !important; max-width:none !important;
+    margin:12px auto 0 !important; padding:24px !important; background:transparent !important; opacity:.85 !important; -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    display:flex !important; flex-direction:column !important; align-items:center !important; gap:20px !important; text-align:center !important; transform:none}
+  .perellion-page--insights #contact .perellion-quote > *{margin:0 !important}
+  .perellion-page--insights #contact .perellion-quote .perellion-quote__body{font-size:16px !important; line-height:23.26px !important; font-weight:500; letter-spacing:1px !important}
+  .perellion-page--insights #contact .perellion-quote hr{width:32px !important}
+  .perellion-page--insights #contact .perellion-split__text p{font-size:16px !important; line-height:36px !important}
 }
