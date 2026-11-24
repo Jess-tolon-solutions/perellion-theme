@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.38.0
+Version: 1.38.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5413,5 +5413,26 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	}
 	.perellion-page--what-we-do .perellion-subcaps:not(.perellion-band--tint) .perellion-subcap__desc {
 		max-width: 300px;
+	}
+}
+
+/* What we do › band colours, from the frame's fills (1.38.1).
+   Machines and Manufacturing bodies: #f5f5f5 under a linear gradient white
+   (31%) to #f9f9f9 (100%), running right to left. The 400px capability
+   bars: white 30% + charcoal 5% over the white page = #f4f4f4. The short
+   bars: white. Get in touch: #f5f5f5. */
+@media (min-width: 861px) {
+	.perellion-page--what-we-do #machine-automation,
+	.perellion-page--what-we-do #manufacturing-logistics {
+		background: linear-gradient(255deg, #ffffff 31%, #f9f9f9 100%), #f5f5f5;
+	}
+	.perellion-page--what-we-do .perellion-subcaps.perellion-band--tint {
+		background: #f4f4f4;
+	}
+	.perellion-page--what-we-do .perellion-subcaps:not(.perellion-band--tint) {
+		background: #ffffff;
+	}
+	.perellion-page--what-we-do #contact {
+		background: #f5f5f5;
 	}
 }
