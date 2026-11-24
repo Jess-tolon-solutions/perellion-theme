@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.41.6
+Version: 1.41.7
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5923,4 +5923,23 @@ figure.perellion-quote figcaption.perellion-quote__source {
 .perellion-page--advanced-manufacturing #applications .perellion-panel__media img{object-position:50% 90% !important}
 @media (min-width: 861px){
   .perellion-page--advanced-manufacturing #applications .perellion-ticklist{padding-left:10px !important}
+}
+
+/* 1.41.7 — Home.
+   Desktop (298:85176): Core Capabilities subtitle uses the Header Content subtitle style
+   (14/31.52, tracking .85, 854 measure) and sits on one line; the build set 16/24 at 760 and
+   wrapped it.
+   Tablet (298:85192): the showcase photo is 635 wide (x96), not 467; Get in touch copy is
+   centred under the visual (heading, intro, contact lines and button). */
+@media (min-width: 1101px){
+  .perellion-page--home #capabilities h2 + p{font-size:14px !important; line-height:31.52px !important; letter-spacing:.85px !important; max-width:854px !important}
+}
+@media (min-width: 601px) and (max-width: 860px){
+  .perellion-page--home #showcase .perellion-panel__media{width:min(635px, 100%) !important; max-width:none !important; height:auto !important}
+  .perellion-page--home #showcase .perellion-panel__media img{width:100% !important; height:auto !important}
+  .perellion-page--home #showcase .perellion-panel{width:auto !important; max-width:none !important}
+  .perellion-page--home #contact .perellion-split__text,
+  .perellion-page--home #contact .perellion-copy__inner{text-align:center !important; margin-inline:auto !important; max-width:674px !important}
+  .perellion-page--home #contact .perellion-copy__inner > *{margin-inline:auto !important}
+  .perellion-page--home #contact .wp-block-buttons{justify-content:center !important}
 }
