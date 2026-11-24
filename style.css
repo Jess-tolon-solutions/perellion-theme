@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.39.1
+Version: 1.39.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5658,4 +5658,65 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (min-width: 1101px){
   .perellion-page--home #contact .perellion-split__text,
   .perellion-page--insights #contact .perellion-split__text{margin-inline:34.72% 1.39%}
+}
+
+/* 1.39.2 — What We Do at ≤600, from Figma 298:85395 (390w) geometry:
+   Visual: media x36 w318 (321/318/321/318, Get in touch 318×434) 48px below the section top;
+   glow ("Brand Expression Options", ellipses 34–361 × 551–846) sits behind the photo only;
+   Testimonial Right card x65 w260, pad 24, blur 12, opacity .85, 36px under the photo;
+   copy starts 32px under the card. Reveal-on-scroll untouched. */
+@media (max-width: 600px){
+  .perellion-page--what-we-do main section.alignfull.perellion-split{padding-top:24px !important}
+  .perellion-page--what-we-do .perellion-split{gap:32px !important}
+  .perellion-page--what-we-do .perellion-split .perellion-panel{
+    padding:24px 0 0 !important; margin:0 !important; width:auto !important; max-width:none !important;
+    aspect-ratio:auto !important; position:relative !important; left:auto !important; right:auto !important}
+  .perellion-page--what-we-do #contact .perellion-panel{margin-inline:24px !important}
+  .perellion-page--what-we-do .perellion-split .perellion-panel__media{
+    position:relative !important; left:auto !important; top:auto !important;
+    width:318px !important; max-width:calc(100% - 24px) !important; margin:0 auto !important; aspect-ratio:auto !important}
+  .perellion-page--what-we-do .perellion-split .perellion-panel__media img{
+    width:100% !important; height:auto !important; aspect-ratio:318/321 !important; object-fit:cover !important; border-radius:0}
+  .perellion-page--what-we-do #aerospace-defense .perellion-panel__media img,
+  .perellion-page--what-we-do #engineering-services .perellion-panel__media img{aspect-ratio:1 !important}
+  .perellion-page--what-we-do #contact .perellion-panel__media img{aspect-ratio:318/434 !important}
+  /* glow behind the photo only (was the whole panel, i.e. behind the quote too) */
+  .perellion-page--what-we-do .perellion-split .perellion-panel::before{
+    inset:0 -12px auto -12px !important; height:calc(24px + 100vw * 0.8154) !important;
+    max-height:none; background-size:contain !important; background-position:center !important}
+  .perellion-page--what-we-do .perellion-split .perellion-panel::after{display:none !important}
+  .perellion-page--what-we-do .perellion-split .perellion-quote{
+    position:relative !important; left:auto !important; top:auto !important; right:auto !important;
+    box-sizing:border-box !important; width:260px !important; max-width:none !important;
+    margin:36px auto 0 !important; padding:24px !important;
+    background:#fff !important; opacity:.85 !important;
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-radius:2px;
+    text-align:center !important; transform:none}
+  .perellion-page--what-we-do .perellion-split .perellion-quote .perellion-quote__body{
+    font-size:16px !important; line-height:23.26px !important; font-weight:500; letter-spacing:1px !important; margin:20px 0 0 !important}
+  .perellion-page--what-we-do .perellion-split .perellion-quote hr{margin:20px auto !important}
+  .perellion-page--what-we-do .perellion-split figure.perellion-quote figcaption.perellion-quote__source{
+    font-size:13px !important; line-height:19.94px !important; letter-spacing:1px !important; margin:0 !important}
+
+  /* Jump nav: one horizontally scrolling row (Jump Nav XL at 390: items pad 0 20, 48 tall,
+     Poppins Medium 16/24, letter-spacing 1, uppercase #0669fe). */
+  .perellion-page--what-we-do .perellion-jumpnav{
+    flex-wrap:nowrap !important; justify-content:flex-start !important; gap:0 !important;
+    overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none;
+    margin-inline:calc(var(--wp--preset--spacing--24) * -1) !important; padding-inline:0 !important; max-width:none !important}
+  .perellion-page--what-we-do .perellion-jumpnav::-webkit-scrollbar{display:none}
+  .perellion-page--what-we-do .perellion-jumpnav a{
+    flex:none; box-sizing:border-box; max-width:none; padding:0 20px;
+    font-size:16px; line-height:24px; letter-spacing:1px; color:#0669fe}
+  .perellion-page--what-we-do .perellion-jumpnav a:nth-child(1){width:174px}
+  .perellion-page--what-we-do .perellion-jumpnav a:nth-child(2){width:142px}
+  .perellion-page--what-we-do .perellion-jumpnav a:nth-child(3){width:190px}
+  .perellion-page--what-we-do .perellion-jumpnav a:nth-child(4){width:170px}
+
+  /* Footer XS (every 390 frame): centred copyright, then links + 32px LinkedIn mark centred. */
+  .perellion-footer__row{flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:16px !important}
+  .perellion-footer__legal{text-align:center !important; width:100%}
+  .perellion-footer__links{justify-content:center; flex-wrap:nowrap}
+  .perellion-footer__social{margin-left:4px}
+  .perellion-footer__social svg{width:32px; height:32px}
 }
