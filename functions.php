@@ -152,8 +152,10 @@ add_action( 'wp_enqueue_scripts', 'perellion_enqueue_motion' );
  *
  *  - queryId 7  (team profile, "You might also like to meet"): leave the
  *    current person out and shuffle, so the strip changes per profile.
- *  - queryId 31 (Insights): one grid across all three content types, which
- *    the Query block cannot express on its own.
+ *
+ * Insights (queryId 31) is no longer widened: per Figma 298:85446 its default
+ * grid is team profiles only ("Meet the team" active). Jobs and case studies
+ * live on their own archives (/join-the-team/, /case-studies/).
  */
 add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 	$id = isset( $block->context['queryId'] ) ? (int) $block->context['queryId'] : 0;
@@ -163,11 +165,6 @@ add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 			$query['post__not_in'] = array( $current );
 		}
 		$query['orderby'] = 'rand';
-	}
-	if ( 31 === $id ) {
-		$query['post_type'] = array( 'team_member', 'case_study', 'job_posting' );
-		$query['orderby']   = 'date';
-		$query['order']     = 'DESC';
 	}
 	return $query;
 }, 10, 2 );
