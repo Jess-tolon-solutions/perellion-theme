@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.39.3
+Version: 1.39.4
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5721,4 +5721,13 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-footer__links{justify-content:center; flex-wrap:nowrap}
   .perellion-footer__social{margin-left:4px}
   .perellion-footer__social svg{width:32px; height:32px}
+}
+
+/* 1.39.4 — WWD 390: testimonial card internals per Testimonial Right (pad 24, gap 20:
+   mark 32 → body → 32px rule → source), and Get in touch photo centred like the others. */
+@media (max-width: 600px){
+  .perellion-page--what-we-do .perellion-split .perellion-quote{display:flex !important; flex-direction:column !important; align-items:center !important; gap:20px !important}
+  .perellion-page--what-we-do .perellion-split .perellion-quote > *{margin:0 !important}
+  .perellion-page--what-we-do .perellion-split .perellion-quote hr{width:32px !important; margin:0 !important}
+  body.perellion-page--what-we-do #contact .perellion-panel .perellion-panel__media{margin:0 auto !important; left:auto !important; transform:none !important}
 }
