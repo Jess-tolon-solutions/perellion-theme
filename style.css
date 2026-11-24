@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.8
+Version: 1.43.9
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6302,7 +6302,8 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (max-width: 600px){
   .perellion-page--about .perellion-split .perellion-panel__media:not(.perellion-panel--portrait *){width:318px !important; max-width:calc(100% - 12px) !important}
   .perellion-page--about .perellion-split .perellion-panel::before{clip-path:inset(0 0 calc(100% - 430px) 0)}
-  .perellion-page--about #team .perellion-carousel{padding:0 24px !important}
+  /* teamband already supplies the 24px gutter; Figma 298:85267 cards are 345 wide at x23 */
+  .perellion-page--about #team .perellion-carousel{padding:0 !important}
   .perellion-page--about #team .perellion-carousel__track > li{width:100% !important}
   .perellion-page--about #team .wp-block-post-title,
   .perellion-page--about #team .wp-block-post-title a,
