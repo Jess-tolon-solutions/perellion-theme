@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.4
+Version: 1.43.5
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6150,3 +6150,10 @@ figure.perellion-quote figcaption.perellion-quote__source {
 /* 1.43.4 — Contact uses the 1:2967 master as its instance shows it: the lattice group
    (opacity .5) and the down-arrow are hidden in 298:85617, so that copy omits those two
    layers; every other path is the master's, unchanged. */
+
+/* 1.43.5 — Insights tablet (298:85498): card grid inset 60 (cards 342, 24 gutter; build 24 →
+   378); Get in touch copy starts at x80 like the other 834 frames (build 24). */
+@media (min-width: 601px) and (max-width: 860px){
+  .perellion-page--insights main section.alignfull.perellion-archive__grid--insights{padding-inline:60px !important}
+  .perellion-page--insights #contact .perellion-split__text{padding-inline:80px !important; max-width:none !important}
+}
