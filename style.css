@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.39.5
+Version: 1.39.6
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5740,7 +5740,8 @@ figure.perellion-quote figcaption.perellion-quote__source {
     inset:-8px -36px auto -36px !important; height:calc(64px + 100vw * 0.8154) !important}
   .perellion-page--what-we-do #contact .perellion-panel::before{height:calc(64px + 100vw * 1.1128) !important}
   .perellion-page--what-we-do .perellion-split .perellion-split__text h2{font-size:40px !important; line-height:44px !important}
-  .perellion-page--what-we-do .perellion-split .perellion-split__text p{font-size:14px !important; line-height:31.52px !important}
+  .perellion-page--what-we-do .perellion-split .perellion-split__text p{font-size:14px !important; line-height:31.52px !important; letter-spacing:1px !important}
+  .perellion-page--what-we-do .perellion-split .perellion-split__text{padding-inline:4px !important}
   .perellion-page--what-we-do #manufacturing-logistics .perellion-split__text p{font-size:16px !important; line-height:37px !important}
   .perellion-page--what-we-do #contact .perellion-split__text p{font-size:16px !important; line-height:36px !important}
 }
