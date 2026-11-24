@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.41.0
+Version: 1.41.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5871,4 +5871,17 @@ figure.perellion-quote figcaption.perellion-quote__source {
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) main .perellion-ticklist li{padding-left:0 !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) main .perellion-ticklist li::before{
     position:static !important; display:inline-block !important; vertical-align:middle; margin:-2px 8px 0 0 !important; width:8px !important; height:8px !important}
+}
+
+/* 1.41.1 — Industry pinned splits at ≥861. The 80/150 copy insets belonged to the old masked
+   copy window (fades of 48/72); that window is switched off at this width (mask none,
+   transform none, copy scrolls normally), so the insets only left ~125px of dead space per
+   section. Measured on a real scroll at 1440: photo holds ~200–300px, then 166px of white
+   under the last line before the next section, against 39–66px in the frames (Overview 66,
+   Help 51, Risk 49, Future 40, symmetric top/bottom). Use the frames' middle value. */
+@media (min-width: 861px){
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) .perellion-motion .perellion-split.is-pinned .perellion-copy__inner,
+  .perellion-motion :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) .perellion-split.is-pinned .perellion-copy__inner,
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy).perellion-motion .perellion-split.is-pinned .perellion-copy__inner{
+    padding-block:56px !important}
 }
