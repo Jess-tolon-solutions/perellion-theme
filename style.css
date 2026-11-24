@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.6
+Version: 1.37.7
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4925,6 +4925,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 
 .perellion-page--home #showcase,
 .perellion-page--home #contact,
+.perellion-page--insights #contact,
 .perellion-page--about #who-we-are,
 .perellion-page--industries #fanuc,
 .perellion-page--industries #coriolis,
@@ -5254,5 +5255,57 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (min-width: 861px) and (max-width: 1439px) {
 	.perellion-showcase .perellion-panel--wide {
 		width: min(720px, calc((50vw - 16px) * 1.2773));
+	}
+}
+
+/* Insights Get in touch (298:85496; layers identical to Home 298:85190 apart from ids and 0.001px rounding): Visual 3f2eb9 + Atmosphere Grey; Content b92a7e */
+@media (min-width: 861px) {
+	.perellion-page--insights #contact .perellion-panel::before {
+		inset: auto;
+		left: 6.4292%;
+		top: 2.6686%;
+		width: 93.75%;
+		height: auto;
+		aspect-ratio: 675 / 698;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-3f2eb9.svg");
+		background-size: 19.5556% auto, 100% auto;
+		background-position: 44.6869% 3.7562%, 0% 0%;
+		clip-path: inset(0 0.1911% 2.3897% 0);
+	}
+}
+@media (min-width: 861px) {
+	.perellion-page--insights #contact .perellion-panel::after {
+		inset: auto;
+		left: -85.9722%;
+		top: 1.8571%;
+		width: 33.3333%;
+		height: auto;
+		aspect-ratio: 240 / 261;
+		z-index: -1;
+		background-image: url("assets/img/art/figma/perellion-industry-hub-decorative-engineering-artwork-b92a7e.svg");
+		background-size: 100% 100%;
+		background-position: 0 0;
+	}
+}
+
+
+/* About › Our culture header (1.37.7). Batch B took the section's padding to
+   0, which put the heading on the band's top edge and left the 150px gap
+   above the photo designed for the old 60px padding: heading too high, photo
+   72px too low. Frame (298:85237 + 298:85238): heading box at 44 with a 75px
+   line (glyph centre 81.5), one-line 14 / 31.5 subline at 119, photo top 304,
+   next band 906 below. */
+@media (min-width: 861px) {
+	main section.alignfull#our-culture {
+		padding-top: 60px !important;          /* 44px h2 line: glyph centre at 82 */
+		padding-bottom: 9px !important;        /* section 906 as the frame */
+	}
+	.perellion-page--about #our-culture h2 + p {
+		margin-top: 15px;                      /* subline box at 119 */
+		font-size: 14px;
+		line-height: 31.5px;
+	}
+	.perellion-page--about #our-culture .perellion-panel--wide {
+		margin-top: 46px;                      /* panel 197, photo (107 in) at 304 */
 	}
 }
