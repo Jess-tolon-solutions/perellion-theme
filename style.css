@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.42.5
+Version: 1.42.6
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6015,3 +6015,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-page--contact main section.alignfull.perellion-mapband{padding-top:0 !important}
   .perellion-page--contact .perellion-mapband .perellion-panel{margin-top:12px !important}
 }
+
+/* 1.42.6 — Team profile (298:85546 / 85567 / 85595): the hero carries the "MEET THE TEAM"
+   preheadline above the name; the global hero rule hid it. */
+.perellion-hero--profile .perellion-eyebrow{display:block !important}
