@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.8
+Version: 1.37.9
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5327,5 +5327,18 @@ figure.perellion-quote figcaption.perellion-quote__source {
 		background-size: 11.9134% auto, 29.5126% auto, 100% auto;
 		background-position: 44.1998% 5.4936%, 24.1665% 51.6667%, 0% 0%;
 		background-repeat: no-repeat;
+	}
+}
+
+/* About › culture split and Join (1.37.9): their artwork is still the
+   earlier crop, drawn 14.29% above and below the 700px panel. The overhang
+   reached into the band above, so the culture split's crop drew a second
+   arrow under the Our culture photo, beside the frame's own. The handoff
+   says to clip decoration at the section boundary; these clip the layer at
+   the panel's top and bottom edges (the box is 900px tall, 100px over). */
+@media (min-width: 861px) {
+	.perellion-page--about .perellion-culture-split .perellion-panel::before,
+	.perellion-page--about #join .perellion-panel::before {
+		clip-path: inset(11.11% 0 11.11% 0);
 	}
 }
