@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.40.7
+Version: 1.40.8
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5854,4 +5854,12 @@ figure.perellion-quote figcaption.perellion-quote__source {
     justify-content:start !important; padding-left:calc(50% - 590px) !important; margin-top:150px !important; max-width:none !important}
   .perellion-page--energy #extra-2 .perellion-apps h3{font-size:16px !important; line-height:37px !important; font-weight:700 !important; margin:0 !important; letter-spacing:1px}
   .perellion-page--energy #extra-2 .perellion-apps p{font-size:16px !important; line-height:37px !important; margin:0 !important; letter-spacing:1px}
+}
+
+/* 1.40.8 — Aerospace/Space Security marks below 1101: the figure was a fixed-height,
+   overflow-hidden box, so the 345×471 marks image lost its ITAR badge. Show it whole. */
+@media (max-width: 1100px){
+  :is(.perellion-page--aerospace,.perellion-page--space) #security .perellion-panel__media{height:auto !important; aspect-ratio:auto !important; overflow:visible !important}
+  :is(.perellion-page--aerospace,.perellion-page--space) #security .perellion-panel__media img{height:auto !important; aspect-ratio:auto !important; object-fit:contain !important; border-radius:0 !important}
+  :is(.perellion-page--aerospace,.perellion-page--space) #security .perellion-split__media{aspect-ratio:auto !important; height:auto !important}
 }
