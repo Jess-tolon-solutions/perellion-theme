@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.42.0
+Version: 1.42.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5988,4 +5988,16 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (max-width: 600px){
   body.perellion-page--home #showcase .perellion-panel .perellion-panel__media{margin:0 auto !important}
   .perellion-page--home #showcase .perellion-teamband__arrow{display:none !important}
+}
+
+/* 1.42.1 — Contact at ≤600 (298:85627): title 40/44, intro 16/28, contact lines 16/28,
+   map 340×190 inset at x24 (build: 294 at x48); glow kept to the map's edges. */
+@media (max-width: 600px){
+  .perellion-page--contact #get-in-touch h1{font-size:40px !important; line-height:44px !important}
+  .perellion-page--contact #get-in-touch .perellion-hero__body{font-size:16px !important; line-height:28px !important}
+  .perellion-page--contact #get-in-touch .perellion-contact__lines{line-height:28px !important}
+  .perellion-page--contact .perellion-mapband .perellion-panel{padding:0 !important; margin-top:24px}
+  .perellion-page--contact .perellion-mapband .perellion-panel__media{width:340px !important; max-width:100% !important; margin:0 auto !important; left:auto !important; position:relative !important}
+  .perellion-page--contact .perellion-mapband .perellion-panel__media img{width:100% !important; height:auto !important; aspect-ratio:340/190 !important; object-fit:cover !important}
+  .perellion-page--contact .perellion-mapband .perellion-panel::before{opacity:.5}
 }
