@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.40.0
+Version: 1.40.1
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5767,4 +5767,24 @@ figure.perellion-quote figcaption.perellion-quote__source {
 }
 @media (min-width: 861px){
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) .perellion-hero .perellion-scrollcue{display:none !important}
+}
+
+/* 1.40.1 — Industry pages, against Defense 7:7863 (same components on all six frames).
+   Security (7:13387): marks at x232 (345×471), copy x933 w460; heading 40/44 on two lines;
+   body 16/37 Regular, tracking 1; list 14/27 Regular with a plain "•", no indent.
+   Get in touch: contact lines 16/36 Medium, tracking 1 (the frame wraps Address onto its
+   own line at 460 because of it). Eyebrows: the frames carry them only on Overview,
+   Challenges and How Perellion Helps. */
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) :is(#security,#risk,#future,#faq,#contact) .perellion-eyebrow{display:none !important}
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #contact .perellion-contact__lines{letter-spacing:1px; font-weight:500}
+@media (min-width: 1101px){
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .wp-block-columns{flex-direction:row !important; gap:0 !important; flex-wrap:nowrap !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .wp-block-column:has(.perellion-marks){order:0; flex:0 0 345px !important; margin-left:152px !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .wp-block-column:not(:has(.perellion-marks)){order:1; flex:0 0 460px !important; margin-left:356px !important; margin-right:-33px}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security h2{font-size:40px !important; line-height:44px !important; max-width:460px}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .wp-block-column p{font-size:16px !important; line-height:37px !important; letter-spacing:1px !important; color:var(--wp--preset--color--charcoal) !important; margin-top:16px !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .wp-block-column p + p{margin-top:0 !important; font-weight:500}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist{margin-top:27px !important; font-size:14px !important; line-height:27px !important; letter-spacing:1px; color:var(--wp--preset--color--charcoal) !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li{padding-left:0 !important; margin:0 !important; font-size:14px !important; line-height:27px !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li::before{content:"\2022\00a0" !important; position:static !important; display:inline; width:auto !important; height:auto !important; border-radius:0 !important; background:none !important}
 }
