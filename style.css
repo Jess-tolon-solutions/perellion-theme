@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.42.9
+Version: 1.43.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6102,3 +6102,20 @@ figure.perellion-quote figcaption.perellion-quote__source {
 .perellion-page--industries #contact .perellion-panel__media img{
   object-fit:fill !important; max-width:none !important; inset:auto !important;
   width:223.02% !important; height:108.68% !important; left:-70.43% !important; top:0 !important; transform:none !important}
+
+/* 1.43.0 — Get in touch on the six industry pages (7:14472 etc.) and the Industries hub.
+   - Portrait: every industry frame crops the same 1024×681 photograph to x .4479 w .386,
+     y .0022 h .7921 (the face sits left of the card); the build's cover crop put the face
+     under the card.
+   - Card: Testimonial Right body is 16/23.26 Medium; the industry body-copy rule had set it
+     to 16/37, making the card 29px taller with awkward breaks.
+   - Copy column: the frames start it at x250 (built at 210), as on Home/Insights (1.39.0). */
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #contact .perellion-panel__media img{
+  object-fit:fill !important; max-width:none !important; inset:auto !important;
+  width:259.07% !important; height:126.25% !important; left:-116.04% !important; top:-.28% !important; transform:none !important}
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) #contact .perellion-quote .perellion-quote__body,
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) #contact .perellion-quote .perellion-quote__body p{
+  line-height:23.26px !important; letter-spacing:1px !important}
+@media (min-width: 1101px){
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) #contact .perellion-split__text{margin-inline:34.72% 1.39% !important}
+}
