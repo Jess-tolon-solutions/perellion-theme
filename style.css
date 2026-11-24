@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.41.2
+Version: 1.41.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5890,6 +5890,21 @@ figure.perellion-quote figcaption.perellion-quote__source {
    gap, the first 129px below the card tops (cards +84, arrows +213/+281). Build: 40px, 12 gap,
    199px below. */
 @media (min-width: 861px){
-  .perellion-page--about #team .perellion-carousel__nav{top:129px !important; gap:20px !important}
+  .perellion-page--about #team .perellion-carousel__nav{top:187px !important; gap:20px !important}
   .perellion-page--about #team .perellion-carousel__nav button{width:48px !important; height:48px !important}
+}
+
+/* 1.41.3 — About, against 298:85231.
+   Culture split (298:85239) copy: 16/37 Regular, tracking 1, a blank 37px line between
+   paragraphs (build: 31.5 line, 16 gap). Certifications cards (298:85241): group starts at
+   x163 like every Cards row in the frames (not centred: 183); body 16/24, tracking -0.24,
+   275 measure; title 28/36. */
+@media (min-width: 861px){
+  .perellion-page--about .perellion-culture-split .perellion-split__text p{line-height:37px !important; letter-spacing:1px !important}
+  .perellion-page--about .perellion-culture-split .perellion-split__text p + p{margin-top:37px !important}
+}
+@media (min-width: 1101px){
+  .perellion-page--about #certifications .perellion-certs__grid{justify-content:start !important; padding-left:calc(50% - 557px) !important; max-width:none !important}
+  .perellion-page--about #certifications .perellion-certs__grid > * p{font-size:16px !important; line-height:24px !important; letter-spacing:-0.24px !important; max-width:275px; margin-inline:auto !important}
+  .perellion-page--about #certifications .perellion-certs__grid > * h3{line-height:36px !important}
 }
