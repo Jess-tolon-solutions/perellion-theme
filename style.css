@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.9
+Version: 1.44.0
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -4565,7 +4565,7 @@ figure.perellion-quote figcaption.perellion-quote__source {
 
 	/* team: the frame stacks the first three cards; the rest wait for
 	   Meet the team */
-	.perellion-carousel { padding: 0 24px; }
+	.perellion-carousel { padding: 0; } /* 1.44.0: the teamband already supplies the 24px gutter */
 	.perellion-carousel::before { top: 60px; }
 	.perellion-carousel::after { display: none; }
 	.perellion-carousel__viewport { overflow: visible; }
@@ -6308,4 +6308,15 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-page--about #team .wp-block-post-title,
   .perellion-page--about #team .wp-block-post-title a,
   .perellion-page--about #team .wp-block-post-excerpt__excerpt{text-align:left !important; font-size:28px !important; line-height:36px !important; font-weight:500 !important}
+}
+
+/* 1.44.0 — Team profile at ≤600, measured from the 390 frame (298:85595):
+   hero overline 13/24 left; name + role 28/38 left at x24; related-profile titles 28/36 left
+   (cards now 342 wide at x24, matching Figma's 345 at x23); Get in touch heading 40/50. */
+@media (max-width: 600px){
+  body.single-team_member .perellion-hero--profile .perellion-overline{text-align:left !important; font-size:13px !important; line-height:24px !important}
+  body.single-team_member .perellion-hero--profile :is(.perellion-profile__name,.wp-block-post-excerpt__excerpt){text-align:left !important; font-size:28px !important; line-height:38px !important; margin-left:0 !important; margin-right:auto !important}
+  body.single-team_member .perellion-carousel .wp-block-post-title,
+  body.single-team_member .perellion-carousel .wp-block-post-title a{font-size:28px !important; line-height:36px !important; font-weight:500 !important; text-align:left !important}
+  body.single-team_member #contact h2{font-size:40px !important; line-height:50px !important}
 }
