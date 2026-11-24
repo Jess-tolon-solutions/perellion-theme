@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.40.6
+Version: 1.40.7
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5832,4 +5832,26 @@ figure.perellion-quote figcaption.perellion-quote__source {
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) main .perellion-ticklist li::before{
     content:"\2022" !important; position:absolute !important; left:0 !important; top:0 !important; display:block !important;
     width:auto !important; height:auto !important; border-radius:0 !important; background:none !important; color:inherit}
+}
+
+/* 1.40.7 — Energy: Manufacturing Solutions (9:63702 + cards 9:68559 / 11:30788) and
+   Applications Across Advanced Energy (11:34811).
+   Cards: 345 wide, 20 gutter, 62 between rows, group starting x163; padding 24/20;
+   title 28/36 Medium (305 measure), body 16/24 (275 measure), white, square.
+   Intro 14/31.52. Applications: intro 21/37; two 500px columns at x130 / x769;
+   entry heading 16/37 Bold, body 16/37, a blank line between entries. No eyebrows. */
+.perellion-page--energy :is(#extra-1,#extra-2) .perellion-eyebrow{display:none !important}
+@media (min-width: 1101px){
+  .perellion-page--energy #extra-1 .perellion-feature__intro{font-size:14px !important; line-height:31.52px !important; letter-spacing:1px}
+  .perellion-page--energy #extra-1 .perellion-cards{grid-template-columns:repeat(3,345px) !important; column-gap:20px !important; row-gap:62px !important;
+    justify-content:start !important; padding-left:calc(50% - 557px) !important; max-width:none !important}
+  .perellion-page--energy #extra-1 .perellion-cards > li{padding:24px 20px !important; border-radius:0 !important; box-shadow:none !important; background:#fff !important}
+  .perellion-page--energy #extra-1 .perellion-cards > li :is(h3,h4){font-size:28px !important; line-height:36px !important; font-weight:500 !important; max-width:305px; margin:0 auto !important}
+  .perellion-page--energy #extra-1 .perellion-cards > li > :not(h3):not(h4){max-width:275px; margin:20px auto 0 !important; font-size:16px !important; line-height:24px !important}
+  .perellion-page--energy #extra-1 .perellion-cards > li > :not(h3):not(h4) *{font-size:16px !important; line-height:24px !important}
+  .perellion-page--energy #extra-2 .perellion-feature__intro{font-size:21px !important; line-height:37px !important; max-width:854px !important}
+  .perellion-page--energy #extra-2 .perellion-apps{grid-template-columns:repeat(2,500px) !important; column-gap:139px !important; row-gap:37px !important;
+    justify-content:start !important; padding-left:calc(50% - 590px) !important; margin-top:150px !important; max-width:none !important}
+  .perellion-page--energy #extra-2 .perellion-apps h3{font-size:16px !important; line-height:37px !important; font-weight:700 !important; margin:0 !important; letter-spacing:1px}
+  .perellion-page--energy #extra-2 .perellion-apps p{font-size:16px !important; line-height:37px !important; margin:0 !important; letter-spacing:1px}
 }
