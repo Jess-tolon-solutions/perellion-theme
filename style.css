@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.40.1
+Version: 1.40.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5787,4 +5787,11 @@ figure.perellion-quote figcaption.perellion-quote__source {
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist{margin-top:27px !important; font-size:14px !important; line-height:27px !important; letter-spacing:1px; color:var(--wp--preset--color--charcoal) !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li{padding-left:0 !important; margin:0 !important; font-size:14px !important; line-height:27px !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li::before{content:"\2022\00a0" !important; position:static !important; display:inline; width:auto !important; height:auto !important; border-radius:0 !important; background:none !important}
+}
+
+/* 1.40.2 — Industry FAQ (7:14329): two 500px columns at x130 and x769 (139 gutter), no rules. */
+:is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #faq details{border:0 !important}
+@media (min-width: 1101px){
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #faq .wp-block-column:last-child{
+    column-gap:139px !important; justify-content:start !important; padding-left:calc(50% - 590px) !important}
 }
