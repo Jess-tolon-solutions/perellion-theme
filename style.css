@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.38.2
+Version: 1.38.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5460,5 +5460,40 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	.perellion-page--what-we-do #engineering-services .perellion-split__text p {
 		font-size: 14px;
 		line-height: 31.5px;
+	}
+}
+
+/* About › What we do as a static split (1.38.3, Jess 23 Nov: fix the
+   excess space). The copy here is shorter than the hold, so the pinned
+   treatment only added ~180px of empty travel and pushed the photo down.
+   Frame 298:85236: Body 844 tall, copy from 62, Visual from 72 (photo at
+   179), copy column at x 250. motion.js still measures the section; these
+   rules neutralise the pin for this one section only. */
+@media (min-width: 861px) {
+	.perellion-page--about #what-we-do {
+		align-items: start !important;
+		min-height: 844px;
+		padding-bottom: 72px !important;
+	}
+	.perellion-page--about #what-we-do .perellion-col {
+		height: auto !important;
+	}
+	.perellion-page--about #what-we-do .perellion-col--media > .perellion-panel {
+		position: relative !important;
+		top: auto !important;
+		margin-top: 72px;
+	}
+	.perellion-page--about #what-we-do .perellion-col--text > .perellion-split__text,
+	.perellion-page--about #what-we-do > .perellion-split__text {
+		position: static !important;
+		height: auto !important;
+		overflow: visible !important;
+		-webkit-mask-image: none !important;
+		        mask-image: none !important;
+		margin-top: 62px;
+	}
+	.perellion-page--about #what-we-do .perellion-copy__inner {
+		transform: none !important;
+		padding-block: 0 !important;
 	}
 }
