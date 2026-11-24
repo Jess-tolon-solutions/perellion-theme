@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.7
+Version: 1.43.8
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6276,4 +6276,35 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-page--about #certifications .perellion-certs__grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:24px !important; padding-inline:36px !important}
   .perellion-page--about .perellion-panel--wide .perellion-panel__media,
   .perellion-page--about .perellion-panel--wide figure.perellion-panel__media{width:min(700px,100%) !important; max-width:none !important; margin-inline:auto !important}
+}
+
+/* 1.43.8 — Team profile tablet (298:85567): the portrait Visual follows the same 834×700
+   pattern as the other tablet frames (circle 490 at 172,100; Testimonial card at the right of
+   the circle at 546,210, 206 wide), not the phone stack (card under the circle over the glow).
+   About ≤600 (298:85267): photos 318 at x36; glow kept behind the photo; Meet the team cards
+   342 wide (x24); card titles 28/36 left. */
+@media (min-width: 601px) and (max-width: 860px){
+  .perellion-hero--profile ~ .perellion-profile__portrait > .perellion-panel,
+  main section.alignfull.perellion-profile__portrait > .perellion-panel{
+    display:block !important; position:relative !important; width:100% !important; max-width:none !important; aspect-ratio:834/700 !important; margin:0 !important; padding:0 !important}
+  main section.alignfull.perellion-profile__portrait{padding-inline:0 !important}
+  .perellion-profile__portrait > .perellion-panel > .perellion-panel__media{
+    position:absolute !important; margin:0 !important; left:20.62% !important; top:14.29% !important; width:58.75% !important; aspect-ratio:1 !important; translate:none !important}
+  .perellion-profile__portrait > .perellion-panel > .perellion-panel__media img{width:100% !important; height:100% !important; object-fit:cover !important}
+  .perellion-profile__portrait > .perellion-panel .perellion-quote{
+    display:flex !important; flex-direction:column !important; gap:20px !important; position:absolute !important; z-index:2 !important;
+    left:65.47% !important; right:auto !important; top:30% !important; transform:none !important; width:24.7% !important; min-height:0 !important; margin:0 !important;
+    padding:24px !important; border:1px solid #fff !important; background-color:#fff !important; opacity:.9 !important;
+    -webkit-backdrop-filter:blur(7px) !important; backdrop-filter:blur(7px); text-align:left !important; align-items:stretch !important}
+  .perellion-profile__portrait > .perellion-panel .perellion-quote > *{margin:0 !important}
+  .perellion-profile__portrait > .perellion-panel figure.perellion-quote figcaption.perellion-quote__source{text-align:left !important}
+}
+@media (max-width: 600px){
+  .perellion-page--about .perellion-split .perellion-panel__media:not(.perellion-panel--portrait *){width:318px !important; max-width:calc(100% - 12px) !important}
+  .perellion-page--about .perellion-split .perellion-panel::before{clip-path:inset(0 0 calc(100% - 430px) 0)}
+  .perellion-page--about #team .perellion-carousel{padding:0 24px !important}
+  .perellion-page--about #team .perellion-carousel__track > li{width:100% !important}
+  .perellion-page--about #team .wp-block-post-title,
+  .perellion-page--about #team .wp-block-post-title a,
+  .perellion-page--about #team .wp-block-post-excerpt__excerpt{text-align:left !important; font-size:28px !important; line-height:36px !important; font-weight:500 !important}
 }
