@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.38.6
+Version: 1.38.7
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5528,71 +5528,71 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (min-width: 601px) and (max-width: 860px) {
 	.perellion-page--what-we-do main section.alignfull.perellion-split {
 		padding: 0 0 60px !important;
-		row-gap: 24px;
+		row-gap: 24px !important;
 	}
 	.perellion-page--what-we-do .perellion-split > .perellion-panel,
 	.perellion-page--what-we-do .perellion-split .perellion-col--media > .perellion-panel {
-		display: block;
-		position: relative;
-		width: 100%;
-		aspect-ratio: 834 / 700;
-		margin: 0;
+		display: block !important;
+		position: relative !important;
+		width: 100% !important;
+		aspect-ratio: 834 / 700 !important;
+		margin: 0 !important;
 	}
 	.perellion-page--what-we-do .perellion-split .perellion-panel > .perellion-panel__media,
 	.perellion-page--what-we-do .perellion-split .perellion-panel > figure.perellion-panel__media {
-		position: absolute;
-		margin: 0;
-		left: 20.86%;
-		top: 14.29%;
-		width: 56%;
-		aspect-ratio: 467 / 471;
-		translate: none;
+		position: absolute !important;
+		margin: 0 !important;
+		left: 20.86% !important;
+		top: 14.29% !important;
+		width: 56% !important;
+		aspect-ratio: 467 / 471 !important;
+		translate: none !important;
 	}
 	.perellion-page--what-we-do .perellion-split .perellion-panel--round > .perellion-panel__media,
 	.perellion-page--what-we-do .perellion-split .perellion-panel--round > figure.perellion-panel__media {
-		left: 20.62%;
-		width: 58.75%;
-		aspect-ratio: 1;
+		left: 20.62% !important;
+		width: 58.75% !important;
+		aspect-ratio: 1 !important;
 	}
 	.perellion-page--what-we-do #contact .perellion-panel > .perellion-panel__media,
 	.perellion-page--what-we-do #contact .perellion-panel > figure.perellion-panel__media {
-		left: 28.54%;
-		width: 43.05%;
-		aspect-ratio: 359 / 490;
-		border-radius: 4px;
+		left: 28.54% !important;
+		width: 43.05% !important;
+		aspect-ratio: 359 / 490 !important;
+		border-radius: 4px !important;
 	}
 	.perellion-page--what-we-do .perellion-split .perellion-panel .perellion-quote {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		position: absolute;
-		z-index: 2;
-		left: 65.47%;
-		right: auto;
-		top: 30%;
-		transform: none;
-		width: 24.7%;
-		min-height: 0;
-		margin: 0;
-		padding: 24px;
-		border: 1px solid #fff;
-		background-color: #fff;
-		opacity: 0.9;
-		-webkit-backdrop-filter: blur(7px);
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 20px !important;
+		position: absolute !important;
+		z-index: 2 !important;
+		left: 65.47% !important;
+		right: auto !important;
+		top: 30% !important;
+		transform: none !important;
+		width: 24.7% !important;
+		min-height: 0 !important;
+		margin: 0 !important;
+		padding: 24px !important;
+		border: 1px solid #fff !important;
+		background-color: #fff !important;
+		opacity: 0.9 !important;
+		-webkit-backdrop-filter: blur(7px) !important;
 		        backdrop-filter: blur(7px);
-		text-align: left;
-		align-items: stretch;
+		text-align: left !important;
+		align-items: stretch !important;
 	}
-	.perellion-page--what-we-do .perellion-split .perellion-panel .perellion-quote .perellion-quote__mark { margin: 0; }
-	.perellion-page--what-we-do .perellion-split .perellion-panel figure.perellion-quote figcaption.perellion-quote__source { text-align: left; }
+	.perellion-page--what-we-do .perellion-split .perellion-panel .perellion-quote .perellion-quote__mark { margin: 0 !important; }
+	.perellion-page--what-we-do .perellion-split .perellion-panel figure.perellion-quote figcaption.perellion-quote__source { text-align: left !important; }
 	.perellion-page--what-we-do .perellion-split .perellion-split__text,
 	.perellion-page--what-we-do .perellion-split .perellion-col--text > .perellion-split__text {
-		margin: 0;
-		padding-inline: 9.59%;
-		max-width: none;
+		margin: 0 !important;
+		padding-inline: 9.59% !important;
+		max-width: none !important;
 	}
 	.perellion-page--what-we-do .perellion-split .perellion-split__text p {
-		font-size: 16px;
-		line-height: 32px;
+		font-size: 16px !important;
+		line-height: 32px !important;
 	}
 }
