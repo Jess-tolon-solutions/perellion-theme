@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.43.2
+Version: 1.43.3
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6130,4 +6130,19 @@ figure.perellion-quote figcaption.perellion-quote__source {
 @media (min-width: 1101px){
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li::before{display:inline !important; position:static !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--space) #security .perellion-ticklist li{padding-left:0 !important}
+}
+
+/* 1.43.3 — Contact map visual (298:85617): the frame's art is Brand Expression Options 1:2967
+   (verified master, as Home showcase) + Atmosphere Grey 1:574; it carries no lattice beside
+   the map and its ">>" sits behind the map. The build used the legacy panel-c composite
+   (lattice + chevrons at the left, weaker glow). Placed from frame geometry: map 306,615
+   837×471; master SVG origin 204.5,511 (group 226,538 + blur pad); grey 649,548 (132 svg).
+   Dev map is 800 wide → scale .9558; offsets as % of the 800×450 panel. */
+@media (min-width: 861px){
+  .perellion-page--contact .perellion-mapband .perellion-panel::before{
+    inset:auto !important; left:-12.13% !important; top:-22.09% !important; width:132.39% !important; height:auto !important;
+    aspect-ratio:1108/677 !important; opacity:1 !important;
+    background-image:url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-brand-expression-options-1-2967.svg") !important;
+    background-size:11.9134% auto, 100% auto !important; background-position:45.54% 6.79%, 0% 0% !important; background-repeat:no-repeat !important}
+  .perellion-page--contact .perellion-mapband .perellion-panel::after{display:none !important}
 }
