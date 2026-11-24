@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.37.7
+Version: 1.37.8
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5307,5 +5307,25 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	}
 	.perellion-page--about #our-culture .perellion-panel--wide {
 		margin-top: 46px;                      /* panel 197, photo (107 in) at 304 */
+	}
+}
+
+/* About › Our culture wide photo (1.37.8). Frame 298:85238: the same
+   Brand Expression Options as the Home showcase (1:2967) plus one layer the
+   master hides, "Left Computer Intelligence" (I298:85238;1:2982, exported
+   from the frame, checksum-verified), + Atmosphere Grey. Replaces the
+   about-culture-wide.webp crop, which drew the arrow twice. */
+@media (min-width: 861px) {
+	.perellion-page--about #our-culture .perellion-panel::before {
+		inset: auto;
+		left: -19.7847%;
+		top: 1.4286%;
+		width: 153.8889%;
+		height: auto;
+		aspect-ratio: 1108 / 677;
+		background-image: url("assets/img/art/figma/perellion-atmosphere-grey-1-574.svg"), url("assets/img/art/figma/perellion-about-culture-left-computer-intelligence-I298-85238-1-2982.svg"), url("assets/img/art/figma/perellion-brand-expression-options-1-2967.svg");
+		background-size: 11.9134% auto, 29.5126% auto, 100% auto;
+		background-position: 44.1998% 5.4936%, 24.1665% 51.6667%, 0% 0%;
+		background-repeat: no-repeat;
 	}
 }
