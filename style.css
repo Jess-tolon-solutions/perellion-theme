@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.41.8
+Version: 1.41.9
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5950,4 +5950,35 @@ figure.perellion-quote figcaption.perellion-quote__source {
   .perellion-page--home #showcase .perellion-teamband__arrow{display:none !important}
   .perellion-page--home #showcase .perellion-panel::before,
   .perellion-page--home #showcase .perellion-panel::after{clip-path:inset(0 0 calc(100% - 470px) 0) !important}
+}
+
+/* 1.41.9 — Home at ≤600, measured from the 390 frame (298:85213):
+   hero title 40/44, intro 16/28; showcase photo inset 340 wide at x24 (not full-bleed);
+   testimonials are the 260px Testimonial card (pad 24, blur 12, opacity .85, no fill);
+   Get in touch portrait 318×434 at x36; headings 40/44; Capabilities intro 16/31.5 tracking 1. */
+@media (max-width: 600px){
+  .perellion-page--home .perellion-hero h1{font-size:40px !important; line-height:44px !important}
+  .perellion-page--home .perellion-hero p{font-size:16px !important; line-height:28px !important}
+  .perellion-page--home :is(#capabilities,#contact) h2{font-size:40px !important; line-height:44px !important}
+  .perellion-page--home #capabilities h2 + p{line-height:31.5px !important; letter-spacing:1px !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-panel{padding:24px 0 0 !important; margin:0 !important; width:auto !important; max-width:none !important; aspect-ratio:auto !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-panel__media{position:relative !important; left:auto !important; top:auto !important; margin:0 auto !important; max-width:100% !important; aspect-ratio:auto !important; height:auto !important}
+  .perellion-page--home #showcase .perellion-panel__media{width:340px !important}
+  .perellion-page--home #contact .perellion-panel__media{width:318px !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-panel__media img{position:static !important; inset:auto !important; display:block !important; width:100% !important; height:auto !important; object-fit:cover !important}
+  .perellion-page--home #showcase .perellion-panel__media img{aspect-ratio:340/190 !important}
+  .perellion-page--home #contact .perellion-panel__media img{aspect-ratio:318/434 !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-panel::before{clip-path:inset(0 0 calc(100% - 520px) 0)}
+  .perellion-page--home #showcase .perellion-panel::before{clip-path:inset(0 0 calc(100% - 280px) 0)}
+  .perellion-page--home :is(#showcase,#contact) .perellion-quote{
+    position:relative !important; left:auto !important; top:auto !important; right:auto !important;
+    box-sizing:border-box !important; width:260px !important; max-width:none !important; margin:48px auto 0 !important; padding:24px !important;
+    background:transparent !important; opacity:.85 !important; -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    display:flex !important; flex-direction:column !important; align-items:center !important; gap:20px !important; text-align:center !important; transform:none}
+  .perellion-page--home #contact .perellion-quote{margin-top:12px !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-quote > *{margin:0 !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-quote .perellion-quote__body{font-size:16px !important; line-height:23.26px !important; font-weight:500; letter-spacing:1px !important}
+  .perellion-page--home :is(#showcase,#contact) .perellion-quote hr{width:32px !important}
+  .perellion-page--home :is(#showcase,#contact) figure.perellion-quote figcaption.perellion-quote__source{font-size:13px !important; line-height:19.94px !important; letter-spacing:1px !important}
+  .perellion-page--home #contact .perellion-split__text p{font-size:16px !important; line-height:36px !important}
 }
