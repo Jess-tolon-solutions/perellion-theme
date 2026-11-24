@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.38.1
+Version: 1.38.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -5434,5 +5434,31 @@ figure.perellion-quote figcaption.perellion-quote__source {
 	}
 	.perellion-page--what-we-do #contact {
 		background: #f5f5f5;
+	}
+}
+
+/* What we do › copy columns, from the frame's text boxes (1.38.2).
+   Copy left of the photo starts at x 250 of its half (Machines,
+   Manufacturing, Get in touch); copy right of the photo at x 213
+   (Aerospace, Engineering). Those two set the body at 14 / 31.5 and break
+   the heading after its first word ("Aerospace / & Defense",
+   "Engineering / Services"). */
+@media (min-width: 1101px) {
+	.perellion-page--what-we-do .perellion-split:not(.perellion-split--mirror) .perellion-split__text {
+		margin-inline: 34.72% 1.39%;
+	}
+	.perellion-page--what-we-do .perellion-split--mirror .perellion-split__text {
+		margin-inline: 29.58% 6.53%;
+	}
+}
+@media (min-width: 861px) {
+	.perellion-page--what-we-do #aerospace-defense h2,
+	.perellion-page--what-we-do #engineering-services h2 {
+		max-width: 240px;
+	}
+	.perellion-page--what-we-do #aerospace-defense .perellion-split__text p,
+	.perellion-page--what-we-do #engineering-services .perellion-split__text p {
+		font-size: 14px;
+		line-height: 31.5px;
 	}
 }
