@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.44.1
+Version: 1.44.2
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6331,4 +6331,26 @@ figure.perellion-quote figcaption.perellion-quote__source {
   main section.alignfull.perellion-hero--archive{padding-bottom:0 !important}
   main section.alignfull.perellion-archive__grid{padding-top:40px !important}
   .perellion-archive__grid--insights::before{top:150px}
+}
+
+/* 1.44.2 — Round 1 feedback (Reese Allen, Monday 25 Nov; client feedback overrides the
+   frames here): a split with the copy on the right of the photo is now the mirror of one
+   with the copy on the left. Before, the copy sat 210-213 from the midline (a 335 gap from
+   the photo against 141 on the left-hand version) and the Testimonial Left card sat at
+   x 7 / -13 of the Visual, on or past the page edge. Now: copy 10 from the midline and 250
+   from the outer edge, card inset 77, the same as the left-hand version. 861-1100 mirrors
+   the existing 12% / 8%. What we do, About and the Industries hub; 860 and below stack and
+   are untouched. */
+@media (min-width: 861px){
+  .perellion-page--what-we-do .perellion-split--mirror .perellion-split__text,
+  .perellion-page--about .perellion-split:not(.perellion-split--mirror):not(.perellion-cta) .perellion-split__text,
+  .perellion-page--industries .perellion-partner:not(.perellion-split--mirror) .perellion-split__text{margin-inline:8% 12% !important}
+  .perellion-page--what-we-do .perellion-split--mirror .perellion-quote--left,
+  .perellion-page--about .perellion-split:not(.perellion-split--mirror) .perellion-quote--left,
+  .perellion-page--industries .perellion-partner:not(.perellion-split--mirror) .perellion-quote--left{left:10.67% !important}
+}
+@media (min-width: 1101px){
+  .perellion-page--what-we-do .perellion-split--mirror .perellion-split__text,
+  .perellion-page--about .perellion-split:not(.perellion-split--mirror):not(.perellion-cta) .perellion-split__text,
+  .perellion-page--industries .perellion-partner:not(.perellion-split--mirror) .perellion-split__text{margin-inline:1.39% 34.72% !important}
 }
