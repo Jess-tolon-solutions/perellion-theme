@@ -34,6 +34,36 @@
 	}
 	window.addEventListener( 'resize', placeDropdownBands );
 
+	/* ---- 0b. Tablet and phone menu (layout, not motion; runs for everyone) --
+	 * Round 1: with one section open, tapping another section's chevron must
+	 * open it in that one tap. WordPress closes the open one on the tap and
+	 * needs a second tap to open the next, so the open state is kept here. */
+	( function () {
+		var small = window.matchMedia( '(max-width: 860px)' );
+		document.documentElement.classList.add( 'perellion-menu-js' );
+		document.addEventListener( 'click', function ( e ) {
+			if ( ! small.matches || ! e.target.closest ) { return; }
+			var toggle = e.target.closest( '.perellion-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-submenu__toggle' );
+			if ( ! toggle ) { return; }
+			e.preventDefault();
+			e.stopPropagation();
+			var li = toggle.closest( '.has-child' );
+			var open = ! li.classList.contains( 'perellion-sub-open' );
+			document.querySelectorAll( '.perellion-header .has-child.perellion-sub-open' ).forEach( function ( other ) {
+				other.classList.remove( 'perellion-sub-open' );
+			} );
+			li.classList.toggle( 'perellion-sub-open', open );
+			/* WordPress rewrites aria-expanded when focus moves; set it after. */
+			var sync = function () {
+				document.querySelectorAll( '.perellion-header .has-child > .wp-block-navigation-submenu__toggle' ).forEach( function ( t ) {
+					t.setAttribute( 'aria-expanded', t.parentNode.classList.contains( 'perellion-sub-open' ) ? 'true' : 'false' );
+				} );
+			};
+			sync();
+			window.setTimeout( sync, 60 );
+		}, true );
+	}() );
+
 	var reduce = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 	if ( reduce.matches ) {
 		document.documentElement.classList.add( 'perellion-no-motion' );

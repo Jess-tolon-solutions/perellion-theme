@@ -9,7 +9,9 @@
  *  - the old category archives (/category/meet-the-team/ etc.) become the
  *    post type archives at the same top-level path;
  *  - /aerospace-defense/ goes to the home page, as Reese Allen asked on the
- *    Monday thread "Aerospace and Defense page" (20 Nov 2026).
+ *    Monday thread "Aerospace and Defense page" (20 Nov 2026);
+ *  - /terms/ is removed (Round 1, 27 Nov 2026) and goes to /privacy/, which
+ *    stays because Google Analytics requires a privacy policy.
  *
  * Add a line to $map for any further legacy URL. Paths are matched without
  * their query string and trailing slash.
@@ -21,6 +23,7 @@ function perellion_legacy_redirects(): void {
 		'/category/case-studies'   => '/case-studies/',
 		'/category/join-the-team'  => '/join-the-team/',
 		'/aerospace-defense'       => '/',
+		'/terms'                   => '/privacy/',
 	);
 	$path = rtrim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
 	if ( $path === '' || ! isset( $map[ $path ] ) ) {
