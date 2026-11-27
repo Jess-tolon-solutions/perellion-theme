@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.44.9
+Version: 1.44.10
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6454,7 +6454,7 @@ main.perellion-article section.alignfull.perellion-article__body{padding-top:48p
    Home at tablet: showcase artwork is the desktop crop scaled to the 635 photo and centred on it
    (it was stretched across the panel and cut off under the photo); Get in touch has 60px above
    the photo and 60px between the photo and the heading.
-   About at tablet: "More" button under the Meet the team cards (markup added in inc/components.php). */
+   About at tablet: "See more" button under the Meet the team cards (markup added in inc/components.php). */
 .perellion-teamband__more{display:none !important}
 @media (min-width: 601px) and (max-width: 860px){
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) main .perellion-split:not(.perellion-cta) .perellion-split__text{margin:0 !important; padding-inline:9.59% !important; max-width:none !important; width:auto !important}
