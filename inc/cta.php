@@ -2,8 +2,9 @@
 /**
  * Get in touch section, shared by every page.
  *
- * ONE PLACE FOR THE CONTACT DETAILS: perellion_contact_details() below holds
- * the phone number, the email addresses and the mailing address. Every Get in
+ * ONE PLACE FOR THE CONTACT DETAILS: the "Contact details" screen in
+ * wp-admin (ACF options page), with perellion_contact_details() below as
+ * the fallback values. Every Get in
  * touch block on the site (pages, industry pages, team profiles, job posts,
  * case studies, the archives and the Contact page) is filled from it when the
  * page is rendered, including blocks already saved inside page content. To
@@ -13,7 +14,7 @@
  * call perellion_cta_markup() with the frame's values.
  */
 function perellion_contact_details(): array {
-	return array(
+	$d = array(
 		'phone_label'   => '+1 (425) 368-3368',
 		'phone_href'    => 'tel:+14253683368',
 		'email'         => 'info@perellion.com',
@@ -23,7 +24,82 @@ function perellion_contact_details(): array {
 		'address_2'     => 'Everett, WA 98203',
 		'map_href'      => 'https://maps.google.com/?q=6700+Hardeson+Rd+%23104+Everett+WA+98203',
 	);
+	/*
+	 * Editable in wp-admin under "Contact details" (ACF options page, below).
+	 * Any field left empty, or ACF being switched off, falls back to the
+	 * values above, so the site never shows a blank phone or address.
+	 */
+	if ( function_exists( 'get_field' ) ) {
+		$map = array(
+			'phone_label' => 'perellion_phone',
+			'email'       => 'perellion_email',
+			'address_1'   => 'perellion_address_1',
+			'address_2'   => 'perellion_address_2',
+			'map_href'    => 'perellion_map_link',
+		);
+		foreach ( $map as $key => $field ) {
+			$v = get_field( $field, 'option' );
+			if ( is_string( $v ) && '' !== trim( $v ) ) {
+				$d[ $key ] = trim( $v );
+			}
+		}
+		$digits = preg_replace( '/[^0-9]/', '', $d['phone_label'] );
+		if ( strlen( $digits ) >= 10 ) {
+			$d['phone_href'] = 'tel:+' . ( 10 === strlen( $digits ) ? '1' : '' ) . $digits;
+		}
+		$defense = get_field( 'perellion_email_defense', 'option' );
+		if ( is_string( $defense ) && is_email( trim( $defense ) ) ) {
+			$d['email_by_page']['defense'] = trim( $defense );
+		}
+		if ( ! is_email( $d['email'] ) ) {
+			$d['email'] = 'info@perellion.com';
+		}
+	}
+	return $d;
 }
+
+/**
+ * "Contact details" screen in wp-admin (needs ACF Pro, which the site runs).
+ * Editors and administrators can change the phone, emails and address here;
+ * every Get in touch block and the Contact page pick the change up at once.
+ */
+add_action( 'acf/init', function () {
+	if ( ! function_exists( 'acf_add_options_page' ) || ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+	acf_add_options_page( array(
+		'page_title' => 'Contact details',
+		'menu_title' => 'Contact details',
+		'menu_slug'  => 'perellion-contact',
+		'capability' => 'edit_pages',
+		'icon_url'   => 'dashicons-phone',
+		'position'   => 25,
+		'redirect'   => false,
+	) );
+	$text = function ( $name, $label, $placeholder, $help = '' ) {
+		return array(
+			'key'          => 'field_' . $name,
+			'name'         => $name,
+			'label'        => $label,
+			'type'         => 'text',
+			'placeholder'  => $placeholder,
+			'instructions' => $help,
+		);
+	};
+	acf_add_local_field_group( array(
+		'key'      => 'group_perellion_contact',
+		'title'    => 'Contact details shown across the site',
+		'fields'   => array(
+			$text( 'perellion_phone', 'Phone', '+1 (425) 368-3368', 'Shown as typed. The tap-to-call link is built from the digits.' ),
+			$text( 'perellion_email', 'Email', 'info@perellion.com', 'Used on every page except Defense.' ),
+			$text( 'perellion_email_defense', 'Email on the Defense page', 'defense@perellion.com' ),
+			$text( 'perellion_address_1', 'Address, line 1', '6700 Hardeson Rd #104' ),
+			$text( 'perellion_address_2', 'Address, line 2', 'Everett, WA 98203' ),
+			$text( 'perellion_map_link', 'Map link', 'https://maps.google.com/?q=...', 'Where the address links to. Leave empty to keep the current link.' ),
+		),
+		'location' => array( array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'perellion-contact' ) ) ),
+	) );
+} );
 
 /** Email for the page being viewed. */
 function perellion_contact_email(): string {
