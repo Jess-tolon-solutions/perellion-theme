@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.44.7
+Version: 1.44.8
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6444,4 +6444,31 @@ main.perellion-article section.alignfull.perellion-article__body{padding-top:48p
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #contact.perellion-split{grid-template-columns:minmax(0,1fr) !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #contact .perellion-panel{grid-template-columns:minmax(0,1fr) !important}
   :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy) #contact .perellion-split__text{min-width:0 !important; max-width:100% !important}
+}
+
+/* 1.44.8 — Round 1, Haley's remaining P1s (1:1s 1800-10326, 1800-10345, 1800-10383, 1800-10480).
+   Industry pages and the Industries hub at tablet: copy runs the full measure, inset 80, like the
+   other 834 frames (it was held to a 460 column at the left edge).
+   Industries hub at tablet and phone: the glow is centred on the photo. With a quote under the
+   photo the panel is taller, and the glow was centred on the panel, so it sat under the photo.
+   Home at tablet: showcase artwork is the desktop crop scaled to the 635 photo and centred on it
+   (it was stretched across the panel and cut off under the photo); Get in touch has 60px above
+   the photo and 60px between the photo and the heading.
+   About at tablet: "More" button under the Meet the team cards (markup added in inc/components.php). */
+.perellion-teamband__more{display:none !important}
+@media (min-width: 601px) and (max-width: 860px){
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) main .perellion-split:not(.perellion-cta) .perellion-split__text{margin:0 !important; padding-inline:9.59% !important; max-width:none !important; width:auto !important}
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) main .perellion-split:not(.perellion-cta) .perellion-split__text > *,
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) main .perellion-split:not(.perellion-cta) .perellion-copy__inner,
+  :is(.perellion-page--defense,.perellion-page--aerospace,.perellion-page--advanced-manufacturing,.perellion-page--space,.perellion-page--medical-technology,.perellion-page--energy,.perellion-page--industries) main .perellion-split:not(.perellion-cta) .perellion-copy__inner > *{max-width:none !important}
+  .perellion-page--industries .perellion-partner .perellion-panel::before{top:-119px !important; bottom:auto !important; height:660px !important; clip-path:inset(60px 0 6% 0) !important}
+  .perellion-page--home #showcase .perellion-panel::before{inset:auto !important; left:50% !important; top:-95px !important; width:986px !important; height:607px !important; transform:translateX(-50%) !important; background-size:100% 100% !important; clip-path:inset(0 0 4% 0) !important}
+  .perellion-page--home #contact .perellion-panel{margin-top:-18.07% !important}
+  .perellion-page--home #contact .perellion-panel::before{clip-path:inset(calc(20.8% - 60px) 0 0 0) !important}
+  .perellion-page--home #contact .perellion-split__text{margin-top:calc(12px - 19.75%) !important}
+  .perellion-page--about #team .perellion-teamband__more{display:flex !important; justify-content:center; margin:40px 0 0 !important; position:relative; z-index:2}
+  .perellion-page--about main section#team{padding-bottom:60px !important}
+}
+@media (max-width: 600px){
+  .perellion-page--industries .perellion-partner .perellion-panel::before{top:0 !important; bottom:auto !important; left:-12% !important; right:auto !important; width:124% !important; height:auto !important; aspect-ratio:1 !important; margin-top:calc(24px - 27.4%) !important; clip-path:inset(14px 0 7% 0) !important}
 }

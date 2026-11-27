@@ -76,3 +76,25 @@ function perellion_panel( string $shape, $media, string $alt, string $art = 'a',
 <!-- /wp:group -->
 HTML;
 }
+
+/**
+ * About › Meet the team: a "More" button under the cards, linking to the
+ * full team list. Shown at tablet width only (style.css, 1.44.8), where the
+ * cards sit in a 2 × 2 grid with no way to reach the rest of the team
+ * (Round 1, Haley's About 1:1). Added at render time so the About page
+ * content does not need editing.
+ */
+add_filter( 'render_block_core/group', function ( $content, $block ) {
+	if ( ! is_string( $content ) || ! is_page( 'about' ) ) {
+		return $content;
+	}
+	if ( false === strpos( $content, 'id="team"' ) || 0 !== strpos( ltrim( $content ), '<section' ) || false !== strpos( $content, 'perellion-teamband__more' ) ) {
+		return $content;
+	}
+	$pos = strrpos( $content, '</section>' );
+	if ( false === $pos ) {
+		return $content;
+	}
+	$more = '<nav class="perellion-more perellion-teamband__more" aria-label="Meet the team"><a class="wp-block-query-pagination-next" href="/meet-the-team/">More</a></nav>';
+	return substr( $content, 0, $pos ) . $more . substr( $content, $pos );
+}, 10, 2 );
