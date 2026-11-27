@@ -5,7 +5,7 @@ Author: Tolon Solutions AI LLC
 Author URI: https://tolonsolutions.ai
 Description: Custom block theme for Perellion, built from the Sovo design system. Design tokens live in theme.json. Section layouts live in /patterns. Content types live in /inc.
 Template: ollie
-Version: 1.44.8
+Version: 1.44.9
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.1
@@ -6466,8 +6466,7 @@ main.perellion-article section.alignfull.perellion-article__body{padding-top:48p
   .perellion-page--home #contact .perellion-panel{margin-top:-18.07% !important}
   .perellion-page--home #contact .perellion-panel::before{clip-path:inset(calc(20.8% - 60px) 0 0 0) !important}
   .perellion-page--home #contact .perellion-split__text{margin-top:calc(12px - 19.75%) !important}
-  .perellion-page--about #team .perellion-teamband__more{display:flex !important; justify-content:center; margin:40px 0 0 !important; position:relative; z-index:2}
-  .perellion-page--about main section#team{padding-bottom:60px !important}
+  .perellion-page--about #team .perellion-teamband__more{display:flex !important; justify-content:center; margin:40px 0 60px !important; position:relative; z-index:2}
 }
 @media (max-width: 600px){
   .perellion-page--industries .perellion-partner .perellion-panel::before{top:0 !important; bottom:auto !important; left:-12% !important; right:auto !important; width:124% !important; height:auto !important; aspect-ratio:1 !important; margin-top:calc(24px - 27.4%) !important; clip-path:inset(14px 0 7% 0) !important}
