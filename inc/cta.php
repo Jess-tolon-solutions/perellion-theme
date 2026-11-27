@@ -64,18 +64,31 @@ function perellion_contact_details(): array {
  * every Get in touch block and the Contact page pick the change up at once.
  */
 add_action( 'acf/init', function () {
-	if ( ! function_exists( 'acf_add_options_page' ) || ! function_exists( 'acf_add_local_field_group' ) ) {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
 	}
-	acf_add_options_page( array(
-		'page_title' => 'Contact details',
-		'menu_title' => 'Contact details',
-		'menu_slug'  => 'perellion-contact',
-		'capability' => 'edit_pages',
-		'icon_url'   => 'dashicons-phone',
-		'position'   => 25,
-		'redirect'   => false,
-	) );
+	/* The site runs the older ACF "Options Page" add-on, which provides one
+	   options screen (slug acf-options); name it and open it to editors. */
+	if ( function_exists( 'acf_set_options_page_title' ) ) {
+		acf_set_options_page_title( 'Contact details' );
+	}
+	if ( function_exists( 'acf_set_options_page_menu' ) ) {
+		acf_set_options_page_menu( 'Contact details' );
+	}
+	if ( function_exists( 'acf_set_options_page_capability' ) ) {
+		acf_set_options_page_capability( 'edit_pages' );
+	}
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => 'Contact details',
+			'menu_title' => 'Contact details',
+			'menu_slug'  => 'perellion-contact',
+			'capability' => 'edit_pages',
+			'icon_url'   => 'dashicons-phone',
+			'position'   => 25,
+			'redirect'   => false,
+		) );
+	}
 	$text = function ( $name, $label, $placeholder, $help = '' ) {
 		return array(
 			'key'          => 'field_' . $name,
@@ -97,7 +110,10 @@ add_action( 'acf/init', function () {
 			$text( 'perellion_address_2', 'Address, line 2', 'Everett, WA 98203' ),
 			$text( 'perellion_map_link', 'Map link', 'https://maps.google.com/?q=...', 'Where the address links to. Leave empty to keep the current link.' ),
 		),
-		'location' => array( array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'perellion-contact' ) ) ),
+		'location' => array(
+			array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'perellion-contact' ) ),
+			array( array( 'param' => 'options_page', 'operator' => '==', 'value' => 'acf-options' ) ),
+		),
 	) );
 } );
 
