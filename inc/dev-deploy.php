@@ -250,7 +250,42 @@ function perellion_dev_deploy( WP_REST_Request $req ) {
 				continue;
 			}
 			$title = isset( $item['title'] ) ? sanitize_text_field( $item['title'] ) : '';
-			if ( ! empty( $item['name'] ) ) {
+			if ( ! empty( $item['time'] ) && preg_match( '#^\d{4}/\d{2}$#', (string) $item['time'] ) ) {
+				// "time": "2025/07" keeps the file in the same uploads folder it
+				// has on production (PDFs included), so links to it survive the
+				// launch copy unchanged. Skipped when the file is already there.
+				$name = sanitize_file_name( wp_basename( (string) wp_parse_url( $url, PHP_URL_PATH ) ) );
+				$dir  = wp_upload_dir( $item['time'] );
+				if ( file_exists( trailingslashit( $dir['path'] ) . $name ) ) {
+					$imported[] = array( 'url' => $url, 'skipped' => 'exists' );
+					continue;
+				}
+				$tmp = download_url( $url, 120 );
+				if ( is_wp_error( $tmp ) ) {
+					$errors[] = array( 'path' => $url, 'error' => $tmp->get_error_message() );
+					continue;
+				}
+				$file = wp_handle_sideload( array( 'name' => $name, 'tmp_name' => $tmp ), array( 'test_form' => false ), $item['time'] );
+				if ( empty( $file['file'] ) ) {
+					@unlink( $tmp );
+					$errors[] = array( 'path' => $url, 'error' => isset( $file['error'] ) ? $file['error'] : 'sideload failed' );
+					continue;
+				}
+				$post = array(
+					'post_mime_type' => $file['type'],
+					'guid'           => $file['url'],
+					'post_title'     => $title !== '' ? $title : pathinfo( $name, PATHINFO_FILENAME ),
+					'post_content'   => '',
+					'post_status'    => 'inherit',
+				);
+				if ( ! empty( $item['date'] ) && preg_match( '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/', (string) $item['date'] ) ) {
+					$post['post_date'] = str_replace( 'T', ' ', (string) $item['date'] );
+				}
+				$id = wp_insert_attachment( $post, $file['file'], 0, true );
+				if ( ! is_wp_error( $id ) ) {
+					wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file['file'] ) );
+				}
+			} elseif ( ! empty( $item['name'] ) ) {
 				// Figma raw-image URLs carry no extension, which
 				// media_sideload_image() insists on; download and hand the
 				// file over under the given name instead.
