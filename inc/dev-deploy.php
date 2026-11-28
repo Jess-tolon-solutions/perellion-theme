@@ -265,7 +265,8 @@ function perellion_dev_deploy( WP_REST_Request $req ) {
 					$errors[] = array( 'path' => $url, 'error' => $tmp->get_error_message() );
 					continue;
 				}
-				$file = wp_handle_sideload( array( 'name' => $name, 'tmp_name' => $tmp ), array( 'test_form' => false ), $item['time'] );
+				$farr = array( 'name' => $name, 'tmp_name' => $tmp );
+				$file = wp_handle_sideload( $farr, array( 'test_form' => false ), $item['time'] );
 				if ( empty( $file['file'] ) ) {
 					@unlink( $tmp );
 					$errors[] = array( 'path' => $url, 'error' => isset( $file['error'] ) ? $file['error'] : 'sideload failed' );
